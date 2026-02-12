@@ -10,30 +10,112 @@ const dbName = "pawsitiveWalks";
 
 const dogNames = [
   // Common names
-  "Max", "Bella", "Charlie", "Luna", "Cooper", "Rocky", "Daisy", "Bailey",
-  "Lucy", "Duke", "Sadie", "Jack", "Molly", "Buddy", "Maggie", "Bear",
-  "Sophie", "Zeus", "Chloe", "Tucker", "Lola", "Oliver", "Zoe", "Leo",
+  "Max",
+  "Bella",
+  "Charlie",
+  "Luna",
+  "Cooper",
+  "Rocky",
+  "Daisy",
+  "Bailey",
+  "Lucy",
+  "Duke",
+  "Sadie",
+  "Jack",
+  "Molly",
+  "Buddy",
+  "Maggie",
+  "Bear",
+  "Sophie",
+  "Zeus",
+  "Chloe",
+  "Tucker",
+  "Lola",
+  "Oliver",
+  "Zoe",
+  "Leo",
   // Additional names
-  "Milo", "Nala", "Thor", "Stella", "Finn", "Penny", "Oscar", "Ruby",
-  "Murphy", "Rosie", "Gus", "Willow", "Teddy", "Pepper", "Archie", "Coco",
-  "Winston", "Gracie", "Bentley", "Ellie", "Toby", "Millie", "Sam", "Ivy",
-  "Harley", "Lily", "Apollo", "Maya", "Rex", "Hazel", "Louie", "Winnie"
+  "Milo",
+  "Nala",
+  "Thor",
+  "Stella",
+  "Finn",
+  "Penny",
+  "Oscar",
+  "Ruby",
+  "Murphy",
+  "Rosie",
+  "Gus",
+  "Willow",
+  "Teddy",
+  "Pepper",
+  "Archie",
+  "Coco",
+  "Winston",
+  "Gracie",
+  "Bentley",
+  "Ellie",
+  "Toby",
+  "Millie",
+  "Sam",
+  "Ivy",
+  "Harley",
+  "Lily",
+  "Apollo",
+  "Maya",
+  "Rex",
+  "Hazel",
+  "Louie",
+  "Winnie",
 ];
 
 const breeds = [
   // Common breeds
-  "Golden Retriever", "Labrador Retriever", "German Shepherd", "Beagle", 
-  "Bulldog", "Poodle", "Siberian Husky", "Pembroke Welsh Corgi", 
-  "Dachshund", "Boxer", "Shiba Inu", "Boston Terrier",
+  "Golden Retriever",
+  "Labrador Retriever",
+  "German Shepherd",
+  "Beagle",
+  "Bulldog",
+  "Poodle",
+  "Siberian Husky",
+  "Pembroke Welsh Corgi",
+  "Dachshund",
+  "Boxer",
+  "Shiba Inu",
+  "Boston Terrier",
   // Additional breeds
-  "Pomeranian", "Yorkshire Terrier", "French Bulldog", "Chihuahua",
-  "Border Collie", "Australian Shepherd", "Cocker Spaniel", "Maltese",
-  "Cavalier King Charles Spaniel", "Shih Tzu", "Miniature Schnauzer",
-  "Doberman Pinscher", "Great Dane", "Bernese Mountain Dog", "Rottweiler",
-  "English Springer Spaniel", "Havanese", "Bichon Frise", "Akita",
-  "Rhodesian Ridgeback", "Newfoundland", "West Highland White Terrier",
-  "Shetland Sheepdog", "Basset Hound", "Pug", "Weimaraner", "Dalmatian",
-  "Jack Russell Terrier", "Vizsla", "Samoyed", "Bull Terrier", "Mixed Breed"
+  "Pomeranian",
+  "Yorkshire Terrier",
+  "French Bulldog",
+  "Chihuahua",
+  "Border Collie",
+  "Australian Shepherd",
+  "Cocker Spaniel",
+  "Maltese",
+  "Cavalier King Charles Spaniel",
+  "Shih Tzu",
+  "Miniature Schnauzer",
+  "Doberman Pinscher",
+  "Great Dane",
+  "Bernese Mountain Dog",
+  "Rottweiler",
+  "English Springer Spaniel",
+  "Havanese",
+  "Bichon Frise",
+  "Akita",
+  "Rhodesian Ridgeback",
+  "Newfoundland",
+  "West Highland White Terrier",
+  "Shetland Sheepdog",
+  "Basset Hound",
+  "Pug",
+  "Weimaraner",
+  "Dalmatian",
+  "Jack Russell Terrier",
+  "Vizsla",
+  "Samoyed",
+  "Bull Terrier",
+  "Mixed Breed",
 ];
 
 const sizes = ["small", "medium", "large"];
@@ -48,31 +130,76 @@ const statuses = ["open", "matched", "completed"];
 
 const locations = [
   // Boston neighborhoods
-  "Back Bay, Boston", "Fenway, Boston", "Allston, Boston", "Brighton, Boston",
-  "South End, Boston", "Beacon Hill, Boston", "North End, Boston",
-  "South Boston", "West End, Boston", "Downtown Boston", "Chinatown, Boston",
-  "Bay Village, Boston", "Leather District, Boston",
+  "Back Bay, Boston",
+  "Fenway, Boston",
+  "Allston, Boston",
+  "Brighton, Boston",
+  "South End, Boston",
+  "Beacon Hill, Boston",
+  "North End, Boston",
+  "South Boston",
+  "West End, Boston",
+  "Downtown Boston",
+  "Chinatown, Boston",
+  "Bay Village, Boston",
+  "Leather District, Boston",
   // Greater Boston
-  "Brookline, MA", "Cambridge, MA", "Somerville, MA", "Jamaica Plain, Boston",
-  "Dorchester, Boston", "Roxbury, Boston", "Roslindale, Boston",
-  "West Roxbury, Boston", "Hyde Park, Boston", "Mattapan, Boston",
+  "Brookline, MA",
+  "Cambridge, MA",
+  "Somerville, MA",
+  "Jamaica Plain, Boston",
+  "Dorchester, Boston",
+  "Roxbury, Boston",
+  "Roslindale, Boston",
+  "West Roxbury, Boston",
+  "Hyde Park, Boston",
+  "Mattapan, Boston",
   // Nearby cities
-  "Newton, MA", "Watertown, MA", "Medford, MA", "Malden, MA",
-  "Quincy, MA", "Waltham, MA", "Arlington, MA", "Belmont, MA"
+  "Newton, MA",
+  "Watertown, MA",
+  "Medford, MA",
+  "Malden, MA",
+  "Quincy, MA",
+  "Waltham, MA",
+  "Arlington, MA",
+  "Belmont, MA",
 ];
 
 const ownerNames = [
-  "Sarah Johnson", "Mike Chen", "Emily Davis", "James Wilson", "Lisa Brown",
-  "David Lee", "Maria Garcia", "John Smith", "Anna Wang", "Tom Anderson",
-  "Jennifer Martinez", "Chris Taylor", "Amanda Rodriguez", "Kevin Park",
-  "Michelle Kim", "Brian O'Connor", "Samantha Green", "Daniel Nguyen",
-  "Rachel Cohen", "Andrew Patel", "Jessica Liu", "Matthew White",
-  "Laura Thompson", "Ryan Murphy", "Nicole Rossi", "Eric Zhang",
-  "Ashley Santos", "Jason Lee", "Stephanie Adams", "Brandon Wu"
+  "Sarah Johnson",
+  "Mike Chen",
+  "Emily Davis",
+  "James Wilson",
+  "Lisa Brown",
+  "David Lee",
+  "Maria Garcia",
+  "John Smith",
+  "Anna Wang",
+  "Tom Anderson",
+  "Jennifer Martinez",
+  "Chris Taylor",
+  "Amanda Rodriguez",
+  "Kevin Park",
+  "Michelle Kim",
+  "Brian O'Connor",
+  "Samantha Green",
+  "Daniel Nguyen",
+  "Rachel Cohen",
+  "Andrew Patel",
+  "Jessica Liu",
+  "Matthew White",
+  "Laura Thompson",
+  "Ryan Murphy",
+  "Nicole Rossi",
+  "Eric Zhang",
+  "Ashley Santos",
+  "Jason Lee",
+  "Stephanie Adams",
+  "Brandon Wu",
 ];
 
 const specialNeedsList = [
-  "",  // 70% no special needs
+  "", // 70% no special needs
   "",
   "",
   "",
@@ -87,7 +214,7 @@ const specialNeedsList = [
   "Allergies to certain treats",
   "Fear of loud noises",
   "Must stay on sidewalk, fears grass",
-  "Needs to be carried up stairs"
+  "Needs to be carried up stairs",
 ];
 
 const socialNotes = [
@@ -100,7 +227,7 @@ const socialNotes = [
   "Interested in puppy playdate meetups",
   "Would enjoy walking with other large breed owners",
   "Hope to find friends for both me and my pup!",
-  "New to the area, would love to meet fellow dog lovers"
+  "New to the area, would love to meet fellow dog lovers",
 ];
 
 // ========== Helper Functions ==========
@@ -129,10 +256,10 @@ function randomFutureDate(daysAhead = 30) {
 
 function generateRequest(index) {
   const createdDate = randomDate(60);
-  
+
   // 30% of requests are open to social interaction
   const isOpenToSocial = randomBoolean(0.3);
-  
+
   return {
     dogName: randomItem(dogNames),
     breed: randomItem(breeds),
@@ -140,27 +267,29 @@ function generateRequest(index) {
     size: randomItem(sizes),
     temperament: randomItem(temperaments),
     specialNeeds: randomItem(specialNeedsList),
-    
+
     frequency: randomItem(frequencies),
     preferredTime: randomItem(times),
     duration: [15, 30, 45, 60][Math.floor(Math.random() * 4)],
     startDate: randomFutureDate(30),
-    
+
     location: randomItem(locations),
-    pickupLocation: randomBoolean(0.7) ? "Apartment lobby" : "Building entrance",
-    
+    pickupLocation: randomBoolean(0.7)
+      ? "Apartment lobby"
+      : "Building entrance",
+
     budget: Math.floor(Math.random() * 35) + 15, // $15-50
-    
+
     ownerName: randomItem(ownerNames),
     ownerPhone: `617-${String(Math.floor(Math.random() * 1000)).padStart(3, "0")}-${String(Math.floor(Math.random() * 10000)).padStart(4, "0")}`,
     ownerEmail: `${randomItem(ownerNames).toLowerCase().replace(/ /g, ".")}${index}@example.com`,
-    
+
     // Social interaction fields
     openToSocial: isOpenToSocial,
     socialNote: isOpenToSocial ? randomItem(socialNotes) : "",
-    
+
     status: randomItem(statuses),
-    
+
     createdAt: createdDate,
     updatedAt: createdDate,
   };
@@ -177,36 +306,36 @@ async function seedRequests() {
   console.log(`   - ${ownerNames.length} owner names`);
   console.log(`   - ${socialNotes.length} social notes`);
   console.log("");
-  
+
   const client = new MongoClient(URI);
-  
+
   try {
     await client.connect();
     console.log("✅ Connected to MongoDB at:", URI);
-    
+
     const db = client.db(dbName);
     const collection = db.collection("requests");
-    
+
     // Clear old data
     const deleteResult = await collection.deleteMany({});
     console.log(`🗑️  Cleared ${deleteResult.deletedCount} old documents`);
-    
+
     // Generate 1000 requests
     console.log("🎲 Generating requests...");
     const requests = [];
     for (let i = 1; i <= 1000; i++) {
       requests.push(generateRequest(i));
-      
+
       if (i % 200 === 0) {
         console.log(`   📝 Generated ${i}/1000...`);
       }
     }
-    
+
     // Insert into database
     console.log("💾 Inserting into MongoDB...");
     const result = await collection.insertMany(requests);
     console.log(`✅ Success! Inserted ${result.insertedCount} requests`);
-    
+
     // Statistics
     const stats = {
       total: await collection.countDocuments(),
@@ -216,17 +345,20 @@ async function seedRequests() {
       smallDogsCount: await collection.countDocuments({ size: "small" }),
       mediumDogsCount: await collection.countDocuments({ size: "medium" }),
     };
-    
+
     console.log("\n📊 Database Statistics:");
     console.log(`   Total requests: ${stats.total}`);
     console.log(`   Open requests: ${stats.openRequests}`);
-    console.log(`   Open to social: ${stats.withSocialNote} (${Math.round(stats.withSocialNote/stats.total*100)}%)`);
-    console.log(`   By size: Small=${stats.smallDogsCount}, Medium=${stats.mediumDogsCount}, Large=${stats.largeDogsCount}`);
+    console.log(
+      `   Open to social: ${stats.withSocialNote} (${Math.round((stats.withSocialNote / stats.total) * 100)}%)`,
+    );
+    console.log(
+      `   By size: Small=${stats.smallDogsCount}, Medium=${stats.mediumDogsCount}, Large=${stats.largeDogsCount}`,
+    );
     console.log("");
     console.log("🎉 Sample request:");
     const sampleRequest = await collection.findOne({ openToSocial: true });
     console.log(JSON.stringify(sampleRequest, null, 2));
-    
   } catch (error) {
     console.error("\n❌ Error seeding data:", error.message);
     console.error("   Make sure MongoDB is running!");

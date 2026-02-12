@@ -23,6 +23,6 @@ app.get("/api/health", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`✅ Server is running on http://localhost:${PORT}`);
-  console.log(`📱 Frontend: http://localhost:${PORT}`);
-  console.log(`🔌 API: http://localhost:${PORT}/api`);
+  console.log(`Frontend: http://localhost:${PORT}`);
+  console.log(`API: http://localhost:${PORT}/api`);
 });

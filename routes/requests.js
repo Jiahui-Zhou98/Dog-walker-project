@@ -29,7 +29,11 @@ function validateRequestData(body) {
   const errors = [];
 
   // --- Required fields ---
-  if (!body.dogName || typeof body.dogName !== "string" || !body.dogName.trim()) {
+  if (
+    !body.dogName ||
+    typeof body.dogName !== "string" ||
+    !body.dogName.trim()
+  ) {
     errors.push("dogName is required and must be a non-empty string");
   }
 
@@ -37,15 +41,27 @@ function validateRequestData(body) {
     errors.push("breed is required and must be a non-empty string");
   }
 
-  if (!body.ownerName || typeof body.ownerName !== "string" || !body.ownerName.trim()) {
+  if (
+    !body.ownerName ||
+    typeof body.ownerName !== "string" ||
+    !body.ownerName.trim()
+  ) {
     errors.push("ownerName is required and must be a non-empty string");
   }
 
-  if (!body.ownerEmail || typeof body.ownerEmail !== "string" || !body.ownerEmail.trim()) {
+  if (
+    !body.ownerEmail ||
+    typeof body.ownerEmail !== "string" ||
+    !body.ownerEmail.trim()
+  ) {
     errors.push("ownerEmail is required and must be a non-empty string");
   }
 
-  if (!body.location || typeof body.location !== "string" || !body.location.trim()) {
+  if (
+    !body.location ||
+    typeof body.location !== "string" ||
+    !body.location.trim()
+  ) {
     errors.push("location is required and must be a non-empty string");
   }
 
@@ -110,7 +126,9 @@ function validateRequestData(body) {
     startDate: body.startDate || undefined,
     budget: body.budget !== undefined ? Number(body.budget) : undefined,
     location: body.location.trim(),
-    pickupLocation: body.pickupLocation ? body.pickupLocation.trim() : undefined,
+    pickupLocation: body.pickupLocation
+      ? body.pickupLocation.trim()
+      : undefined,
     ownerName: body.ownerName.trim(),
     status: body.status || undefined,
     ownerPhone: body.ownerPhone ? body.ownerPhone.trim() : undefined,
@@ -194,7 +212,9 @@ router.post("/", async (req, res) => {
   // Validate request body
   const { valid, errors, data } = validateRequestData(req.body);
   if (!valid) {
-    return res.status(400).json({ error: "Validation failed", details: errors });
+    return res
+      .status(400)
+      .json({ error: "Validation failed", details: errors });
   }
 
   try {
@@ -216,7 +236,9 @@ router.put("/:id", async (req, res) => {
   // Validate request body
   const { valid, errors, data } = validateRequestData(req.body);
   if (!valid) {
-    return res.status(400).json({ error: "Validation failed", details: errors });
+    return res
+      .status(400)
+      .json({ error: "Validation failed", details: errors });
   }
 
   try {
