@@ -1,0 +1,83 @@
+/* =============================================
+   index.css - Styles for Home Page
+   Author: Jiahui Zhou
+   Page: index.html
+   ============================================= */
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #fff9f5 0%, #ffe8d6 100%);
+  padding: 4rem 0;
+  border-radius: 0 0 50px 50px;
+  margin-bottom: 3rem;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+/* Image Placeholder */
+.image-placeholder {
+  background-color: var(--bg-light);
+  border: 3px dashed var(--border-color);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.image-placeholder img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+/* Section Title & Subtitle */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+/* Responsive - Home Page */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .image-placeholder {
+    min-height: 250px;
+  }
+}

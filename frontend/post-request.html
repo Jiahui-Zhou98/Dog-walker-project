@@ -1,3 +1,8 @@
+<!-- =============================================
+   post-request.html - Post a Dog Walking Request
+   Author: Jiahui Zhou
+   Page: post-request.html
+   ============================================= -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,6 +14,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/requests.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -30,6 +36,9 @@
           <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item">
               <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about.html">About</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="/requests.html">Find a Walker</a>
@@ -61,7 +70,7 @@
         <div class="card-body p-4">
           <form id="postRequestForm">
             <!-- Section 1: Dog Information -->
-            <h5 class="mb-3">🐶 Dog Information</h5>
+            <h5 class="mb-3">Dog Information</h5>
             <div class="row g-3 mb-4">
               <div class="col-md-6">
                 <label for="dogName" class="form-label"
@@ -137,7 +146,7 @@
             <hr class="my-4" />
 
             <!-- Section 2: Walking Details -->
-            <h5 class="mb-3">🚶 Walking Details</h5>
+            <h5 class="mb-3">Walking Details</h5>
             <div class="row g-3 mb-4">
               <div class="col-md-4">
                 <label for="frequency" class="form-label"
@@ -223,7 +232,7 @@
             <hr class="my-4" />
 
             <!-- Section 3: Location -->
-            <h5 class="mb-3">📍 Location</h5>
+            <h5 class="mb-3">Location</h5>
             <div class="row g-3 mb-4">
               <div class="col-md-6">
                 <label for="location" class="form-label"
@@ -256,7 +265,7 @@
             <hr class="my-4" />
 
             <!-- Section 4: Owner Contact -->
-            <h5 class="mb-3">👤 Your Contact Information</h5>
+            <h5 class="mb-3">Your Contact Information</h5>
             <div class="row g-3 mb-4">
               <div class="col-md-4">
                 <label for="ownerName" class="form-label"
@@ -304,7 +313,7 @@
             <hr class="my-4" />
 
             <!-- Section 5: Additional Information -->
-            <h5 class="mb-3">📝 Additional Information</h5>
+            <h5 class="mb-3">Additional Information</h5>
             <div class="row g-3 mb-4">
               <div class="col-12">
                 <label for="specialNeeds" class="form-label"
@@ -327,7 +336,7 @@
                     name="openToSocial"
                   />
                   <label class="form-check-label" for="openToSocial">
-                    🤝 I'm open to meeting other dog owners for group walks or
+                    I'm open to meeting other dog owners for group walks or
                     socializing
                   </label>
                 </div>
@@ -367,7 +376,7 @@
     <!-- Footer -->
     <footer>
       <div class="container">
-        <p>&copy; 2024 PawsitiveWalks. Made with ❤️ for BU CS5610</p>
+        <p>&copy; 2026 PawsitiveWalks</p>
       </div>
     </footer>
 
@@ -381,7 +390,7 @@
         aria-atomic="true"
       >
         <div class="toast-header bg-success text-white">
-          <strong class="me-auto">🎉 Success</strong>
+          <strong class="me-auto">Success</strong>
           <button
             type="button"
             class="btn-close btn-close-white"
@@ -399,7 +408,7 @@
         aria-atomic="true"
       >
         <div class="toast-header bg-danger text-white">
-          <strong class="me-auto">❌ Error</strong>
+          <strong class="me-auto">Error</strong>
           <button
             type="button"
             class="btn-close btn-close-white"

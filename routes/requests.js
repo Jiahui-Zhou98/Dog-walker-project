@@ -1,6 +1,13 @@
+// =============================================
+// routes/requests.js - Routes for Dog Walking Requests
+// Author: Jiahui Zhou
+// Page: requests.html, post-request.html,
+//       edit-request.html
+// =============================================
+
 import express from "express";
 import { ObjectId } from "mongodb";
-import MyDB from "../db/MyMongoDB.js";
+import requestsDB from "../db/RequestsDB.js";
 
 const router = express.Router();
 
@@ -16,7 +23,7 @@ const VALID_TEMPERAMENTS = [
   "calm",
   "aggressive",
 ];
-const VALID_FREQUENCIES = ["daily", "weekly", "occasional", "one-time"];
+const VALID_FREQUENCIES = ["once", "daily", "weekly", "weekdays", "weekends"];
 const VALID_STATUSES = ["open", "matched", "completed"];
 
 // Check if a string is a valid MongoDB ObjectId
@@ -166,14 +173,14 @@ router.get("/", async (req, res) => {
   console.log("🐕 GET /api/requests", { page, pageSize, query });
 
   try {
-    const requests = await MyDB.requestsDB.getRequests({
+    const requests = await requestsDB.getRequests({
       query,
       pageSize,
       page,
     });
 
     // Get total count for pagination
-    const total = await MyDB.requestsDB.countRequests(query);
+    const total = await requestsDB.countRequests(query);
 
     // Return in the format frontend expects
     res.json({
@@ -196,7 +203,7 @@ router.get("/:id", async (req, res) => {
   }
 
   try {
-    const request = await MyDB.requestsDB.getRequestById(req.params.id);
+    const request = await requestsDB.getRequestById(req.params.id);
     if (!request) {
       return res.status(404).json({ error: "Request not found" });
     }
@@ -218,7 +225,7 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    const newRequest = await MyDB.requestsDB.createRequest(data);
+    const newRequest = await requestsDB.createRequest(data);
     res.status(201).json({ request: newRequest });
   } catch (error) {
     console.error("Error creating request:", error);
@@ -243,13 +250,13 @@ router.put("/:id", async (req, res) => {
 
   try {
     // Check if the request exists before updating
-    const existing = await MyDB.requestsDB.getRequestById(req.params.id);
+    const existing = await requestsDB.getRequestById(req.params.id);
     if (!existing) {
       return res.status(404).json({ error: "Request not found" });
     }
 
-    await MyDB.requestsDB.updateRequest(req.params.id, data);
-    const updatedRequest = await MyDB.requestsDB.getRequestById(req.params.id);
+    await requestsDB.updateRequest(req.params.id, data);
+    const updatedRequest = await requestsDB.getRequestById(req.params.id);
     res.json({ request: updatedRequest });
   } catch (error) {
     console.error("Error updating request:", error);
@@ -266,12 +273,12 @@ router.delete("/:id", async (req, res) => {
 
   try {
     // Check if the request exists before deleting
-    const existing = await MyDB.requestsDB.getRequestById(req.params.id);
+    const existing = await requestsDB.getRequestById(req.params.id);
     if (!existing) {
       return res.status(404).json({ error: "Request not found" });
     }
 
-    await MyDB.requestsDB.deleteRequest(req.params.id);
+    await requestsDB.deleteRequest(req.params.id);
     res.json({ message: "Request deleted successfully" });
   } catch (error) {
     console.error("Error deleting request:", error);

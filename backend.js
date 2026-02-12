@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import requestsRouter from "./routes/requests.js";
+// TODO: Yi-Peng - uncomment when walkers router is ready
+// import walkersRouter from "./routes/walkers.js";
 
 dotenv.config();
 
@@ -15,6 +17,8 @@ app.use(express.static("frontend"));
 
 // API Routes
 app.use("/api/requests", requestsRouter);
+// TODO: Yi-Peng - uncomment when walkers router is ready
+// app.use("/api/walkers", walkersRouter);
 
 // Health check
 app.get("/api/health", (req, res) => {
@@ -22,7 +26,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
   console.log(`Frontend: http://localhost:${PORT}`);
   console.log(`API: http://localhost:${PORT}/api`);
 });
