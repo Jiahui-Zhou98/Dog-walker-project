@@ -1,0 +1,33 @@
+{
+  "name": "pawsitive-walks",
+  "version": "1.0.0",
+  "description": "A platform connecting dog owners with trusted dog walkers",
+  "main": "backend.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend.js",
+    "dev": "nodemon backend.js",
+    "seed": "node data/seed-requests.js",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "dog",
+    "walking",
+    "pets",
+    "students",
+    "platform"
+  ],
+  "author": "Jiahui",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongodb": "^6.20.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "eslint": "^9.37.0",
+    "prettier": "^3.6.2"
+  }
+}

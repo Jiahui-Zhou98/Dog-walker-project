@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post a Request - PawsitiveWalks</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <span>🐕</span>
+          <span>PawsitiveWalks</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/requests.html">Find a Walker</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/walkers.html">Become a Walker</a>
+            </li>
+            <li class="nav-item ms-lg-3">
+              <a class="nav-link btn-signin" href="#signin">Sign In</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="container mt-4">
+      <div class="mb-4">
+        <h1 class="mb-2">Post a Dog Walking Request</h1>
+        <p class="text-muted mb-0">
+          Fill in the details below to find a walker for your furry friend
+        </p>
+      </div>
+    </div>
+
+    <!-- Form Container -->
+    <div class="container mb-5">
+      <div class="card">
+        <div class="card-body p-4">
+          <form id="postRequestForm">
+            <!-- Section 1: Dog Information -->
+            <h5 class="mb-3">🐶 Dog Information</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label for="dogName" class="form-label"
+                  >Dog Name <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="dogName"
+                  name="dogName"
+                  required
+                  placeholder="e.g., Max"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="breed" class="form-label"
+                  >Breed <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="breed"
+                  name="breed"
+                  required
+                  placeholder="e.g., Golden Retriever"
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="age" class="form-label"
+                  >Age (years) <span class="text-danger">*</span></label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="age"
+                  name="age"
+                  min="0"
+                  max="20"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="size" class="form-label"
+                  >Size <span class="text-danger">*</span></label
+                >
+                <select class="form-select" id="size" name="size" required>
+                  <option value="">Choose...</option>
+                  <option value="small">Small (< 20 lbs)</option>
+                  <option value="medium">Medium (20-50 lbs)</option>
+                  <option value="large">Large (> 50 lbs)</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="temperament" class="form-label"
+                  >Temperament <span class="text-danger">*</span></label
+                >
+                <select
+                  class="form-select"
+                  id="temperament"
+                  name="temperament"
+                  required
+                >
+                  <option value="">Choose...</option>
+                  <option value="friendly">Friendly</option>
+                  <option value="shy">Shy</option>
+                  <option value="energetic">Energetic</option>
+                  <option value="calm">Calm</option>
+                  <option value="aggressive">Aggressive</option>
+                </select>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Section 2: Walking Details -->
+            <h5 class="mb-3">🚶 Walking Details</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-4">
+                <label for="frequency" class="form-label"
+                  >Frequency <span class="text-danger">*</span></label
+                >
+                <select
+                  class="form-select"
+                  id="frequency"
+                  name="frequency"
+                  required
+                >
+                  <option value="">Choose...</option>
+                  <option value="once">Once</option>
+                  <option value="daily">Daily</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="weekdays">Weekdays</option>
+                  <option value="weekends">Weekends</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="preferredTime" class="form-label"
+                  >Preferred Time <span class="text-danger">*</span></label
+                >
+                <select
+                  class="form-select"
+                  id="preferredTime"
+                  name="preferredTime"
+                  required
+                >
+                  <option value="">Choose...</option>
+                  <option value="morning">Morning</option>
+                  <option value="afternoon">Afternoon</option>
+                  <option value="evening">Evening</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="duration" class="form-label"
+                  >Duration (minutes) <span class="text-danger">*</span></label
+                >
+                <select
+                  class="form-select"
+                  id="duration"
+                  name="duration"
+                  required
+                >
+                  <option value="">Choose...</option>
+                  <option value="15">15 minutes</option>
+                  <option value="30">30 minutes</option>
+                  <option value="45">45 minutes</option>
+                  <option value="60">60 minutes</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="startDate" class="form-label"
+                  >Start Date <span class="text-danger">*</span></label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="startDate"
+                  name="startDate"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="budget" class="form-label"
+                  >Budget ($) <span class="text-danger">*</span></label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="budget"
+                  name="budget"
+                  min="1"
+                  max="500"
+                  step="1"
+                  required
+                  placeholder="e.g., 25"
+                />
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Section 3: Location -->
+            <h5 class="mb-3">📍 Location</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label for="location" class="form-label"
+                  >General Location <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="location"
+                  name="location"
+                  required
+                  placeholder="e.g., Back Bay, Boston"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="pickupLocation" class="form-label"
+                  >Pickup Location <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pickupLocation"
+                  name="pickupLocation"
+                  required
+                  placeholder="e.g., Apartment lobby"
+                />
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Section 4: Owner Contact -->
+            <h5 class="mb-3">👤 Your Contact Information</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-4">
+                <label for="ownerName" class="form-label"
+                  >Your Name <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="ownerName"
+                  name="ownerName"
+                  required
+                  placeholder="e.g., Sarah Johnson"
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="ownerPhone" class="form-label"
+                  >Phone Number <span class="text-danger">*</span></label
+                >
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="ownerPhone"
+                  name="ownerPhone"
+                  required
+                  placeholder="e.g., 617-555-0123"
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                />
+                <small class="form-text text-muted">Format: 617-555-0123</small>
+              </div>
+              <div class="col-md-4">
+                <label for="ownerEmail" class="form-label"
+                  >Email <span class="text-danger">*</span></label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="ownerEmail"
+                  name="ownerEmail"
+                  required
+                  placeholder="e.g., sarah@example.com"
+                />
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Section 5: Additional Information -->
+            <h5 class="mb-3">📝 Additional Information</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-12">
+                <label for="specialNeeds" class="form-label"
+                  >Special Needs or Instructions</label
+                >
+                <textarea
+                  class="form-control"
+                  id="specialNeeds"
+                  name="specialNeeds"
+                  rows="3"
+                  placeholder="Any special requirements, medical conditions, or behavior notes..."
+                ></textarea>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="openToSocial"
+                    name="openToSocial"
+                  />
+                  <label class="form-check-label" for="openToSocial">
+                    🤝 I'm open to meeting other dog owners for group walks or
+                    socializing
+                  </label>
+                </div>
+              </div>
+              <div
+                class="col-12"
+                id="socialNoteContainer"
+                style="display: none"
+              >
+                <label for="socialNote" class="form-label"
+                  >Social Preferences (Optional)</label
+                >
+                <textarea
+                  class="form-control"
+                  id="socialNote"
+                  name="socialNote"
+                  rows="2"
+                  placeholder="Tell us what you're looking for in social walks..."
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex gap-3">
+              <button type="submit" class="btn btn-primary-custom">
+                Post Request
+              </button>
+              <a href="/requests.html" class="btn btn-secondary-custom">
+                Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 PawsitiveWalks. Made with ❤️ for BU CS5610</p>
+      </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div
+        id="successToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header bg-success text-white">
+          <strong class="me-auto">🎉 Success</strong>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">Your request has been posted successfully!</div>
+      </div>
+      <div
+        id="errorToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header bg-danger text-white">
+          <strong class="me-auto">❌ Error</strong>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">Failed to post request. Please try again.</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./js/postRequestModule.js"></script>
+  </body>
+</html>

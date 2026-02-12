@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find a Walker - PawsitiveWalks</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <span>🐕</span>
+          <span>PawsitiveWalks</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/requests.html">Find a Walker</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/walkers.html">Become a Walker</a>
+            </li>
+            <li class="nav-item ms-lg-3">
+              <a class="nav-link btn-signin" href="#signin">Sign In</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="container mt-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h1 class="mb-2">Dog Walking Requests</h1>
+        </div>
+        <a
+          href="/post-request.html"
+          class="btn btn-primary-custom d-none d-md-block"
+        >
+          + Post Request
+        </a>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="container">
+      <div class="filters-section">
+        <h5>Filter Requests</h5>
+        <div class="row g-3">
+          <div class="col-md-2">
+            <label class="form-label">Dog Size</label>
+            <select id="filterSize" class="form-select">
+              <option value="">All Sizes</option>
+              <option value="small">Small (&lt; 20 lbs)</option>
+              <option value="medium">Medium (20-50 lbs)</option>
+              <option value="large">Large (&gt; 50 lbs)</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Location</label>
+            <input
+              type="text"
+              id="filterLocation"
+              class="form-control"
+              placeholder="e.g., Back Bay"
+            />
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Preferred Time</label>
+            <select id="filterTime" class="form-select">
+              <option value="">All Times</option>
+              <option value="morning">Morning</option>
+              <option value="afternoon">Afternoon</option>
+              <option value="evening">Evening</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Status</label>
+            <select id="filterStatus" class="form-select">
+              <option value="">All Status</option>
+              <option value="open">Open</option>
+              <option value="matched">Matched</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Social Preference</label>
+            <select id="filterSocial" class="form-select">
+              <option value="">All</option>
+              <option value="true">Open to Social</option>
+              <option value="false">Not Social</option>
+            </select>
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button id="applyFilters" class="btn btn-primary-custom w-100">
+              Apply Filters
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Requests List -->
+    <div class="container mt-4">
+      <div id="requests-list">
+        <!-- Will be populated by JavaScript -->
+        <div class="text-center py-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-3 text-muted">Loading requests...</p>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center" id="pagination"></ul>
+      </nav>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Are you sure you want to delete the request for
+              <strong id="deleteRequestName"></strong>?
+            </p>
+            <p class="text-danger mb-0">This action cannot be undone.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div
+        id="deleteSuccessToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header bg-success text-white">
+          <strong class="me-auto">✅ Success</strong>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">Request deleted successfully!</div>
+      </div>
+      <div
+        id="deleteErrorToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header bg-danger text-white">
+          <strong class="me-auto">❌ Error</strong>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">
+          Failed to delete request. Please try again.
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2026 PawsitiveWalks</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./js/requestsModule.js"></script>
+  </body>
+</html>
