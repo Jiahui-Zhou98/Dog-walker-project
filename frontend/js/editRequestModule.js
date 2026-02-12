@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // ========== Fetch existing request data ==========
   try {
     console.log("🔍 Fetching request data...");
-    
+
     // Send GET request to fetch this specific request
     const response = await fetch(`/api/requests/${requestId}`);
 
@@ -47,14 +47,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Walking details
     document.getElementById("frequency").value = request.frequency || "";
-    document.getElementById("preferredTime").value = request.preferredTime || "";
+    document.getElementById("preferredTime").value =
+      request.preferredTime || "";
     document.getElementById("duration").value = request.duration || "";
     document.getElementById("startDate").value = request.startDate || "";
     document.getElementById("budget").value = request.budget || "";
 
     // Location
     document.getElementById("location").value = request.location || "";
-    document.getElementById("pickupLocation").value = request.pickupLocation || "";
+    document.getElementById("pickupLocation").value =
+      request.pickupLocation || "";
 
     // Owner information
     document.getElementById("ownerName").value = request.ownerName || "";
@@ -66,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Additional information
     document.getElementById("specialNeeds").value = request.specialNeeds || "";
-    
+
     // Social preference
     if (request.openToSocial) {
       openToSocialCheckbox.checked = true;
@@ -75,7 +77,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     console.log("✅ Form pre-filled with existing data");
-
   } catch (error) {
     console.error("❌ Error loading request:", error);
     alert(`Error loading request: ${error.message}`);
@@ -168,7 +169,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Show success toast
       const successToast = new bootstrap.Toast(
-        document.getElementById("successToast")
+        document.getElementById("successToast"),
       );
       successToast.show();
 
@@ -182,7 +183,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Show error toast
       const errorToast = new bootstrap.Toast(
-        document.getElementById("errorToast")
+        document.getElementById("errorToast"),
       );
       errorToast.show();
 
