@@ -1,8 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import requestsRouter from "./routes/requests.js";
-// TODO: Yi-Peng - uncomment when walkers router is ready
-// import walkersRouter from "./routes/walkers.js";
+import walkersRouter from "./routes/walkers.js";
 
 dotenv.config();
 
@@ -17,8 +16,7 @@ app.use(express.static("frontend"));
 
 // API Routes
 app.use("/api/requests", requestsRouter);
-// TODO: Yi-Peng - uncomment when walkers router is ready
-// app.use("/api/walkers", walkersRouter);
+app.use("/api/walkers", walkersRouter);
 
 // Health check
 app.get("/api/health", (req, res) => {
