@@ -99,7 +99,7 @@ async function seedWalkers() {
     console.log("🗑️ Cleared old walkers");
 
     const walkers = [];
-    for (let i = 1; i <= 200; i++) {
+    for (let i = 1; i <= 1000; i++) {
       walkers.push(generateWalker(i));
     }
 
