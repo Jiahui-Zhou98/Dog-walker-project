@@ -252,10 +252,27 @@ function randomFutureDate(daysAhead = 30) {
   return date.toISOString().split("T")[0];
 }
 
+function randomIntInRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getBudgetRangeByDuration(duration) {
+  const budgetByDuration = {
+    15: { min: 12, max: 22 },
+    30: { min: 18, max: 32 },
+    45: { min: 25, max: 42 },
+    60: { min: 32, max: 55 },
+  };
+
+  return budgetByDuration[duration] || { min: 15, max: 50 };
+}
+
 // ========== Generate Request ==========
 
 function generateRequest(index) {
   const createdDate = randomDate(60);
+  const duration = [15, 30, 45, 60][Math.floor(Math.random() * 4)];
+  const budgetRange = getBudgetRangeByDuration(duration);
 
   // 30% of requests are open to social interaction
   const isOpenToSocial = randomBoolean(0.3);
@@ -270,7 +287,7 @@ function generateRequest(index) {
 
     frequency: randomItem(frequencies),
     preferredTime: randomItem(times),
-    duration: [15, 30, 45, 60][Math.floor(Math.random() * 4)],
+    duration,
     startDate: randomFutureDate(30),
 
     location: randomItem(locations),
@@ -278,7 +295,7 @@ function generateRequest(index) {
       ? "Apartment lobby"
       : "Building entrance",
 
-    budget: Math.floor(Math.random() * 35) + 15, // $15-50
+    budget: randomIntInRange(budgetRange.min, budgetRange.max),
 
     ownerName: randomItem(ownerNames),
     ownerPhone: `617-${String(Math.floor(Math.random() * 1000)).padStart(3, "0")}-${String(Math.floor(Math.random() * 10000)).padStart(4, "0")}`,
