@@ -47,10 +47,6 @@ dog-walker/
 ├── data/
 │   ├── seed-requests.js        # Jiahui  - Seed 1000 request records
 │   └── seed-walkers.js         # Yi-Peng - Seed walker records (TBD)
-|
-|__ image/
-|   |__ og-image.png            # Jiahui  - Open graph
-|   |__ favicon.png             # Yi-Peng - Favicon
 │
 └── frontend/
     ├── index.html              # Jiahui  - Home page
@@ -60,6 +56,10 @@ dog-walker/
     ├── walkers.html            # Yi-Peng - Browse walker profiles
     ├── about.html              # Yi-Peng - About page
     │
+    |__ image/
+    |   |__ og-image.png        # Jiahui  - Open graph
+    |   |__ favicon.png         # Yi-Peng - Favicon
+    |
     ├── css/
     │   ├── main.css            # Shared  - Variables, navbar, footer, buttons
     │   ├── index.css           # Jiahui  - Home page styles
@@ -109,7 +109,7 @@ Yi-Peng Chiang built the full-stack Walker Profiles feature around the `walkers`
   - Image path: `./images/og-image.png`
 
 - Yi-Peng Chiang: Favicon design
-   - Tools used: Canva(https://www.canva.com/), favicon.io(https://favicon.io/favicon-converter/)
+  - Tools used: Canva(https://www.canva.com/), favicon.io(https://favicon.io/favicon-converter/)
   - Image path: `./images/favicon.png`
 
 ---
