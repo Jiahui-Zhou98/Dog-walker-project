@@ -109,6 +109,7 @@ Yi-Peng Chiang built the full-stack Walker Profiles feature around the `walkers`
   - Image path: `./images/og-image.png`
 
 - Yi-Peng Chiang: Favicon design
+   - Tools used: Canva(https://www.canva.com/), favicon.io(https://favicon.io/favicon-converter/)
   - Image path: `./images/favicon.png`
 
 ---
