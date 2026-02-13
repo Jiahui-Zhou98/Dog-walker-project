@@ -47,6 +47,10 @@ dog-walker/
 ├── data/
 │   ├── seed-requests.js        # Jiahui  - Seed 1000 request records
 │   └── seed-walkers.js         # Yi-Peng - Seed walker records (TBD)
+|
+|__ image/
+|   |__ og-image.png            # Jiahui  - Open graph
+|   |__ favicon.png             # Yi-Peng - Favicon
 │
 └── frontend/
     ├── index.html              # Jiahui  - Home page
@@ -94,6 +98,20 @@ Yi-Peng Chiang built the full-stack Walker Profiles feature around the `walkers`
 | `backend.js`            | Express server setup, middleware, route mounting                      |
 | `db/connection.js`      | Shared MongoDB connection helper used by both DB modules              |
 | `frontend/css/main.css` | Global CSS variables, navbar, footer, shared buttons, responsive base |
+
+---
+
+### Components
+
+- Jiahui Zhou: Open graph design
+  - Tools used: Canva(https://www.canva.com/), Uchinoko Maker(https://uchinoko-maker.jp/?lang=en)
+
+  - Image path: `./images/og-image.png`
+
+- Yi-Peng Chiang: Favicon design
+  - Image path: `./images/favicon.png`
+
+---
 
 ## Getting Started
 
