@@ -275,6 +275,24 @@ function RequestsModule() {
     fetchRequests(); // Fetch with new filters
   };
 
+  // Reset filters and reload unfiltered data
+  me.resetFilters = () => {
+    const sizeSelect = document.getElementById("filterSize");
+    const locationInput = document.getElementById("filterLocation");
+    const timeSelect = document.getElementById("filterTime");
+    const statusSelect = document.getElementById("filterStatus");
+    const socialSelect = document.getElementById("filterSocial");
+
+    if (sizeSelect) sizeSelect.value = "";
+    if (locationInput) locationInput.value = "";
+    if (timeSelect) timeSelect.value = "";
+    if (statusSelect) statusSelect.value = "";
+    if (socialSelect) socialSelect.value = "";
+
+    currentPage = 1;
+    fetchRequests();
+  };
+
   // Initialize
   me.init = () => {
     // Initial data fetch
@@ -284,6 +302,12 @@ function RequestsModule() {
     const filterBtn = document.getElementById("applyFilters");
     if (filterBtn) {
       filterBtn.addEventListener("click", me.applyFilters);
+    }
+
+    // Setup reset button
+    const resetBtn = document.getElementById("resetFilters");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", me.resetFilters);
     }
 
     // Allow Enter key in location input
