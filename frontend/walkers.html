@@ -115,7 +115,33 @@
           + Post Profile
         </a>
       </div>
-      
+
+      <div class="row g-3">
+        <div class="col-md-2">
+          <label class="form-label">Preferred Size</label>
+          <select id="filterSize" class="form-select">
+            <option value="">All Sizes</option>
+            <option value="small">Small (< 20 lbs)</option>
+            <option value="medium">Medium (20-50 lbs)</option>
+            <option value="large">Large  (> 50 lbs)</option>
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <label class="form-label">Location</label>
+          <input type="text" id="filterLocation" class="form-control" placeholder="e.g., Boston" />
+        </div>
+
+        <div class="col-md-2">
+          <label class="form-label">Min Experience</label>
+          <select id="filterExperience" class="form-select">
+            <option value="">Any</option>
+            <option value="1">1+ Year</option>
+            <option value="3">3+ Years</option>
+            <option value="5">5+ Years</option>
+          </select>
+        </div>
+      </div>
 
       <!-- Walkers list -->
       <div id="walkers-list" class="row g-3"></div>
