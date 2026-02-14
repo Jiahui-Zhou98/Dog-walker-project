@@ -14,27 +14,57 @@ function isValidObjectId(id) {
   return ObjectId.isValid(id) && String(new ObjectId(id)) === id;
 }
 
-// GET /api/walkers - Get walkers (pagination)
 router.get("/", async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const pageSize = Math.min(parseInt(req.query.pageSize) || 20, 100);
 
   const query = {};
 
-  console.log("🐾 GET /api/walkers", { page, pageSize, query });
+  // 1. Array Membership (Dog Sizes)
+  if (req.query.size) {
+    query.preferredDogSizes = req.query.size; 
+  }
+
+  // 2. Partial String Match (Location)
+  if (req.query.location) {
+    query.serviceAreas = { $regex: req.query.location, $options: "i" };
+  }
+
+  // 3. Comparison Operators (Experience)
+  if (req.query.experience) {
+    query.experienceYears = { $gte: parseInt(req.query.experience) };
+  }
+
+  // 4. Dot Notation for Nested Objects (Time slots)
+  if (req.query.time) {
+    query["availability.times"] = req.query.time;
+  }
+  
+  // 5. Boolean Logic (Availability)
+  if (req.query.availability) {
+    if (req.query.availability === "weekdays") query["availability.weekdays"] = true;
+    if (req.query.availability === "weekends") query["availability.weekends"] = true;
+  }
+
+  console.log("🐾 GET /api/walkers with Query:", query);
 
   try {
-    const walkers = await walkersDB.getWalkers({ query, pageSize, page });
+    // Execute both queries simultaneously for better performance
+    const [walkers, totalCount] = await Promise.all([
+      walkersDB.getWalkers({ query, pageSize, page }),
+      walkersDB.countWalkers(query) // You'll need to add this helper to WalkersDB.js
+    ]);
 
     res.json({
       data: walkers,
-      total: walkers.length,
+      total: totalCount, // The REAL total for pagination math
       page,
       pageSize,
+      totalPages: Math.ceil(totalCount / pageSize) // Helper for the frontend
     });
   } catch (error) {
-    console.error("Error fetching walkers:", error);
-    res.status(500).json({ error: "Internal Server Error", data: [] });
+    console.error("Filter Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

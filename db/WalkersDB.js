@@ -7,6 +7,15 @@ import { ObjectId } from "mongodb";
 import { connect } from "./connection.js";
 
 const WalkersDB = {
+  countWalkers: async (query = {}) => {
+    const { client, collection } = await connect("walkers");
+    try {
+      return await collection.countDocuments(query);
+    } finally {
+      await client.close();
+    }
+  },
+  
   getWalkers: async ({ query = {}, pageSize = 20, page = 1 } = {}) => {
     const { client, collection } = await connect("walkers");
     try {
