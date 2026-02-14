@@ -95,23 +95,28 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 hero-content">
-            <h1>Your Dog's Happy Walk Starts Here</h1>
-            <p>
-              A zero-fee community platform connecting dog owners with trusted
-              walkers. <br />
-              A simple bridge for direct connection and negotiation.
-            </p>
-          </div>
-          <div class="col-lg-6 mt-4 mt-lg-0">
-            <div class="image-placeholder">
-              <div>
-                <p class="mb-2">Place your dog walking image here</p>
-              </div>
-            </div>
-          </div>
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="./images/hero-poster.png"
+        aria-hidden="true"
+      >
+        <source src="./videos/hero.mp4" type="video/mp4" />
+      </video>
+
+      <div class="hero-layer"></div>
+
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <h1>PawsitiveWalks - Happy Walks</h1>
+          <p>
+            A platform connecting dog owners with trusted walkers. <br />
+            A simple bridge for direct connection and negotiation.
+          </p>
         </div>
       </div>
     </section>

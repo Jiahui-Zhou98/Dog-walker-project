@@ -6,45 +6,52 @@
 
 /* Hero Section */
 .hero-section {
-  background: linear-gradient(135deg, #fff9f5 0%, #ffe8d6 100%);
-  padding: 4rem 0;
-  border-radius: 0 0 50px 50px;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
   margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-layer {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  max-width: 720px;
 }
 
 .hero-content h1 {
   font-size: 3rem;
   font-weight: 800;
-  color: var(--text-dark);
+  color: #ffffff;
   margin-bottom: 1.5rem;
   line-height: 1.2;
 }
 
 .hero-content p {
   font-size: 1.25rem;
-  color: var(--text-light);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 2rem;
-}
-
-/* Image Placeholder */
-.image-placeholder {
-  background-color: var(--bg-light);
-  border: 3px dashed var(--border-color);
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-  color: var(--text-light);
-  font-size: 1.1rem;
-  text-align: center;
-  padding: 2rem;
-}
-
-.image-placeholder img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 20px;
 }
 
 /* Section Title & Subtitle */
@@ -73,11 +80,11 @@
     font-size: 1rem;
   }
 
-  .section-title {
-    font-size: 2rem;
+  .hero-section {
+    min-height: 85vh;
   }
 
-  .image-placeholder {
-    min-height: 250px;
+  .section-title {
+    font-size: 2rem;
   }
 }
