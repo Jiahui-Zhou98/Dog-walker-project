@@ -1,1 +1,71 @@
-/* Yi-Peng */
+/* ==========================================================================
+    about.css - Styles for About Page
+    Author: Yi-Peng Chiang
+    Page: about.html
+   ========================================================================== */
+
+/* Page Container & Header Section */
+.about-page {
+    padding-bottom: 3rem;
+}
+
+/* Adjust the width of the main introduction text for better readability */
+.about-lead {
+    max-width: 850px;
+    line-height: 1.8; /* Improves reading flow for English text */
+    font-size: 1.15rem;
+}
+
+/* Typography & Highlights */
+/* Custom highlight for key terms like "zero-fee" */
+.about-page .highlight {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+/* Overriding default primary color to match brand orange */
+.about-page .text-primary {
+    color: var(--primary-color) !important;
+}
+
+/* Info Cards (Owner, Walker, and Community sections) */
+.info-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff;
+}
+
+/* Subtle hover effect to make the interface feel interactive */
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Decorative border for role-based subheaders (Owners/Walkers) */
+.role-section h5 {
+    border-left: 4px solid var(--secondary-color);
+    padding-left: 12px;
+    margin-bottom: 0.75rem;
+}
+
+/* Community Feature Tags (The "Inclusive • Transparent • Social" box) */
+.feature-tag-container {
+    /* Background using primary color with 10% opacity */
+    background-color: rgba(255, 140, 66, 0.1); 
+    color: var(--accent-color);
+    padding: 1rem;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    border: 1px dashed var(--secondary-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    /* Scale down font sizes for smaller mobile screens */
+    .about-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .about-lead {
+        font-size: 1rem;
+    }
+}
