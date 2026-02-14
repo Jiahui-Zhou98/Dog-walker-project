@@ -3,7 +3,6 @@
 // Author: Yi-Peng Chiang
 // Collection: walkers
 // =============================================
-// db/WalkersDB.js
 import { ObjectId } from "mongodb";
 import { connect } from "./connection.js";
 
