@@ -21,26 +21,62 @@ async function fetchAndRenderWalkers(queryString = "") {
       return;
     }
 
-    // Iterate through the data and create HTML cards
-    json.data.forEach((w) => {
-      const col = document.createElement("div");
-      col.className = "col-md-4 mb-4";
+    // Iterate through the fetched data and build the UI cards
+  json.data.forEach((w) => {
+    const col = document.createElement("div");
+    col.className = "col-md-4 mb-4";
 
-      col.innerHTML = `
-        <div class="card h-100 shadow-sm border-0">
-          <div class="card-body">
-            <h5 class="card-title fw-bold text-primary">${w.name}</h5>
-            <p class="card-text">
-              <i class="bi bi-star-fill text-warning"></i> <strong>Experience:</strong> ${w.experienceYears} years<br/>
-              <strong>Rate:</strong> $${w.hourlyRate}/hour<br/>
-              <strong>Areas:</strong> ${(w.serviceAreas || []).join(", ")}<br/>
-              <small class="text-muted">Sizes: ${(w.preferredDogSizes || []).join(", ")}</small>
+    // 1. Process availability (Weekdays/Weekends) into a readable string
+    const schedule = [];
+    if (w.availability?.weekdays) schedule.push("Weekdays");
+    if (w.availability?.weekends) schedule.push("Weekends");
+    
+    // 2. Format the time slots array
+    const timeSlots = (w.availability?.times || []).join(", ");
+
+    col.innerHTML = `
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-primary">${w.name}</h5>
+          <div class="card-text">
+            <p class="mb-2">
+              <i class="bi bi-envelope-fill text-secondary"></i> 
+              <a href="mailto:${w.email}" class="text-decoration-none">${w.email || 'No Email Provided'}</a>
+            </p>
+
+            <p class="mb-1">
+              <i class="bi bi-star-fill text-warning"></i> 
+              <strong>Exp:</strong> ${w.experienceYears} years | 
+              <strong>Rate:</strong> $${w.hourlyRate}/hr
+            </p>
+
+            <p class="mb-1">
+              <i class="bi bi-geo-alt-fill text-danger"></i> 
+              <strong>Areas:</strong> ${(w.serviceAreas || []).join(", ")}
+            </p>
+
+            <hr class="my-2">
+
+            <p class="mb-1 small">
+              <i class="bi bi-calendar-check-fill text-success"></i> 
+              <strong>Schedule:</strong> ${schedule.join(" & ") || "N/A"}
+            </p>
+            <p class="mb-1 small">
+              <i class="bi bi-clock-fill text-info"></i> 
+              <strong>Times:</strong> ${timeSlots || "N/A"}
+            </p>
+            
+            <p class="mt-2 mb-0">
+              <small class="text-muted text-uppercase" style="font-size: 0.7rem;">
+                Preferred Sizes: ${(w.preferredDogSizes || []).join(", ")}
+              </small>
             </p>
           </div>
         </div>
-      `;
-      list.appendChild(col);
-    });
+      </div>
+    `;
+    list.appendChild(col);
+  });
   } catch (err) {
     console.error("Failed to load walkers:", err);
   }
