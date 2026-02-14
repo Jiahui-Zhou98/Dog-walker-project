@@ -3,7 +3,7 @@
     Author: Yi-Peng Chiang
     Page: about.html
    ========================================================================== */
-   
+
 /* 1. Brand Colors & Typography */
 .about-page .text-brand {
     color: #ff8c42; /* Primary Orange */
@@ -50,12 +50,3 @@
     text-transform: uppercase;
 }
 
-/* 5. Responsive Font Adjustments */
-@media (max-width: 768px) {
-    .about-page .display-4 {
-        font-size: 2.2rem;
-    }
-    .about-page .about-lead {
-        font-size: 1rem;
-    }
-}
