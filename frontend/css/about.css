@@ -4,49 +4,59 @@
     Page: about.html
    ========================================================================== */
 
-/* 1. Brand Colors & Typography */
-.about-page .text-brand {
-    color: #ff8c42; /* Primary Orange */
+/* --- 1. Typography --- */
+
+.about-title {
+  color: #ff8c42; /* Primary Color */
 }
 
-.about-page .about-lead {
-    max-width: 850px;
-    line-height: 1.8;
-    font-size: 1.15rem;
+.about-intro-text {
+  max-width: 850px;
+  line-height: 1.8;
+  font-size: 1.1rem;
 }
 
-.about-page .highlight {
-    color: #e67a2e; /* Primary Dark Orange */
-    font-weight: 700;
+.about-highlight {
+  color: #e67a2e; /* Primary Dark */
+  font-weight: bold;
 }
 
-/* 2. Interactive Info Cards */
-.about-page .info-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
+/* --- 2. Information Cards --- */
+
+.about-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
 }
 
-.about-page .info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* 3. Role Sections (Decorated Subheaders) */
-.about-page .role-section h5 {
-    border-left: 4px solid #ffa562; /* Secondary Orange */
-    padding-left: 12px;
-    margin-bottom: 0.75rem;
+.about-subtitle {
+  color: #ff8c42; /* Primary Color */
+  border-left: 4px solid #ffa562; /* Secondary Color line */
+  padding-left: 12px;
 }
 
-/* 4. Bottom Feature Box (Orange Tinted) */
-.about-page .feature-tag-container {
-    /* Background: Primary color #ff8c42 at 10% opacity */
-    background-color: rgba(255, 140, 66, 0.1); 
-    color: #ff6b35; /* Accent Orange */
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    border: 1px dashed #ffa562;
-    text-transform: uppercase;
+/* --- 3. Community Tags --- */
+
+.about-tag-box {
+  background-color: rgba(255, 140, 66, 0.1); /* 10% Opacity Primary */
+  color: #ff6b35; /* Accent Color */
+  border: 1px dashed #ffa562;
+  letter-spacing: 1px;
+}
+
+/* --- 4. Responsive Styling --- */
+
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 2.2rem;
+  }
+  
+  .about-intro-text {
+    font-size: 1rem;
+  }
 }
 
