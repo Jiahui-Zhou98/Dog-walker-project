@@ -4,58 +4,63 @@
     Page: about.html
    ========================================================================== */
 
-/* Page Container & Header Section */
-.about-page {
-    padding-bottom: 3rem;
+/* 1. Header & Lead Text Styling */
+body .about-page .about-header .text-primary {
+    color: #ff8c42; /* Primary Orange */
 }
 
-/* Adjust the width of the main introduction text for better readability */
-.about-lead {
+body .about-page .about-lead {
     max-width: 850px;
-    line-height: 1.8; /* Improves reading flow for English text */
+    line-height: 1.8;
     font-size: 1.15rem;
 }
 
-/* Typography & Highlights */
-/* Custom highlight for key terms like "zero-fee" */
-.about-page .highlight {
-    color: var(--primary-dark);
+body .about-page .highlight {
+    color: #e67a2e; /* Primary Dark Orange */
     font-weight: 700;
 }
 
-/* Overriding default primary color to match brand orange */
-.about-page .text-primary {
-    color: var(--primary-color);
-}
-
-/* Info Cards (Owner, Walker, and Community sections) */
-.info-card {
+/* 2. Info Cards & Interactive Elements */
+body .about-page .info-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #ffffff;
+    border-color: #dee2e6;
 }
 
-/* Subtle hover effect to make the interface feel interactive */
-.info-card:hover {
+/* Hover effect for a modern feel */
+body .about-page .info-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* Decorative border for role-based subheaders (Owners/Walkers) */
-.role-section h5 {
-    border-left: 4px solid var(--secondary-color);
+/* 3. Role Sections with Accent Borders */
+body .about-page .role-section h5 {
+    color: #ff8c42;
+    border-left: 4px solid #ffa562; /* Secondary Orange */
     padding-left: 12px;
     margin-bottom: 0.75rem;
 }
 
-/* Community Feature Tags (The "Inclusive • Transparent • Social" box) */
-.feature-tag-container {
-    /* Background using primary color with 10% opacity */
+/* 4. Community Feature Tags Container */
+body .about-page .feature-tag-container {
+    /* Background: #ff8c42 at 10% opacity */
     background-color: rgba(255, 140, 66, 0.1); 
-    color: var(--accent-color);
+    color: #ff6b35; /* Accent Orange */
     padding: 1rem;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    border: 1px dashed var(--secondary-color);
+    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    border: 1px dashed #ffa562;
+}
+
+/* 5. Responsive Font Scaling */
+@media (max-width: 768px) {
+    body .about-page .about-header h1 {
+        font-size: 2.25rem;
+    }
+    
+    body .about-page .about-lead {
+        font-size: 1rem;
+    }
 }
 
 
