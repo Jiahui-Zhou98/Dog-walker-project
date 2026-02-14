@@ -13,6 +13,7 @@
   margin-bottom: 3rem;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .hero-video {
@@ -34,14 +35,16 @@
 .hero-inner {
   position: relative;
   z-index: 2;
+  text-align: center;
 }
 
 .hero-content {
   max-width: 720px;
+  margin-inline: auto;
 }
 
 .hero-content h1 {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 800;
   color: #ffffff;
   margin-bottom: 1.5rem;
@@ -49,7 +52,7 @@
 }
 
 .hero-content p {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 2rem;
 }
