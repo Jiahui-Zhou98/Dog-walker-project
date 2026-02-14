@@ -1,1 +1,32 @@
 /* Yi-Peng */
+/* Transparent Orange Filter Section */
+.filters-box {
+  /* 1. Background Color (RGBA):
+     - Red (255), Green (140), Blue (66) creates our Brand Orange.
+     - 0.1 is the 'Alpha' channel, representing 10% opacity.
+     - Note: Using RGBA ensures ONLY the background is transparent, 
+       while the text inside remains 100% solid.
+  */
+  background-color: rgba(255, 140, 66, 0.1); 
+  
+  /* 2. Border Styling:
+     - Uses a slightly darker version (30% opacity) of our orange.
+     - !important ensures this orange border overrides Bootstrap's default grey.
+  */
+  border: 1px solid rgba(255, 140, 66, 0.3) !important; 
+  
+  /* 3. Box Shadow:
+     - Adds a very subtle orange-tinted shadow.
+     - This gives the section "Depth" and makes it look like it's 
+       slightly lifted off the page.
+  */
+  box-shadow: 0 4px 15px rgba(255, 140, 66, 0.05);
+}
+
+/* 4. Label Typography */
+.filters-box .form-label {
+  /* Dark grey color (#555) provides better readability than pure black */
+  color: #555;
+  /* Semi-bold weight makes the headers stand out within the colored box */
+  font-weight: 600;
+}
