@@ -60,6 +60,9 @@ dog-walker/
     |   |__ og-image.png        # Jiahui  - Open graph
     |   |__ favicon.png         # Yi-Peng - Favicon
     |
+    |__ videos/
+    |   |__ hero.mp4            # Jiahui  - Developed for Home page
+    |
     ├── css/
     │   ├── main.css            # Shared  - Variables, navbar, footer, buttons
     │   ├── index.css           # Jiahui  - Home page styles
@@ -103,14 +106,17 @@ Yi-Peng Chiang built the full-stack Walker Profiles feature around the `walkers`
 
 ### Components
 
-- Jiahui Zhou: Open graph design
+- Jiahui Zhou:
+  1. Open graph design
   - Tools used: Canva(https://www.canva.com/), Uchinoko Maker(https://uchinoko-maker.jp/?lang=en)
-
-  - Image path: `./images/og-image.png`
+  - Image path: `frontend/images/og-image.png`
+  2. Home page video design
+  - Tools used: Deepseek(https://chat.deepseek.com/), Jimeng AI(https://jimeng.jianying.com/ai-tool/home)
+  - Video path: `frontend/videos/hero.mp4`
 
 - Yi-Peng Chiang: Favicon design
   - Tools used: Canva(https://www.canva.com/), favicon.io(https://favicon.io/favicon-converter/)
-  - Image path: `./images/favicon.png`
+  - Image path: `frontend/images/favicon.png`
 
 ---
 
@@ -141,10 +147,16 @@ PORT=3000
 ### Seed the Database
 
 ```bash
-npm run seed
+npm run seed:requests
 ```
 
 This generates 1000 dog walking request records in the `pawsitiveWalks` database.
+
+```bash
+npm run seed:walkers
+```
+
+This generates 1000 dog walkers profile records in the `pawsitiveWalks` database.
 
 ### Run the App
 
