@@ -25,7 +25,7 @@
 
 /* Overriding default primary color to match brand orange */
 .about-page .text-primary {
-    color: var(--primary-color) !important;
+    color: var(--primary-color);
 }
 
 /* Info Cards (Owner, Walker, and Community sections) */
@@ -37,7 +37,7 @@
 /* Subtle hover effect to make the interface feel interactive */
 .info-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Decorative border for role-based subheaders (Owners/Walkers) */
