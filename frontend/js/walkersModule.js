@@ -36,12 +36,12 @@ async function fetchAndRenderWalkers(queryString = "") {
 
     col.innerHTML = `
       <div class="card h-100 shadow-sm border-0">
-        <div class="card-body">
-          <h5 class="card-title fw-bold text-primary">${w.name}</h5>
+        <div class="card-body walker-card-body">
+          <h5 class="card-title fw-bold walker-name">${w.name}</h5>
           <div class="card-text">
             <p class="mb-2">
               <i class="bi bi-envelope-fill text-secondary"></i> 
-              <a href="mailto:${w.email}" class="text-decoration-none">${w.email || 'No Email Provided'}</a>
+              <a href="mailto:${w.email}" class="text-decoration-none walker-email">${w.email || 'No Email Provided'}</a>
             </p>
 
             <p class="mb-1">

@@ -17,9 +17,8 @@
   
   /* 2. Border Styling:
      - Uses a slightly darker version (30% opacity) of our orange.
-     - !important ensures this orange border overrides Bootstrap's default grey.
   */
-  border: 1px solid rgba(255, 140, 66, 0.3) !important; 
+  border: 1px solid rgba(255, 140, 66, 0.3); 
   
   /* 3. Box Shadow:
      - Adds a very subtle orange-tinted shadow.
@@ -35,4 +34,21 @@
   color: #555;
   /* Semi-bold weight makes the headers stand out within the colored box */
   font-weight: 600;
+}
+
+/* Target the name by combining classes to increase specificity */
+.walker-card-body .walker-name {
+    color: #ff8800; 
+}
+
+/* Target the email link */
+.walker-card-body .walker-email {
+    color: #ff8800;
+    transition: color 0.3s ease;
+}
+
+/* Hover state for the email */
+.walker-card-body .walker-email:hover {
+    color: #e67a00;
+    text-decoration: underline;
 }
