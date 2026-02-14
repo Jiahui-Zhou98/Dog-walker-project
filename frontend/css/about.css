@@ -3,64 +3,59 @@
     Author: Yi-Peng Chiang
     Page: about.html
    ========================================================================== */
-
-/* 1. Header & Lead Text Styling */
-body .about-page .about-header .text-primary {
+   
+/* 1. Brand Colors & Typography */
+.about-page .text-brand {
     color: #ff8c42; /* Primary Orange */
 }
 
-body .about-page .about-lead {
+.about-page .about-lead {
     max-width: 850px;
     line-height: 1.8;
     font-size: 1.15rem;
 }
 
-body .about-page .highlight {
+.about-page .highlight {
     color: #e67a2e; /* Primary Dark Orange */
     font-weight: 700;
 }
 
-/* 2. Info Cards & Interactive Elements */
-body .about-page .info-card {
+/* 2. Interactive Info Cards */
+.about-page .info-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-color: #dee2e6;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
 }
 
-/* Hover effect for a modern feel */
-body .about-page .info-card:hover {
+.about-page .info-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* 3. Role Sections with Accent Borders */
-body .about-page .role-section h5 {
-    color: #ff8c42;
+/* 3. Role Sections (Decorated Subheaders) */
+.about-page .role-section h5 {
     border-left: 4px solid #ffa562; /* Secondary Orange */
     padding-left: 12px;
     margin-bottom: 0.75rem;
 }
 
-/* 4. Community Feature Tags Container */
-body .about-page .feature-tag-container {
-    /* Background: #ff8c42 at 10% opacity */
+/* 4. Bottom Feature Box (Orange Tinted) */
+.about-page .feature-tag-container {
+    /* Background: Primary color #ff8c42 at 10% opacity */
     background-color: rgba(255, 140, 66, 0.1); 
     color: #ff6b35; /* Accent Orange */
-    padding: 1rem;
-    letter-spacing: 1.5px;
-    font-size: 0.85rem;
-    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
     border: 1px dashed #ffa562;
+    text-transform: uppercase;
 }
 
-/* 5. Responsive Font Scaling */
+/* 5. Responsive Font Adjustments */
 @media (max-width: 768px) {
-    body .about-page .about-header h1 {
-        font-size: 2.25rem;
+    .about-page .display-4 {
+        font-size: 2.2rem;
     }
-    
-    body .about-page .about-lead {
+    .about-page .about-lead {
         font-size: 1rem;
     }
 }
-
-
