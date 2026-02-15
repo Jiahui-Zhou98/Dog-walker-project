@@ -1,7 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 import requestsRouter from "./routes/requests.js";
 import walkersRouter from "./routes/walkers.js";
+import authRouter from "./routes/auth.js";
 
 dotenv.config();
 
@@ -13,8 +16,26 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.static("frontend"));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI || "mongodb://localhost:27017",
+      dbName: "pawsitiveWalks",
+    }),
+    cookie: {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    },
+  }),
+);
 
 // API Routes
+app.use("/api/auth", authRouter);
 app.use("/api/requests", requestsRouter);
 app.use("/api/walkers", walkersRouter);
 
