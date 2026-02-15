@@ -256,6 +256,15 @@ function randomIntInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function emailLocalPartFromName(name) {
+  return String(name)
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s]/g, "") // remove apostrophes and other symbols
+    .replace(/\s+/g, ".") // spaces to single dots
+    .replace(/^\.+|\.+$/g, ""); // trim dots at both ends
+}
+
 function getBudgetRangeByDuration(duration) {
   const budgetByDuration = {
     15: { min: 12, max: 22 },
@@ -273,6 +282,7 @@ function generateRequest(index) {
   const createdDate = randomDate(60);
   const duration = [15, 30, 45, 60][Math.floor(Math.random() * 4)];
   const budgetRange = getBudgetRangeByDuration(duration);
+  const ownerName = randomItem(ownerNames);
 
   // 30% of requests are open to social interaction
   const isOpenToSocial = randomBoolean(0.3);
@@ -297,9 +307,9 @@ function generateRequest(index) {
 
     budget: randomIntInRange(budgetRange.min, budgetRange.max),
 
-    ownerName: randomItem(ownerNames),
+    ownerName,
     ownerPhone: `617-${String(Math.floor(Math.random() * 1000)).padStart(3, "0")}-${String(Math.floor(Math.random() * 10000)).padStart(4, "0")}`,
-    ownerEmail: `${randomItem(ownerNames).toLowerCase().replace(/ /g, ".")}${index}@example.com`,
+    ownerEmail: `${emailLocalPartFromName(ownerName)}.${index}@example.com`,
 
     // Social interaction fields
     openToSocial: isOpenToSocial,

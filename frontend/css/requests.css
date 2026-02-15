@@ -63,6 +63,10 @@
   min-width: 100px;
 }
 
+.info-row span {
+  overflow-wrap: anywhere;
+}
+
 /* Status Badges */
 .badge-status {
   display: inline-block;
