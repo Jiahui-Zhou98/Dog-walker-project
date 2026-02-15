@@ -67,12 +67,23 @@ function WalkersModule() {
     }
   };
 
-  // 4. Render Individual Walker Card (Updated with Edit/Delete Buttons)
+
+  // 4. Render Individual Walker Card
   const renderWalkerCard = (w) => {
     const schedule = [];
     if (w.availability?.weekdays) schedule.push("Weekdays");
     if (w.availability?.weekends) schedule.push("Weekends");
     const timeSlots = (w.availability?.times || []).join(", ");
+
+   
+    const displayAreas = Array.isArray(w.serviceAreas) 
+      ? w.serviceAreas.join(", ") 
+      : (w.serviceAreas || "N/A");
+
+    const displaySizes = Array.isArray(w.preferredDogSizes)
+      ? w.preferredDogSizes.join(", ")
+      : (w.preferredDogSizes || "N/A");
+    // ---------------
 
     return `
       <div class="col-md-4 mb-4">
@@ -90,7 +101,7 @@ function WalkersModule() {
               </p>
               <p class="mb-2">
                 <i class="bi bi-geo-alt-fill me-2 text-danger"></i> 
-                <strong>Areas:</strong> ${(w.serviceAreas || []).join(", ")}
+                <strong>Areas:</strong> ${displayAreas}
               </p>
               <hr class="my-3">
               <p class="mb-1 small text-muted">
@@ -101,12 +112,10 @@ function WalkersModule() {
               </p>
               <div class="mt-3 d-flex justify-content-between align-items-center">
                 <span class="badge bg-light text-primary border text-uppercase" style="font-size: 0.65rem;">
-                  Sizes: ${(w.preferredDogSizes || []).join(", ")}
+                  Sizes: ${displaySizes}
                 </span>
                 <div class="d-flex gap-2">
-                  <a href="/edit-profile.html?id=${w._id}" class="btn btn-outline-primary btn-sm">
-                    Edit
-                  </a>
+                  <a href="/edit-profile.html?id=${w._id}" class="btn btn-outline-primary btn-sm">Edit</a>
                   <button 
                     class="btn btn-outline-danger btn-sm" 
                     onclick="window.walkersModule.deleteWalker('${w._id}', '${w.name}')">
