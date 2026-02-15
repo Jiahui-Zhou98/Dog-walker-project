@@ -99,7 +99,12 @@
               >
             </li>
             <li class="nav-item ms-lg-3">
-              <a class="nav-link btn-signin" href="#signin">Sign In</a>
+              <a
+                id="authActionBtn"
+                class="nav-link btn-signin"
+                href="/login.html"
+                >Sign In</a
+              >
             </li>
           </ul>
         </div>
@@ -121,93 +126,98 @@
         </a>
       </div>
 
-    <div class="container mt-4">
-      <div class="filters-section border p-4 rounded-4 shadow-sm">
-        <h5>Filter Profiles</h5>
-        <div class="row g-3">
-          <div class="col-md-2">
-            <label class="form-label">Preferred Size</label>
-            <select id="filterSize" class="form-select">
-              <option value="">All Sizes</option>
-              <option value="small">Small (< 20 lbs)</option>
-              <option value="medium">Medium (20-50 lbs)</option>
-              <option value="large">Large  (> 50 lbs)</option>
-            </select>
-          </div>
+      <div class="container mt-4">
+        <div class="filters-section border p-4 rounded-4 shadow-sm">
+          <h5>Filter Profiles</h5>
+          <div class="row g-3">
+            <div class="col-md-2">
+              <label class="form-label">Preferred Size</label>
+              <select id="filterSize" class="form-select">
+                <option value="">All Sizes</option>
+                <option value="small">Small (< 20 lbs)</option>
+                <option value="medium">Medium (20-50 lbs)</option>
+                <option value="large">Large (> 50 lbs)</option>
+              </select>
+            </div>
 
-          <div class="col-md-2">
-            <label class="form-label">Location</label>
-            <input type="text" id="filterLocation" class="form-control" placeholder="e.g., Boston" />
-          </div>
+            <div class="col-md-2">
+              <label class="form-label">Location</label>
+              <input
+                type="text"
+                id="filterLocation"
+                class="form-control"
+                placeholder="e.g., Boston"
+              />
+            </div>
 
-          <div class="col-md-2">
-            <label class="form-label">Min Experience</label>
-            <select id="filterExperience" class="form-select">
-              <option value="">Any</option>
-              <option value="1">1+ Year</option>
-              <option value="3">3+ Years</option>
-              <option value="5">5+ Years</option>
-            </select>
-          </div>
-          
-          <div class="col-md-2">
-          <label class="form-label">Availability</label>
-          <select id="filterAvailability" class="form-select">
-            <option value="">Any Day</option>
-            <option value="weekdays">Weekdays</option>
-            <option value="weekends">Weekends</option>
-          </select>
-          </div>
+            <div class="col-md-2">
+              <label class="form-label">Min Experience</label>
+              <select id="filterExperience" class="form-select">
+                <option value="">Any</option>
+                <option value="1">1+ Year</option>
+                <option value="3">3+ Years</option>
+                <option value="5">5+ Years</option>
+              </select>
+            </div>
 
-          <div class="col-md-2">
-            <label class="form-label">Preferred Time</label>
-            <select id="filterTime" class="form-select">
-              <option value="">Any Time</option>
-              <option value="morning">Morning</option>
-              <option value="afternoon">Afternoon</option>
-              <option value="evening">Evening</option>
-            </select>
-          </div>
+            <div class="col-md-2">
+              <label class="form-label">Availability</label>
+              <select id="filterAvailability" class="form-select">
+                <option value="">Any Day</option>
+                <option value="weekdays">Weekdays</option>
+                <option value="weekends">Weekends</option>
+              </select>
+            </div>
 
-          <div class="col-md-2 d-flex align-items-end">
-            <div class="d-flex gap-2 w-100">
-              <button id="applyFilters" class="btn btn-primary-custom flex-fill">
-                Apply
-              </button>
-              <button
-                id="resetFilters"
-                class="btn btn-secondary-custom filter-reset-btn flex-fill"
-              >
-                Reset
-              </button>
+            <div class="col-md-2">
+              <label class="form-label">Preferred Time</label>
+              <select id="filterTime" class="form-select">
+                <option value="">Any Time</option>
+                <option value="morning">Morning</option>
+                <option value="afternoon">Afternoon</option>
+                <option value="evening">Evening</option>
+              </select>
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+              <div class="d-flex gap-2 w-100">
+                <button
+                  id="applyFilters"
+                  class="btn btn-primary-custom flex-fill"
+                >
+                  Apply
+                </button>
+                <button
+                  id="resetFilters"
+                  class="btn btn-secondary-custom filter-reset-btn flex-fill"
+                >
+                  Reset
+                </button>
+              </div>
             </div>
           </div>
-
         </div>
-      </div>
-
-        
       </div>
 
       <!-- Walkers list -->
       <div id="walkers-list" class="row g-3"></div>
       <nav aria-label="Walkers pagination" class="mt-4">
-      <ul class="pagination justify-content-center" id="pagination-container">
-        
-        <li class="page-item disabled" id="prev-page">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
+        <ul class="pagination justify-content-center" id="pagination-container">
+          <li class="page-item disabled" id="prev-page">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+              >Previous</a
+            >
+          </li>
 
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
 
-        <li class="page-item" id="next-page">
-          <a class="page-link" href="#">Next</a>
-        </li>
-        
-      </ul>
-    </nav>
+          <li class="page-item" id="next-page">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
     </div>
 
     <!-- Footer -->
