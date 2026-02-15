@@ -1,0 +1,123 @@
+<!-- =============================================
+   login.html - Login Page
+   Author: Jiahui Zhou
+   Page: login.html
+   ============================================= -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>Login - PawsitiveWalks</title>
+    <meta
+      name="description"
+      content="Login to your PawsitiveWalks account to find dog walking requests and become a walker."
+    />
+    <meta name="keywords" content="login, account, requests, walkers" />
+    <meta name="author" content="Jiahui Zhou" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta
+      property="og:title"
+      content="PawsitiveWalks - Connect with Trusted Dog Walkers"
+    />
+    <meta
+      property="og:description"
+      content="PawsitiveWalks is a platform connecting dog owners with trusted dog walkers. It is a zero-fee community platform connecting dog owners with trusted walkers. A simple bridge for direct connection and negotiation."
+    />
+    <!-- TODO: Add the url after deployment -->
+    <meta property="og:url" content="https://pawsitivewalks.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="PawsitiveWalks" />
+    <meta property="og:image" content="./images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Canonical URL -->
+    <!-- TODO: Add the canonical url after deployment -->
+    <link rel="canonical" href="https://pawsitivewalks.com" />
+
+    <!-- Favicon Meta Tags -->
+    <link rel="icon" type="image/png" href="./images/favicon.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Styles -->
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="./css/main.css" />
+    <!-- Index CSS -->
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+  <body class="login-page">
+    <div class="container login-page-wrap">
+      <div class="login-card">
+        <a href="/" class="brand-link">
+          <span>🐕</span>
+          <span>PawsitiveWalks</span>
+        </a>
+
+        <div class="login-header">
+          <h1>Welcome back</h1>
+          <p>Sign in to your account to continue</p>
+        </div>
+
+        <div id="loginError" class="error-box d-none" role="alert"></div>
+
+        <form id="loginForm" novalidate>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            id="loginBtn"
+            class="btn btn-primary-custom w-100"
+          >
+            Sign In
+          </button>
+        </form>
+
+        <p class="switch-auth mt-3 mb-0">
+          No account yet? <a href="/register.html">Create one</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
