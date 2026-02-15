@@ -60,6 +60,9 @@ function randomDate(daysBack = 120) {
 function generateWalker(index) {
   const createdAt = randomDate();
 
+  const fullName = randomItem(walkerNames);
+  const emailName = fullName.toLowerCase().replace(/\s+/g, '.');
+
   // Ensure these arrays are not empty (optional but prevents weird empty data)
   const preferredDogSizes = sizes.filter(() => Math.random() > 0.4);
   if (preferredDogSizes.length === 0) preferredDogSizes.push(randomItem(sizes));
@@ -68,8 +71,8 @@ function generateWalker(index) {
   if (availableTimes.length === 0) availableTimes.push(randomItem(times));
 
   return {
-    name: randomItem(walkerNames),
-    email: `walker${index}@example.com`,
+    name: fullName,
+    email: `${emailName}${index}@example.com`,
     phone: `617-${String(Math.floor(Math.random() * 1000)).padStart(3, "0")}-${String(Math.floor(Math.random() * 10000)).padStart(4, "0")}`,
 
     experienceYears: Math.floor(Math.random() * 6),
