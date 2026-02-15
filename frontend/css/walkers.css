@@ -5,50 +5,72 @@
           edit-profile.html
    ============================================= */
 
-/* Transparent Orange Filter Section */
-.filters-box {
-  /* 1. Background Color (RGBA):
-     - Red (255), Green (140), Blue (66) creates our Brand Orange.
-     - 0.1 is the 'Alpha' channel, representing 10% opacity.
-     - Note: Using RGBA ensures ONLY the background is transparent, 
-       while the text inside remains 100% solid.
-  */
+/* 1. Filter Section Container Styling */
+.container .filters-section.filters-box {
   background-color: rgba(255, 140, 66, 0.1); 
-  
-  /* 2. Border Styling:
-     - Uses a slightly darker version (30% opacity) of our orange.
-  */
   border: 1px solid rgba(255, 140, 66, 0.3); 
-  
-  /* 3. Box Shadow:
-     - Adds a very subtle orange-tinted shadow.
-     - This gives the section "Depth" and makes it look like it's 
-       slightly lifted off the page.
-  */
   box-shadow: 0 4px 15px rgba(255, 140, 66, 0.05);
+  border-radius: 15px;
+  padding: 1.5rem;
 }
 
-/* 4. Label Typography */
-.filters-box .form-label {
-  /* Dark grey color (#555) provides better readability than pure black */
-  color: #555;
-  /* Semi-bold weight makes the headers stand out within the colored box */
+/* 2. Apply Button Styling (Increased specificity using ID + Class) */
+button#applyFilters.btn.btn-primary-custom {
+  border-radius: 999px;
+  padding: 0.6rem 1.5rem;
+  background-color: #ff8c00;
+  border: none;
+  color: #ffffff;
   font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-/* Target the name by combining classes to increase specificity */
-.walker-card-body .walker-name {
-    color: #ff8800; 
+button#applyFilters.btn.btn-primary-custom:hover {
+  background-color: #e67e00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
 }
 
-/* Target the email link */
-.walker-card-body .walker-email {
-    color: #ff8800;
-    transition: color 0.3s ease;
+/* 3. Reset Button Styling */
+button#resetFilters.btn.btn-secondary-custom {
+  border-radius: 999px;
+  padding: 0.6rem 1.5rem;
+  background-color: #ffe0cc;
+  border: none;
+  color: #5a3e2b;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-/* Hover state for the email */
-.walker-card-body .walker-email:hover {
-    color: #e67a00;
-    text-decoration: underline;
+button#resetFilters.btn.btn-secondary-custom:hover {
+  background-color: #ffc099;
+  transform: translateY(-2px);
 }
+
+/* 4. Orange Size Badge (The blue one you wanted to change) */
+/* We target the specific structure: .item-card -> .badge */
+.item-card .card-body .badge.bg-light.text-primary {
+  background-color: #ffe0cc; /* Pale orange background */
+  color: #ff8c00;            /* Bright orange text */
+  border-radius: 999px;      /* Pill shape */
+  border: 1px solid rgba(255, 136, 0, 0.2);
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+}
+
+/* 5. Dropdown & Input Focus States */
+.filters-box .form-select,
+.filters-box .form-control {
+  border: 1px solid rgba(255, 140, 66, 0.4);
+  border-radius: 8px;
+}
+
+.filters-box .form-select:focus,
+.filters-box .form-control:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 0.25rem rgba(255, 140, 66, 0.25);
+  outline: 0;
+}
+
