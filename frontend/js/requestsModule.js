@@ -165,7 +165,12 @@ function RequestsModule() {
 
                 <div class="info-row">
                   <strong>Owner:</strong>
-                  <span>${request.ownerName} • ${request.ownerPhone}</span>
+                  <span>${request.ownerName}</span>
+                </div>
+
+                <div class="info-row">
+                  <strong>Email:</strong>
+                  <span>${request.ownerEmail || "N/A"}</span>
                 </div>
 
                 ${socialNote}
