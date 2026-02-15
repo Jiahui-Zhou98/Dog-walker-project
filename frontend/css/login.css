@@ -5,8 +5,8 @@
    ============================================= */
 
 .login-page-wrap {
-  min-height: calc(100vh - 88px);
-  min-height: calc(100dvh - 88px);
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
