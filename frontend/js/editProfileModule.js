@@ -1,29 +1,68 @@
 console.log("EditWalkerModule loaded");
 
-// Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", async () => {
-  // Get form elements
   const form = document.getElementById("editWalkerForm");
+  const deleteBtn = document.getElementById("deleteProfileBtn");
 
   // ========== Get walker ID from URL ==========
-  // Example URL: /edit-profile.html?id=607f1f77bcf86cd799439011
   const urlParams = new URLSearchParams(window.location.search);
   const walkerId = urlParams.get("id");
 
-  console.log("📝 Editing walker profile with ID:", walkerId);
+  console.log("Editing walker profile with ID:", walkerId);
 
-  // If no ID in URL, redirect back to walkers list
   if (!walkerId) {
     alert("Error: No walker ID provided");
     window.location.href = "/walkers.html";
     return;
   }
 
+  // ========== Handle profile deletion (Independent Logic) ==========
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", () => {
+      // Show the Bootstrap Modal
+      const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+      deleteModal.show();
+
+      const confirmBtn = document.getElementById("confirmDeleteBtn");
+
+      // Clear previous listeners to prevent multiple deletions
+      const newConfirmBtn = confirmBtn.cloneNode(true);
+      confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+      newConfirmBtn.addEventListener("click", async () => {
+        deleteModal.hide();
+        console.log("Attempting to delete walker profile:", walkerId);
+
+        try {
+          const response = await fetch(`/api/walkers/${walkerId}`, {
+            method: "DELETE",
+          });
+
+          if (!response.ok) throw new Error(`Delete failed: ${response.status}`);
+
+          // Show Success Toast
+          const successToastEl = document.getElementById("successToast");
+          if (successToastEl) {
+            const successToast = new bootstrap.Toast(successToastEl);
+            successToast.show();
+          }
+
+          // Redirect after short delay
+          setTimeout(() => {
+            window.location.href = "/walkers.html";
+          }, 1500);
+
+        } catch (error) {
+          console.error("Error deleting walker:", error);
+          alert("Failed to delete profile. Please try again.");
+        }
+      });
+    });
+  }
+
   // ========== Fetch existing walker data ==========
   try {
-    console.log("🔍 Fetching walker data...");
-
-    // Send GET request to fetch this specific walker profile
+    console.log("Fetching walker data...");
     const response = await fetch(`/api/walkers/${walkerId}`);
 
     if (!response.ok) {
@@ -31,23 +70,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const result = await response.json();
-    const walker = result.walker; // Assuming backend returns { walker: {...} }
+    const walker = result.walker;
 
-    console.log("✅ Walker data loaded:", walker);
+    console.log("Walker data loaded:", walker);
 
-    // ========== Pre-fill form with existing data ==========
-    // Basic Information
+    // Pre-fill form fields
     document.getElementById("name").value = walker.name || "";
     document.getElementById("email").value = walker.email || "";
     document.getElementById("phone").value = walker.phone || "";
     document.getElementById("serviceAreas").value = walker.serviceAreas || "";
-
-    // Experience & Preferences
     document.getElementById("experienceYears").value = walker.experienceYears || 0;
     document.getElementById("hourlyRate").value = walker.hourlyRate || 15;
     document.getElementById("maxDogsPerWalk").value = walker.maxDogsPerWalk || 1;
 
-    // Handle Checkboxes: Preferred Dog Sizes
     if (walker.preferredDogSizes && Array.isArray(walker.preferredDogSizes)) {
       walker.preferredDogSizes.forEach(size => {
         const checkbox = document.querySelector(`input[name="preferredDogSizes"][value="${size}"]`);
@@ -55,12 +90,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    // Availability
     if (walker.availability) {
       document.getElementById("weekdays").checked = walker.availability.weekdays || false;
       document.getElementById("weekends").checked = walker.availability.weekends || false;
 
-      // Handle Checkboxes: Times
       if (walker.availability.times && Array.isArray(walker.availability.times)) {
         walker.availability.times.forEach(time => {
           const checkbox = document.querySelector(`input[name="times"][value="${time}"]`);
@@ -69,13 +102,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
 
-    // Additional Details
     document.getElementById("bio").value = walker.bio || "";
     document.getElementById("openToGroupWalks").checked = walker.openToGroupWalks || false;
 
-    console.log("✅ Form pre-filled with existing data");
+    console.log("Form pre-filled successfully");
   } catch (error) {
-    console.error("❌ Error loading walker profile:", error);
+    console.error("Error loading walker profile:", error);
     alert(`Error loading profile: ${error.message}`);
     window.location.href = "/walkers.html";
     return;
@@ -83,63 +115,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // ========== Handle form submission (UPDATE) ==========
   form.addEventListener("submit", async (event) => {
-
-    // ========== Handle profile deletion ==========
-    const deleteBtn = document.getElementById("deleteProfileBtn");
-    if (deleteBtn) {
-        deleteBtn.addEventListener("click", async () => {
-        if (!confirm("Are you sure you want to delete your profile? This cannot be undone.")) {
-            return;
-        }
-
-        console.log("🗑️ Attempting to delete walker profile:", walkerId);
-
-        try {
-            const response = await fetch(`/api/walkers/${walkerId}`, {
-            method: "DELETE"
-            });
-
-            if (!response.ok) {
-            throw new Error(`Delete failed with status: ${response.status}`);
-            }
-
-            console.log("✅ Profile deleted successfully");
-
-            const successToastEl = document.getElementById("successToast");
-            if (successToastEl) {
-            const successToast = new bootstrap.Toast(successToastEl);
-            successToast.show();
-            } else {
-            alert("Profile deleted successfully.");
-            }
-
-            setTimeout(() => {
-            window.location.href = "/walkers.html";
-            }, 1500);
-
-        } catch (error) {
-            console.error("❌ Error deleting profile:", error);
-            
-            
-            const errorToastEl = document.getElementById("errorToast");
-            if (errorToastEl) {
-            const errorToast = new bootstrap.Toast(errorToastEl);
-            errorToast.show();
-            } else {
-            alert("Failed to delete profile. Please try again.");
-            }
-        }
-        });
-    }
-    // Prevent default form submission
     event.preventDefault();
 
-    console.log("📝 Update profile form submitted!");
-
-    // Collect form data
     const formData = new FormData(form);
-
-    // Collect multi-select checkbox values
     const preferredDogSizes = [];
     document.querySelectorAll('input[name="preferredDogSizes"]:checked').forEach((cb) => {
       preferredDogSizes.push(cb.value);
@@ -150,7 +128,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       times.push(cb.value);
     });
 
-    // Convert FormData to structured object
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
@@ -169,53 +146,36 @@ document.addEventListener("DOMContentLoaded", async () => {
       openToGroupWalks: document.getElementById("openToGroupWalks").checked
     };
 
-    console.log("📦 Updated data to send:", data);
-
-    // Disable submit button
     const submitButton = form.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.textContent;
     submitButton.disabled = true;
     submitButton.textContent = "Updating...";
 
     try {
-      // Send PUT request to backend
       const response = await fetch(`/api/walkers/${walkerId}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-      const result = await response.json();
-      console.log("✅ Profile updated successfully:", result);
-
-      // Show success toast
       const successToastEl = document.getElementById("successToast");
       if (successToastEl) {
         const successToast = new bootstrap.Toast(successToastEl);
         successToast.show();
       }
 
-      // Redirect back to walkers list page after 1.5 seconds
       setTimeout(() => {
         window.location.href = "/walkers.html";
       }, 1500);
     } catch (error) {
-      console.error("❌ Error updating profile:", error);
-
-      // Show error toast
+      console.error("Error updating profile:", error);
       const errorToastEl = document.getElementById("errorToast");
       if (errorToastEl) {
         const errorToast = new bootstrap.Toast(errorToastEl);
         errorToast.show();
       }
-
-      // Restore button state
       submitButton.disabled = false;
       submitButton.textContent = originalButtonText;
     }
