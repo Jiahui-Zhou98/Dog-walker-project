@@ -1,0 +1,108 @@
+<!-- =============================================
+   dashboard.html - Dashboard Page
+   Author: Jiahui Zhou
+   Page: dashboard.html
+   ============================================= -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>Dashboard - PawsitiveWalks</title>
+    <meta
+      name="description"
+      content="View your dashboard to find dog walking requests and manage your account."
+    />
+    <meta name="keywords" content="dashboard, requests, account" />
+    <meta name="author" content="Jiahui Zhou" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="PawsitiveWalks - Dashboard" />
+    <meta
+      property="og:description"
+      content="PawsitiveWalks is a platform connecting dog owners with trusted dog walkers. It is a zero-fee community platform connecting dog owners with trusted walkers. A simple bridge for direct connection and negotiation."
+    />
+    <!-- TODO: Add the url after deployment -->
+    <meta property="og:url" content="https://pawsitivewalks.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="PawsitiveWalks" />
+    <meta property="og:image" content="./images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Canonical URL -->
+    <!-- TODO: Add the canonical url after deployment -->
+    <link rel="canonical" href="https://pawsitivewalks.com" />
+
+    <!-- Favicon Meta Tags -->
+    <link rel="icon" type="image/png" href="./images/favicon.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Styles -->
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="./css/main.css" />
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="./css/dashboard.css" />
+  </head>
+  <body class="dashboard-page">
+    <div class="container dashboard-page-wrap">
+      <a class="dashboard-brand-link" href="/">
+        <span>🐕</span>
+        <span>PawsitiveWalks</span>
+      </a>
+
+      <div class="dashboard-card">
+        <div class="dashboard-header">
+          <h1>Welcome to your dashboard</h1>
+          <p>Manage your account here</p>
+        </div>
+
+        <div class="dashboard-user-info">
+          <div class="dashboard-user-row">
+            <strong>Name:</strong>
+            <span id="dashboardUserName">--</span>
+          </div>
+          <div class="dashboard-user-row">
+            <strong>Email:</strong>
+            <span id="dashboardUserEmail">--</span>
+          </div>
+        </div>
+
+        <div class="dashboard-actions">
+          <a
+            href="/requests.html"
+            class="btn dashboard-btn dashboard-btn-primary"
+          >
+            View Requests
+          </a>
+          <a
+            href="/walkers.html"
+            class="btn dashboard-btn dashboard-btn-primary"
+          >
+            View Walker Profiles
+          </a>
+          <a href="/" class="btn dashboard-btn dashboard-btn-outline">
+            Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/dashboardModule.js"></script>
+  </body>
+</html>
