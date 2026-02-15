@@ -83,6 +83,54 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // ========== Handle form submission (UPDATE) ==========
   form.addEventListener("submit", async (event) => {
+
+    // ========== Handle profile deletion ==========
+    const deleteBtn = document.getElementById("deleteProfileBtn");
+    if (deleteBtn) {
+        deleteBtn.addEventListener("click", async () => {
+        if (!confirm("Are you sure you want to delete your profile? This cannot be undone.")) {
+            return;
+        }
+
+        console.log("🗑️ Attempting to delete walker profile:", walkerId);
+
+        try {
+            const response = await fetch(`/api/walkers/${walkerId}`, {
+            method: "DELETE"
+            });
+
+            if (!response.ok) {
+            throw new Error(`Delete failed with status: ${response.status}`);
+            }
+
+            console.log("✅ Profile deleted successfully");
+
+            const successToastEl = document.getElementById("successToast");
+            if (successToastEl) {
+            const successToast = new bootstrap.Toast(successToastEl);
+            successToast.show();
+            } else {
+            alert("Profile deleted successfully.");
+            }
+
+            setTimeout(() => {
+            window.location.href = "/walkers.html";
+            }, 1500);
+
+        } catch (error) {
+            console.error("❌ Error deleting profile:", error);
+            
+            
+            const errorToastEl = document.getElementById("errorToast");
+            if (errorToastEl) {
+            const errorToast = new bootstrap.Toast(errorToastEl);
+            errorToast.show();
+            } else {
+            alert("Failed to delete profile. Please try again.");
+            }
+        }
+        });
+    }
     // Prevent default form submission
     event.preventDefault();
 
