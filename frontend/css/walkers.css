@@ -52,3 +52,17 @@
     color: #e67a00;
     text-decoration: underline;
 }
+
+.page-item.active .page-link {
+    background-color: #ff8800 !important;
+    border-color: #ff8800 !important;
+    color: white !important;
+}
+
+.page-link {
+    color: #ff8800;
+}
+.page-link:hover {
+    background-color: #fff5eb;
+    color: #e67a00;
+}
