@@ -1,123 +1,123 @@
 /**
- * WalkersModule: Manages data fetching, UI rendering, and pagination state.
- * This module follows the functional module pattern.
+ * Fetches walker data from the API and renders cards into the DOM.
+ * @param {string} queryString - The parameters for filtering and pagination.
  */
-function WalkersModule() {
-  const me = {};
-  
-  // --- Internal State Management ---
-  let currentFilters = {}; 
-  const pageSize = 20;
+async function fetchAndRenderWalkers(queryString = "") {
+  try {
+    const res = await fetch(`/api/walkers?${queryString}`);
+    
+    // Check if the server response is successful
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
 
-  /**
-   * Core method to fetch data from the server and trigger UI updates.
-   * @param {number} page - The specific page number to retrieve (defaults to 1).
-   */
-  me.fetchAndRender = async function (page = 1) {
-    try {
-      // Build search parameters combining filters and pagination logic
-      const params = new URLSearchParams(currentFilters);
-      params.append("page", page);
-      params.append("pageSize", pageSize);
-
-      // Request data from the REST API
-      const res = await fetch(`/api/walkers?${params.toString()}`);
-      if (!res.ok) throw new Error(`Server responded with status: ${res.status}`);
-
-      const json = await res.json();
-      
-      // Update the UI components
-      me.renderCards(json.data);
-      me.renderPagination(json.totalPages, json.currentPage);
-      
-    } catch (err) {
-      console.error("[WalkersModule] Fetch error:", err);
-    }
-  };
-
-  /**
-   * Renders walker data cards into the DOM.
-   * @param {Array} data - Array of walker objects fetched from the API.
-   */
-  me.renderCards = function (data) {
+    const json = await res.json();
     const list = document.getElementById("walkers-list");
-    if (!list) return;
+    
+    // Clear existing content
+    list.innerHTML = "";
 
-    list.innerHTML = ""; // Reset container content
-
-    if (!data || data.length === 0) {
-      list.innerHTML = `
-        <div class="col-12 text-center">
-          <p class="text-muted">No walkers found matching your criteria.</p>
-        </div>`;
+    // Handle case where no results are found
+    if (!json.data || json.data.length === 0) {
+      list.innerHTML = '<div class="col-12 text-center"><p class="text-muted">No walkers found matching your criteria.</p></div>';
       return;
     }
 
-    data.forEach((w) => {
-      const col = document.createElement("div");
-      col.className = "col-md-4 mb-4";
-      
-      // Format availability labels
-      const schedule = [];
-      if (w.availability?.weekdays) schedule.push("Weekdays");
-      if (w.availability?.weekends) schedule.push("Weekends");
+    // Iterate through the fetched data and build the UI cards
+  json.data.forEach((w) => {
+    const col = document.createElement("div");
+    col.className = "col-md-4 mb-4";
 
-      col.innerHTML = `
-        <div class="card h-100 shadow-sm border-0">
-          <div class="card-body">
-            <h5 class="card-title fw-bold text-orange">${w.name}</h5>
-            <div class="card-text">
-              <p class="mb-1"><strong>Rate:</strong> $${w.hourlyRate}/hr</p>
-              <p class="mb-1 small text-muted">Areas: ${(w.serviceAreas || []).join(", ")}</p>
-              <hr class="my-2">
-              <p class="mb-0 small text-uppercase" style="letter-spacing: 0.5px;">
-                ${schedule.join(" & ") || "Full Availability"}
-              </p>
-            </div>
-          </div>
-        </div>`;
-      list.appendChild(col);
-    });
-  };
-
-  /**
-   * Dynamically generates pagination buttons based on total pages.
-   * @param {number} totalPages - Total number of pages calculated by the server.
-   * @param {number} currentPage - The page currently being viewed.
-   */
-  me.renderPagination = function (totalPages, currentPage) {
-    const nav = document.getElementById("pagination-container");
-    if (!nav) return;
+    // 1. Process availability (Weekdays/Weekends) into a readable string
+    const schedule = [];
+    if (w.availability?.weekdays) schedule.push("Weekdays");
+    if (w.availability?.weekends) schedule.push("Weekends");
     
-    nav.innerHTML = ""; // Clear existing pagination links
+    // 2. Format the time slots array
+    const timeSlots = (w.availability?.times || []).join(", ");
 
-    for (let i = 1; i <= totalPages; i++) {
-      const li = document.createElement("li");
-      li.className = `page-item ${i === currentPage ? "active" : ""}`;
-      
-      // Inject orange theme styling for active page
-      li.innerHTML = `
-        <a class="page-link ${i === currentPage ? 'bg-orange border-orange' : ''}" href="#">
-          ${i}
-        </a>`;
-      
-      // Handle page switching click event
-      li.addEventListener("click", (e) => {
-        e.preventDefault();
-        me.fetchAndRender(i); // Refresh data for the selected page
-      });
-      nav.appendChild(li);
-    }
-  };
+    col.innerHTML = `
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body walker-card-body">
+          <h5 class="card-title fw-bold walker-name">${w.name}</h5>
+          <div class="card-text">
+            <p class="mb-2">
+              <i class="bi bi-envelope-fill text-secondary"></i> 
+              <a href="mailto:${w.email}" class="text-decoration-none walker-email">${w.email || 'No Email Provided'}</a>
+            </p>
 
-  /**
-   * Updates the global filter state and resets to page 1.
-   * @param {Object} newFilters - The filter criteria collected from the UI.
-   */
-  me.updateFilters = function (newFilters) {
-    currentFilters = newFilters;
-    me.fetchAndRender(1); // Always reset to page 1 upon new search
-  };
+            <p class="mb-1">
+              <i class="bi bi-star-fill text-warning"></i> 
+              <strong>Exp:</strong> ${w.experienceYears} years | 
+              <strong>Rate:</strong> $${w.hourlyRate}/hr
+            </p>
 
-  return me;
+            <p class="mb-1">
+              <i class="bi bi-geo-alt-fill text-danger"></i> 
+              <strong>Areas:</strong> ${(w.serviceAreas || []).join(", ")}
+            </p>
+
+            <hr class="my-2">
+
+            <p class="mb-1 small">
+              <i class="bi bi-calendar-check-fill text-success"></i> 
+              <strong>Schedule:</strong> ${schedule.join(" & ") || "N/A"}
+            </p>
+            <p class="mb-1 small">
+              <i class="bi bi-clock-fill text-info"></i> 
+              <strong>Times:</strong> ${timeSlots || "N/A"}
+            </p>
+            
+            <p class="mt-2 mb-0">
+              <small class="text-muted text-uppercase" style="font-size: 0.7rem;">
+                Preferred Sizes: ${(w.preferredDogSizes || []).join(", ")}
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+    list.appendChild(col);
+  });
+  } catch (err) {
+    console.error("Failed to load walkers:", err);
+  }
 }
+
+// Initialize the page and set up event listeners
+document.addEventListener("DOMContentLoaded", () => {
+  // Initial load with default page size
+  fetchAndRenderWalkers("pageSize=20");
+
+  const applyBtn = document.getElementById("applyFilters");
+  
+  if (applyBtn) {
+    // Inside the applyBtn listener in walkersModule.js
+    applyBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // 1. Get values from all filter elements
+    const size = document.getElementById("filterSize")?.value;
+    const location = document.getElementById("filterLocation")?.value;
+    const experience = document.getElementById("filterExperience")?.value;
+    const time = document.getElementById("filterTime")?.value;
+    const availability = document.getElementById("filterAvailability")?.value;
+
+    // 2. Build the query string using URLSearchParams
+    const params = new URLSearchParams();
+    
+    if (size) params.append("size", size);
+    if (location) params.append("location", location);
+    if (experience) params.append("experience", experience);
+    if (time) params.append("time", time);
+    if (availability) params.append("availability", availability);
+    
+    // Set default page size for each filter action
+    params.append("pageSize", 20);
+    params.append("page", 1); // Reset to page 1 on every new filter
+
+    console.log("🔍 Dynamic Query Sent:", params.toString());
+    
+    // 3. Trigger the fetch and render process
+    fetchAndRenderWalkers(params.toString());
+  });
+  }
+});

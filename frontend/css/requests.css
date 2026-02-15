@@ -152,34 +152,8 @@
   margin-bottom: 1rem;
 }
 
-.filter-actions {
-  min-width: 0;
-}
-
-.filter-action-btn {
-  flex: 1 1 0;
-  min-width: 0;
-  padding: 0.6rem 0.75rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border-radius: 999px;
-  line-height: 1.2;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.filter-actions .filter-action-btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.filter-actions .filter-action-btn:hover {
-  transform: none;
-}
-
-@media (max-width: 576px) {
-  .filter-actions {
-    flex-direction: column;
-  }
+.filter-reset-btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 10px;
 }
