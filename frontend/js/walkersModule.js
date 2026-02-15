@@ -67,7 +67,7 @@ function WalkersModule() {
     }
   };
 
-  // 4. Render Individual Walker Card
+  // 4. Render Individual Walker Card (Updated with Edit/Delete Buttons)
   const renderWalkerCard = (w) => {
     const schedule = [];
     if (w.availability?.weekdays) schedule.push("Weekdays");
@@ -99,10 +99,20 @@ function WalkersModule() {
               <p class="mb-1 small text-muted">
                 <strong>Times:</strong> ${timeSlots || "N/A"}
               </p>
-              <div class="mt-3">
+              <div class="mt-3 d-flex justify-content-between align-items-center">
                 <span class="badge bg-light text-primary border text-uppercase" style="font-size: 0.65rem;">
                   Sizes: ${(w.preferredDogSizes || []).join(", ")}
                 </span>
+                <div class="d-flex gap-2">
+                  <a href="/edit-profile.html?id=${w._id}" class="btn btn-outline-primary btn-sm">
+                    Edit
+                  </a>
+                  <button 
+                    class="btn btn-outline-danger btn-sm" 
+                    onclick="window.walkersModule.deleteWalker('${w._id}', '${w.name}')">
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -129,67 +139,76 @@ function WalkersModule() {
     renderPagination();
   };
 
+  // [Pagination logic remains the same...]
   const renderPagination = () => {
     const nav = document.getElementById("pagination-container");
     if (!nav) return;
-
     const totalPages = Math.ceil(totalWalkers / pageSize);
-    if (totalPages <= 1) {
-      nav.innerHTML = "";
-      return;
-    }
-
+    if (totalPages <= 1) { nav.innerHTML = ""; return; }
     let html = "";
-
-    // Previous 
-    html += `
-      <li class="page-item ${currentPage === 1 ? "disabled" : ""}">
-        <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
-      </li>
-    `;
-
-    
+    html += `<li class="page-item ${currentPage === 1 ? "disabled" : ""}"><a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a></li>`;
     const range = 2; 
     let startPage = Math.max(1, currentPage - range);
     let endPage = Math.min(totalPages, currentPage + range);
-
-    
     if (endPage - startPage < 4) {
       if (startPage === 1) endPage = Math.min(totalPages, 5);
       else if (endPage === totalPages) startPage = Math.max(1, totalPages - 4);
     }
-
     for (let i = startPage; i <= endPage; i++) {
-      html += `
-        <li class="page-item ${i === currentPage ? "active" : ""}">
-          <a class="page-link" href="#" data-page="${i}">${i}</a>
-        </li>
-      `;
+      html += `<li class="page-item ${i === currentPage ? "active" : ""}"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
     }
-
-    // Next 
-    html += `
-      <li class="page-item ${currentPage === totalPages ? "disabled" : ""}">
-        <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a>
-      </li>
-    `;
-
+    html += `<li class="page-item ${currentPage === totalPages ? "disabled" : ""}"><a class="page-link" href="#" data-page="${currentPage + 1}">Next</a></li>`;
     nav.innerHTML = html;
-
-  
     nav.querySelectorAll(".page-link").forEach(link => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
         const p = parseInt(link.getAttribute("data-page")); 
-        
-        
         if (p && p >= 1 && p <= totalPages && p !== currentPage) {
-          console.log(`🚀 Jumping to page: ${p}`); 
           currentPage = p;
           fetchWalkers(); 
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
       });
+    });
+  };
+
+  // 6. Delete Walker Logic (New Method)
+  me.deleteWalker = (walkerId, walkerName) => {
+    console.log("🗑️ Delete button clicked for walker:", walkerId, walkerName);
+
+    // Update modal content (Re-using the same modal structure as requests)
+    const modalNameEl = document.getElementById("deleteRequestName"); // You might want to change this ID in walkers.html to 'deleteWalkerName'
+    if (modalNameEl) modalNameEl.textContent = walkerName;
+
+    const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+    deleteModal.show();
+
+    const confirmBtn = document.getElementById("confirmDeleteBtn");
+
+    // Clear previous listeners
+    const newConfirmBtn = confirmBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+    newConfirmBtn.addEventListener("click", async () => {
+      deleteModal.hide();
+      try {
+        const response = await fetch(`/api/walkers/${walkerId}`, {
+          method: "DELETE",
+        });
+
+        if (!response.ok) throw new Error(`Delete failed: ${response.status}`);
+
+        // Show Success Toast
+        const successToast = new bootstrap.Toast(document.getElementById("deleteSuccessToast"));
+        successToast.show();
+
+        // Refresh List
+        setTimeout(() => fetchWalkers(), 500);
+      } catch (error) {
+        console.error("❌ Error deleting walker:", error);
+        const errorToast = new bootstrap.Toast(document.getElementById("deleteErrorToast"));
+        errorToast.show();
+      }
     });
   };
 

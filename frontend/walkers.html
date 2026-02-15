@@ -220,6 +220,47 @@
       </nav>
     </div>
 
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title" id="deleteModalLabel">Confirm Delete Profile</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete the walker profile for <strong id="deleteRequestName"></strong>?</p>
+            <p class="text-danger mb-0">This action will permanently remove your profile from the list.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div id="deleteSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+          <strong class="me-auto">Success</strong>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Walker profile deleted successfully!
+        </div>
+      </div>
+
+      <div id="deleteErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white">
+          <strong class="me-auto">Error</strong>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Failed to delete profile. Please try again later.
+        </div>
+      </div>
+    </div>
+    
     <!-- Footer -->
     <footer>
       <div class="container">
