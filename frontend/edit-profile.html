@@ -197,91 +197,52 @@
 
             <hr class="my-4" />
 
-            <h5 class="mb-3 fw-bold text-primary-custom">
-              Preferences & Availability
-            </h5>
+            <h5 class="mb-3 fw-bold text-primary-custom">Preferences & Availability</h5>
             <div class="row g-3 mb-4">
-              <div class="col-md-6">
-                <label class="form-label d-block"
-                  >Preferred Dog Sizes (Select at least one)</label
-                >
-                <div class="d-flex gap-3">
+              <div class="col-12">
+                <label class="form-label d-block">Preferred Dog Sizes <span class="text-danger">*</span></label>
+                <div class="d-flex gap-4">
                   <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      name="preferredDogSizes"
-                      value="small"
-                      id="sizeSmall"
-                    />
-                    <label class="form-check-label" for="sizeSmall"
-                      >Small</label
-                    >
+                    <input class="form-check-input" type="checkbox" name="preferredDogSizes" value="small" id="sizeSmall">
+                    <label class="form-check-label" for="sizeSmall">Small (< 20 lbs)</label>
                   </div>
                   <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      name="preferredDogSizes"
-                      value="medium"
-                      id="sizeMedium"
-                    />
-                    <label class="form-check-label" for="sizeMedium"
-                      >Medium</label
-                    >
+                    <input class="form-check-input" type="checkbox" name="preferredDogSizes" value="medium" id="sizeMedium">
+                    <label class="form-check-label" for="sizeMedium">Medium (20-50 lbs)</label>
                   </div>
                   <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      name="preferredDogSizes"
-                      value="large"
-                      id="sizeLarge"
-                    />
-                    <label class="form-check-label" for="sizeLarge"
-                      >Large</label
-                    >
+                    <input class="form-check-input" type="checkbox" name="preferredDogSizes" value="large" id="sizeLarge">
+                    <label class="form-check-label" for="sizeLarge">Large (> 50 lbs)</label>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <label class="form-label d-block">Availability Times</label>
+
+              <div class="col-md-6 mt-3">
+                <label class="form-label d-block">General Days</label>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="weekdays" name="weekdays">
+                  <label class="form-check-label" for="weekdays">Available Weekdays</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="weekends" name="weekends">
+                  <label class="form-check-label" for="weekends">Available Weekends</label>
+                </div>
+              </div>
+
+              <div class="col-md-6 mt-3">
+                <label class="form-label d-block">Times of Day</label>
                 <div class="d-flex gap-3">
                   <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      name="times"
-                      value="morning"
-                      id="timeMorning"
-                    />
-                    <label class="form-check-label" for="timeMorning"
-                      >Morning</label
-                    >
+                    <input class="form-check-input" type="checkbox" value="morning" name="times" id="timeMorning">
+                    <label class="form-check-label" for="timeMorning">Morning</label>
                   </div>
                   <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      name="times"
-                      value="afternoon"
-                      id="timeAfternoon"
-                    />
-                    <label class="form-check-label" for="timeAfternoon"
-                      >Afternoon</label
-                    >
+                    <input class="form-check-input" type="checkbox" value="afternoon" name="times" id="timeAfternoon">
+                    <label class="form-check-label" for="timeAfternoon">Afternoon</label>
                   </div>
                   <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      name="times"
-                      value="evening"
-                      id="timeEvening"
-                    />
-                    <label class="form-check-label" for="timeEvening"
-                      >Evening</label
-                    >
+                    <input class="form-check-input" type="checkbox" value="evening" name="times" id="timeEvening">
+                    <label class="form-check-label" for="timeEvening">Evening</label>
                   </div>
                 </div>
               </div>
