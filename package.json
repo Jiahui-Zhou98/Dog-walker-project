@@ -7,8 +7,7 @@
   "scripts": {
     "start": "node backend.js",
     "dev": "nodemon backend.js",
-    "seed:requests": "node data/seed-requests.js",
-    "seed:walkers": "node data/seed-walkers.js",
+    "seed": "node data/seed-requests.js",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -19,14 +18,11 @@
     "students",
     "platform"
   ],
-  "author": "Jiahui&Yi-Peng",
+  "author": "Jiahui",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^6.0.0",
-    "connect-mongo": "^6.0.0",
     "dotenv": "^16.4.5",
     "express": "^5.1.0",
-    "express-session": "^1.19.0",
     "mongodb": "^6.21.0"
   },
   "devDependencies": {

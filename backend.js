@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.static("frontend"));
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || "pawsitive_walks_dev_2026",
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
