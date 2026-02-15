@@ -1,0 +1,75 @@
+/* =============================================
+   login.css - Styles for Login Page
+   Author: Jiahui Zhou
+   Page: login.html
+   ============================================= */
+
+.login-page-wrap {
+  min-height: calc(100vh - 88px);
+  min-height: calc(100dvh - 88px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 2rem;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.08);
+}
+
+.login-header {
+  margin-bottom: 1rem;
+}
+
+.login-header h1 {
+  color: var(--text-dark);
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.login-header p {
+  color: var(--text-light);
+  margin-bottom: 0;
+}
+
+.error-box {
+  min-height: 48px;
+  border: 1px solid #f4b5bb;
+  border-radius: 10px;
+  background: #fdecef;
+  color: #8b1f2a;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  border-color: #e7d9cf;
+  border-radius: 10px;
+  min-height: 44px;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(255, 140, 66, 0.2);
+}
+
+.switch-auth {
+  text-align: center;
+  color: var(--text-light);
+}
+
+.switch-auth a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.switch-auth a:hover {
+  text-decoration: underline;
+}
