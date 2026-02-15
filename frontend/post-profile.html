@@ -9,7 +9,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO Meta Tags -->
     <title>Create Your Professional Walker Profile - PawsitiveWalks</title>
     <meta
       name="description"
@@ -18,53 +17,32 @@
     <meta name="keywords" content="create profile, dog walker registration, pet service listing, professional walker" />
     <meta name="author" content="Yi-Peng Chiang" />
 
-    <!-- Open Graph Meta Tags -->
-    <meta
-      property="og:title"
-      content="PawsitiveWalks - Connect with Trusted Dog Walkers"
-    />
-    <meta
-      property="og:description"
-      content="PawsitiveWalks is a platform connecting dog owners with trusted dog walkers. It is a zero-fee community platform connecting dog owners with trusted walkers. A simple bridge for direct connection and negotiation."
-    />
+    <meta property="og:title" content="PawsitiveWalks - Connect with Trusted Dog Walkers" />
+    <meta property="og:description" content="PawsitiveWalks is a platform connecting dog owners with trusted dog walkers." />
     
+    <link rel="icon" type="image/png" href="./images/favicon.png" />
+
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/walkers.css" />
   </head>
   <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg sticky-top">
       <div class="container">
         <a class="navbar-brand" href="/">
           <span>🐕</span>
           <span>PawsitiveWalks</span>
         </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/requests.html">Find Requests</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="/walkers.html"
-                >Become a Walker</a
-              >
-            </li>
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/requests.html">Find Requests</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/walkers.html">Become a Walker</a></li>
             <li class="nav-item ms-lg-3">
               <a id="authActionBtn" class="nav-link btn-signin" href="/login.html">Sign In</a>
             </li>
@@ -82,7 +60,7 @@
 
     <div class="container mb-5">
       <div class="card shadow-sm border-0 rounded-4">
-        <div class="card-body p-4">
+        <div class="card-body p-4 p-md-5">
           <form id="postWalkerForm">
             
             <h5 class="mb-3 fw-bold text-primary-custom">Basic Information</h5>
@@ -102,18 +80,10 @@
               </div>
               <div class="col-md-6">
                 <label for="serviceAreas" class="form-label">Service Area <span class="text-danger">*</span></label>
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="serviceAreas" 
-                    name="serviceAreas" 
-                    required 
-                    placeholder="e.g., Back Bay, Boston or Cambridge" 
-                />
-                <small class="text-muted">Enter the neighborhoods or cities where you can walk dogs.</small>
-            </div>
-
-            <hr class="my-4" />
+                <input type="text" class="form-control" id="serviceAreas" name="serviceAreas" required placeholder="e.g., Back Bay, Boston" />
+                <small class="text-muted">Neighborhoods or cities you cover.</small>
+              </div>
+            </div> <hr class="my-4" />
 
             <h5 class="mb-3 fw-bold text-primary-custom">Experience & Preferences</h5>
             <div class="row g-3 mb-4">
@@ -129,7 +99,6 @@
                 <label for="maxDogsPerWalk" class="form-label">Max Dogs Per Walk <span class="text-danger">*</span></label>
                 <input type="number" class="form-control" id="maxDogsPerWalk" name="maxDogsPerWalk" min="1" max="5" required value="1" />
               </div>
-              
               <div class="col-12 mt-3">
                 <label class="form-label d-block">Preferred Dog Sizes <span class="text-danger">*</span></label>
                 <div class="d-flex gap-4">
@@ -189,14 +158,12 @@
             <div class="row g-3 mb-4">
               <div class="col-12">
                 <label for="bio" class="form-label">About You (Bio) <span class="text-danger">*</span></label>
-                <textarea class="form-control" id="bio" name="bio" rows="4" required placeholder="Tell owners about your experience, why you love dogs, and your walking style..."></textarea>
+                <textarea class="form-control" id="bio" name="bio" rows="4" required placeholder="Tell owners about your experience..."></textarea>
               </div>
               <div class="col-12">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" id="openToGroupWalks" name="openToGroupWalks">
-                  <label class="form-check-label" for="openToGroupWalks">
-                    I am open to conducting group walks (multiple dogs at once)
-                  </label>
+                  <label class="form-check-label" for="openToGroupWalks">Open to group walks</label>
                 </div>
               </div>
             </div>
@@ -208,14 +175,13 @@
           </form>
         </div>
       </div>
-    </div>
-
-    <footer class="py-4 mt-auto border-top">
-      <div class="container text-center text-muted">
-        <p class="mb-0">&copy; 2026 PawsitiveWalks</p>
+    </div> <footer>
+      <div class="container">
+        <p>&copy; 2026 PawsitiveWalks</p>
       </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/postWalkerModule.js"></script>
   </body>
 </html>
