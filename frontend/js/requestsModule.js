@@ -211,13 +211,14 @@ function RequestsModule() {
     const container = document.getElementById("requests-list");
     if (!container) return;
 
-    if (allRequests.length === 0 && !isLoading) {
+    if (allRequests.length === 0) {
       container.innerHTML = `
         <div class="text-center py-5">
-          <h3>No requests found</h3>
-          <p class="text-muted">Try adjusting your filters</p>
+          <h3 class="text-muted">No requests found</h3>
         </div>
       `;
+      const paginationEl = document.getElementById("pagination");
+      if (paginationEl) paginationEl.innerHTML = "";
       return;
     }
 
