@@ -166,6 +166,7 @@ router.get("/", async (req, res) => {
   const pageSize = Math.min(parseInt(req.query.pageSize) || 20, 100); // Cap at 100
 
   const query = {};
+  if (req.query.createdBy) query.createdBy = req.query.createdBy;
   if (req.query.size) query.size = req.query.size;
   if (req.query.location) query.location = new RegExp(req.query.location, "i");
   if (req.query.preferredTime) query.preferredTime = req.query.preferredTime;

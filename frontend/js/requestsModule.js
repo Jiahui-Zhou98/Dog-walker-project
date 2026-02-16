@@ -7,6 +7,7 @@ function RequestsModule() {
   let allRequests = [];
   let totalRequests = 0;
   let isLoading = false;
+  let loggedInUserId = null;
 
   // Fetch requests from API
   const fetchRequests = async () => {
@@ -32,6 +33,12 @@ function RequestsModule() {
       if (time) params.append("preferredTime", time);
       if (status) params.append("status", status);
       if (social) params.append("openToSocial", social);
+
+      // "My Posts" filter – only when logged in and checkbox is checked
+      const myPostsChecked = document.getElementById("filterMyPosts")?.checked;
+      if (myPostsChecked && loggedInUserId) {
+        params.append("createdBy", loggedInUserId);
+      }
 
       const response = await fetch(`/api/requests?${params.toString()}`);
 
@@ -294,12 +301,33 @@ function RequestsModule() {
     if (statusSelect) statusSelect.value = "";
     if (socialSelect) socialSelect.value = "";
 
+    // Uncheck "My Posts"
+    const myPostsCb = document.getElementById("filterMyPosts");
+    if (myPostsCb) myPostsCb.checked = false;
+
     currentPage = 1;
     fetchRequests();
   };
 
   // Initialize
-  me.init = () => {
+  me.init = async () => {
+    // Check login status and show "My Posts" filter if logged in
+    try {
+      const authRes = await fetch("/api/auth/me");
+      if (authRes.ok) {
+        const { user } = await authRes.json();
+        loggedInUserId = user._id;
+        const myPostsCb = document.getElementById("filterMyPosts");
+        if (myPostsCb) myPostsCb.disabled = false;
+        const myPostsLabel = document.querySelector(
+          'label[for="filterMyPosts"]',
+        );
+        if (myPostsLabel) myPostsLabel.classList.remove("text-muted");
+      }
+    } catch {
+      // Not logged in or network error – keep checkbox hidden
+    }
+
     // Initial data fetch
     fetchRequests();
 
