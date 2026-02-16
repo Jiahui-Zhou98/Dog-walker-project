@@ -33,7 +33,9 @@ const WalkersDB = {
   getWalkerById: async (id) => {
     const { client, collection } = await connect("walkers");
     try {
-      const walker = await collection.findOne({ _id: new ObjectId(id) });
+      const walker = await collection.findOne({
+        _id: ObjectId.createFromHexString(id),
+      });
       return walker;
     } finally {
       await client.close();
@@ -56,7 +58,7 @@ const WalkersDB = {
     try {
       const updateData = { ...data, updatedAt: new Date() };
       await collection.updateOne(
-        { _id: new ObjectId(id) },
+        { _id: ObjectId.createFromHexString(id) },
         { $set: updateData },
       );
       return updateData;
@@ -68,7 +70,9 @@ const WalkersDB = {
   deleteWalker: async (id) => {
     const { client, collection } = await connect("walkers");
     try {
-      const result = await collection.deleteOne({ _id: new ObjectId(id) });
+      const result = await collection.deleteOne({
+        _id: ObjectId.createFromHexString(id),
+      });
       return result;
     } finally {
       await client.close();

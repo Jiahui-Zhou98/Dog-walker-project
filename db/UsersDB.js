@@ -23,7 +23,9 @@ const usersDB = {
   async getUserById(id) {
     const { client, collection } = connect("users");
     try {
-      return await collection.findOne({ _id: new ObjectId(id) });
+      return await collection.findOne({
+        _id: ObjectId.createFromHexString(id),
+      });
     } catch (err) {
       console.error("Error fetching user by id:", err);
       throw err;

@@ -30,7 +30,9 @@ const requestsDB = {
   getRequestById: async (id) => {
     const { client, collection } = connect("requests");
     try {
-      const request = await collection.findOne({ _id: new ObjectId(id) });
+      const request = await collection.findOne({
+        _id: ObjectId.createFromHexString(id),
+      });
       return request;
     } catch (err) {
       console.error("Error fetching request by ID:", err);
@@ -78,7 +80,7 @@ const requestsDB = {
     try {
       const updateData = { ...data, updatedAt: new Date() };
       await collection.updateOne(
-        { _id: new ObjectId(id) },
+        { _id: ObjectId.createFromHexString(id) },
         { $set: updateData },
       );
       console.log("✏️ Updated request");
@@ -94,7 +96,9 @@ const requestsDB = {
   deleteRequest: async (id) => {
     const { client, collection } = connect("requests");
     try {
-      const result = await collection.deleteOne({ _id: new ObjectId(id) });
+      const result = await collection.deleteOne({
+        _id: ObjectId.createFromHexString(id),
+      });
       console.log("🗑️ Deleted request");
       return result;
     } catch (err) {

@@ -29,7 +29,9 @@ const VALID_STATUSES = ["open", "matched", "completed"];
 
 // Check if a string is a valid MongoDB ObjectId
 function isValidObjectId(id) {
-  return ObjectId.isValid(id) && String(new ObjectId(id)) === id;
+  return (
+    ObjectId.isValid(id) && String(ObjectId.createFromHexString(id)) === id
+  );
 }
 
 // Validate and sanitize request data for Create and Update

@@ -11,7 +11,9 @@ import walkersDB from "../db/WalkersDB.js";
 const router = express.Router();
 
 function isValidObjectId(id) {
-  return ObjectId.isValid(id) && String(new ObjectId(id)) === id;
+  return (
+    ObjectId.isValid(id) && String(ObjectId.createFromHexString(id)) === id
+  );
 }
 
 router.get("/", async (req, res) => {
