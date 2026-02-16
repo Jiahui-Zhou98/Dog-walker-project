@@ -30,8 +30,7 @@ if (isProduction && !SESSION_SECRET) {
   throw new Error("SESSION_SECRET is required in production.");
 }
 
-const sessionSecret =
-  SESSION_SECRET || crypto.randomBytes(32).toString("hex");
+const sessionSecret = SESSION_SECRET || crypto.randomBytes(32).toString("hex");
 
 if (!SESSION_SECRET) {
   console.warn(
