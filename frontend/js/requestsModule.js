@@ -249,8 +249,8 @@ function RequestsModule() {
       </li>
     `;
 
-    // Show page numbers (max 10 pages visible)
-    const maxVisible = 10;
+    // Show page numbers (max 5 pages visible)
+    const maxVisible = 5;
     let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
     let endPage = Math.min(totalPages, startPage + maxVisible - 1);
 
