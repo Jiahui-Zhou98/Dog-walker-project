@@ -182,6 +182,9 @@ function RequestsModule() {
 
                 ${socialNote}
 
+                ${
+                  loggedInUserId && loggedInUserId === request.createdBy
+                    ? `
                 <div class="mt-3 d-flex gap-2 justify-content-end">
                   <a href="/edit-request.html?id=${request._id}" class="btn btn-outline-primary btn-sm">
                     Edit
@@ -192,6 +195,9 @@ function RequestsModule() {
                     Delete
                   </button>
                 </div>
+                `
+                    : ""
+                }
               </div>
             </div>
           </div>
