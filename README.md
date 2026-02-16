@@ -179,12 +179,27 @@ npm install
 
 ### Environment Setup
 
-Create a `.env` file in the project root:
+Copy the example file and fill in your own values:
+
+```bash
+cp .env.example .env
+```
+
+Required variables:
 
 ```
 MONGODB_URI=mongodb://localhost:27017
 PORT=3000
+SESSION_SECRET=replace_with_a_long_random_secret
 ```
+
+Generate a strong `SESSION_SECRET` (example):
+
+```bash
+openssl rand -base64 48
+```
+
+Security note: never commit `.env` or real Atlas credentials to GitHub.
 
 ### Seed the Database
 

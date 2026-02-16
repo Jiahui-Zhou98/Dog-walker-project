@@ -338,7 +338,7 @@ async function seedRequests() {
 
   try {
     await client.connect();
-    console.log("✅ Connected to MongoDB at:", URI);
+    console.log("✅ Connected to MongoDB");
 
     const db = client.db(dbName);
     const collection = db.collection("requests");
