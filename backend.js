@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import crypto from "node:crypto";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import requestsRouter from "./routes/requests.js";
@@ -10,25 +11,50 @@ dotenv.config();
 
 console.log("🐕 Initializing PawsitiveWalks backend...");
 const PORT = process.env.PORT || 3000;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017";
+const SESSION_SECRET = process.env.SESSION_SECRET;
 
 const app = express();
+const isProduction = process.env.NODE_ENV === "production";
+
+if (isProduction) {
+  // Required so secure session cookies work correctly behind managed proxies.
+  app.set("trust proxy", 1);
+}
+
+if (isProduction && !process.env.MONGODB_URI) {
+  throw new Error("MONGODB_URI is required in production.");
+}
+
+if (isProduction && !SESSION_SECRET) {
+  throw new Error("SESSION_SECRET is required in production.");
+}
+
+const sessionSecret =
+  SESSION_SECRET || crypto.randomBytes(32).toString("hex");
+
+if (!SESSION_SECRET) {
+  console.warn(
+    "SESSION_SECRET is not set. Using a temporary secret for local development only.",
+  );
+}
 
 // Middleware
 app.use(express.json());
 app.use(express.static("frontend"));
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "pawsitive_walks_dev_2026",
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI || "mongodb://localhost:27017",
+      mongoUrl: MONGODB_URI,
       dbName: "pawsitiveWalks",
     }),
     cookie: {
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      secure: isProduction,
       maxAge: 1000 * 60 * 60 * 24 * 7,
     },
   }),
