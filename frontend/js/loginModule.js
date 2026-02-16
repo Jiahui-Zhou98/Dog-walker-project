@@ -14,6 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function redirectIfLoggedIn() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("registered") === "true") {
+    return; // skip auto-redirect if coming from registration success
+  }
+
   try {
     const res = await fetch("/api/auth/me");
 
