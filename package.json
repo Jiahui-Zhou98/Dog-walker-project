@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node backend.js",
     "dev": "nodemon backend.js",
-    "seed": "node data/seed-requests.js",
+    "seed:requests": "node data/seed-requests.js",
     "seed:walkers": "node data/seed-walkers.js",
     "lint": "eslint .",
     "format": "prettier --write ."
