@@ -29,3 +29,12 @@
     color: #e67e00;
     text-decoration: underline;
 }
+
+.input-group .btn-outline-secondary {
+  border-color: #dee2e6;
+  background-color: #fff;
+}
+.input-group .btn-outline-secondary:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}

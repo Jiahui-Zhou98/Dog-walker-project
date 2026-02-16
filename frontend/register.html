@@ -72,9 +72,23 @@
                   <input type="email" id="reg-email" class="form-control form-control-lg" placeholder="name@example.com" required>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-3">
                   <label class="form-label fw-semibold" for="reg-password">Password</label>
-                  <input type="password" id="reg-password" class="form-control form-control-lg" placeholder="Min. 8 characters" required>
+                  <div class="input-group">
+                    <input type="password" id="reg-password" class="form-control form-control-lg" placeholder="Min. 8 characters" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">👁️</button>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label fw-semibold" for="reg-confirm-password">Confirm Password</label>
+                  <div class="input-group">
+                    <input type="password" id="reg-confirm-password" class="form-control form-control-lg" placeholder="Repeat your password" required>
+                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">👁️</button>
+                  </div>
+                  <div id="password-status" class="mt-1 small d-none">
+                    <span id="status-icon"></span> <span id="status-text"></span>
+                  </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary-custom btn-lg w-100 shadow-sm">
