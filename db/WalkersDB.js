@@ -15,7 +15,7 @@ const WalkersDB = {
       await client.close();
     }
   },
-  
+
   getWalkers: async ({ query = {}, pageSize = 20, page = 1 } = {}) => {
     const { client, collection } = await connect("walkers");
     try {
@@ -55,7 +55,10 @@ const WalkersDB = {
     const { client, collection } = await connect("walkers");
     try {
       const updateData = { ...data, updatedAt: new Date() };
-      await collection.updateOne({ _id: new ObjectId(id) }, { $set: updateData });
+      await collection.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: updateData },
+      );
       return updateData;
     } finally {
       await client.close();

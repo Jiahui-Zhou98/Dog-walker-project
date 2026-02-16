@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
 
   // 1. Array Membership (Dog Sizes)
   if (req.query.size) {
-    query.preferredDogSizes = req.query.size; 
+    query.preferredDogSizes = req.query.size;
   }
 
   // 2. Partial String Match (Location)
@@ -39,11 +39,13 @@ router.get("/", async (req, res) => {
   if (req.query.time) {
     query["availability.times"] = req.query.time;
   }
-  
+
   // 5. Boolean Logic (Availability)
   if (req.query.availability) {
-    if (req.query.availability === "weekdays") query["availability.weekdays"] = true;
-    if (req.query.availability === "weekends") query["availability.weekends"] = true;
+    if (req.query.availability === "weekdays")
+      query["availability.weekdays"] = true;
+    if (req.query.availability === "weekends")
+      query["availability.weekends"] = true;
   }
 
   console.log("🐾 GET /api/walkers with Query:", query);
@@ -52,7 +54,7 @@ router.get("/", async (req, res) => {
     // Execute both queries simultaneously for better performance
     const [walkers, totalCount] = await Promise.all([
       walkersDB.getWalkers({ query, pageSize, page }),
-      walkersDB.countWalkers(query) // You'll need to add this helper to WalkersDB.js
+      walkersDB.countWalkers(query), // You'll need to add this helper to WalkersDB.js
     ]);
 
     res.json({
@@ -60,7 +62,7 @@ router.get("/", async (req, res) => {
       total: totalCount, // The REAL total for pagination math
       page,
       pageSize,
-      totalPages: Math.ceil(totalCount / pageSize) // Helper for the frontend
+      totalPages: Math.ceil(totalCount / pageSize), // Helper for the frontend
     });
   } catch (error) {
     console.error("Filter Error:", error);
