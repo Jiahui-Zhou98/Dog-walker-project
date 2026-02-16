@@ -3,7 +3,7 @@ console.log("WalkersModule loaded");
 function WalkersModule() {
   const me = {};
   let currentPage = 1;
-  const pageSize = 12; 
+  const pageSize = 12;
   let totalWalkers = 0;
   let allWalkers = [];
   let isLoading = false;
@@ -52,7 +52,7 @@ function WalkersModule() {
       const experience = document.getElementById("filterExperience")?.value;
       const time = document.getElementById("filterTime")?.value;
       const availability = document.getElementById("filterAvailability")?.value;
-      
+
       // Get value from My Posts filter
       const myPosts = document.getElementById("filterMyPosts")?.checked;
 
@@ -61,7 +61,7 @@ function WalkersModule() {
       if (experience) params.append("experience", experience);
       if (time) params.append("time", time);
       if (availability) params.append("availability", availability);
-      
+
       // Add myPosts parameter if checked
       if (myPosts) params.append("myPosts", "true");
 
@@ -113,14 +113,14 @@ function WalkersModule() {
     if (w.availability?.weekdays) schedule.push("Weekdays");
     if (w.availability?.weekends) schedule.push("Weekends");
     const timeSlots = (w.availability?.times || []).join(", ");
-   
-    const displayAreas = Array.isArray(w.serviceAreas) 
-      ? w.serviceAreas.join(", ") 
-      : (w.serviceAreas || "N/A");
+
+    const displayAreas = Array.isArray(w.serviceAreas)
+      ? w.serviceAreas.join(", ")
+      : w.serviceAreas || "N/A";
 
     const displaySizes = Array.isArray(w.preferredDogSizes)
       ? w.preferredDogSizes.join(", ")
-      : (w.preferredDogSizes || "N/A");
+      : w.preferredDogSizes || "N/A";
 
     return `
       <div class="col-md-4 mb-4">
@@ -130,7 +130,7 @@ function WalkersModule() {
             <div class="walker-info">
               <p class="mb-2">
                 <i class="bi bi-envelope-fill me-2 text-primary"></i> 
-                <a href="mailto:${w.email}" class="text-decoration-none text-dark">${w.email || 'N/A'}</a>
+                <a href="mailto:${w.email}" class="text-decoration-none text-dark">${w.email || "N/A"}</a>
               </p>
               <p class="mb-2">
                 <i class="bi bi-star-fill me-2 text-warning"></i> 
@@ -178,12 +178,13 @@ function WalkersModule() {
       list.innerHTML = `
         <div class="col-12 text-center py-5">
           <h3 class="text-muted">No walkers found</h3>
-          <p>Try adjusting your filters or location.</p>
         </div>`;
+      const nav = document.getElementById("pagination-container");
+      if (nav) nav.innerHTML = "";
       return;
     }
 
-    list.innerHTML = allWalkers.map(w => renderWalkerCard(w)).join("");
+    list.innerHTML = allWalkers.map((w) => renderWalkerCard(w)).join("");
     renderPagination();
   };
 
@@ -194,10 +195,13 @@ function WalkersModule() {
     const nav = document.getElementById("pagination-container");
     if (!nav) return;
     const totalPages = Math.ceil(totalWalkers / pageSize);
-    if (totalPages <= 1) { nav.innerHTML = ""; return; }
+    if (totalPages <= 1) {
+      nav.innerHTML = "";
+      return;
+    }
     let html = "";
     html += `<li class="page-item ${currentPage === 1 ? "disabled" : ""}"><a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a></li>`;
-    const range = 2; 
+    const range = 2;
     let startPage = Math.max(1, currentPage - range);
     let endPage = Math.min(totalPages, currentPage + range);
     if (endPage - startPage < 4) {
@@ -209,13 +213,13 @@ function WalkersModule() {
     }
     html += `<li class="page-item ${currentPage === totalPages ? "disabled" : ""}"><a class="page-link" href="#" data-page="${currentPage + 1}">Next</a></li>`;
     nav.innerHTML = html;
-    nav.querySelectorAll(".page-link").forEach(link => {
+    nav.querySelectorAll(".page-link").forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
-        const p = parseInt(link.getAttribute("data-page")); 
+        const p = parseInt(link.getAttribute("data-page"));
         if (p && p >= 1 && p <= totalPages && p !== currentPage) {
           currentPage = p;
-          fetchWalkers(); 
+          fetchWalkers();
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
       });
@@ -228,14 +232,16 @@ function WalkersModule() {
   me.deleteWalker = (walkerId, walkerName) => {
     console.log("🗑️ Delete initiated for walker:", walkerId, walkerName);
 
-    const modalNameEl = document.getElementById("deleteRequestName"); 
+    const modalNameEl = document.getElementById("deleteRequestName");
     if (modalNameEl) modalNameEl.textContent = walkerName;
 
-    const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+    const deleteModal = new bootstrap.Modal(
+      document.getElementById("deleteModal"),
+    );
     deleteModal.show();
 
     const confirmBtn = document.getElementById("confirmDeleteBtn");
-    
+
     // Replace the button to remove old event listeners (prevents multiple deletes)
     const newConfirmBtn = confirmBtn.cloneNode(true);
     confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
@@ -250,14 +256,18 @@ function WalkersModule() {
         if (!response.ok) throw new Error(`Delete failed: ${response.status}`);
 
         // Success Feedback
-        const successToast = new bootstrap.Toast(document.getElementById("deleteSuccessToast"));
+        const successToast = new bootstrap.Toast(
+          document.getElementById("deleteSuccessToast"),
+        );
         successToast.show();
 
         // Refresh list after a short delay
         setTimeout(() => fetchWalkers(), 500);
       } catch (error) {
         console.error("❌ Error deleting walker:", error);
-        const errorToast = new bootstrap.Toast(document.getElementById("deleteErrorToast"));
+        const errorToast = new bootstrap.Toast(
+          document.getElementById("deleteErrorToast"),
+        );
         errorToast.show();
       }
     });
@@ -275,11 +285,17 @@ function WalkersModule() {
    * Reset all filters and fetch default list
    */
   me.resetFilters = () => {
-    ["filterSize", "filterLocation", "filterExperience", "filterTime", "filterAvailability"].forEach(id => {
+    [
+      "filterSize",
+      "filterLocation",
+      "filterExperience",
+      "filterTime",
+      "filterAvailability",
+    ].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.value = "";
     });
-    
+
     // Reset My Posts Checkbox
     const myPosts = document.getElementById("filterMyPosts");
     if (myPosts) myPosts.checked = false;
@@ -295,12 +311,18 @@ function WalkersModule() {
     fetchWalkers();
     checkAuthForMyPosts(); // Check if user is logged in to enable "My Posts"
 
-    document.getElementById("applyFilters")?.addEventListener("click", me.applyFilters);
-    document.getElementById("resetFilters")?.addEventListener("click", me.resetFilters);
+    document
+      .getElementById("applyFilters")
+      ?.addEventListener("click", me.applyFilters);
+    document
+      .getElementById("resetFilters")
+      ?.addEventListener("click", me.resetFilters);
 
-    document.getElementById("filterLocation")?.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") me.applyFilters();
-    });
+    document
+      .getElementById("filterLocation")
+      ?.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") me.applyFilters();
+      });
   };
 
   return me;
@@ -310,5 +332,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const module = WalkersModule();
   module.init();
   // Attach to window for global access (e.g., from onclick in cards)
-  window.walkersModule = module; 
+  window.walkersModule = module;
 });
