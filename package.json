@@ -22,8 +22,11 @@
   "author": "Jiahui",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-mongo": "^6.0.0",
     "dotenv": "^16.4.5",
     "express": "^5.1.0",
+    "express-session": "^1.19.0",
     "mongodb": "^6.21.0"
   },
   "devDependencies": {
