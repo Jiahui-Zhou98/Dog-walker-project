@@ -1,25 +1,31 @@
-.btn-orange {
-    background-color: #ff8800; 
-    color: white;             
-    border: none;             
+/* Custom Primary Button - Orange */
+.btn-primary-custom {
+    background-color: #ff8800;
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
 }
 
-.btn-orange:hover {
-    background-color: #e67a00;  
-    color: white;             
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+.btn-primary-custom:hover,
+.btn-primary-custom:focus {
+    background-color: #e67a00;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.switch-auth a, 
-.text-primary-custom {
-    color: #ff8c00 !important; 
-    text-decoration: none;      
-    font-weight: 600;           
+/* Targeting links specifically within the login/register card 
+   to increase specificity without using !important.
+*/
+.login-card .text-primary-custom,
+.login-card .switch-auth a {
+    color: #ff8c00;
+    text-decoration: none;
+    font-weight: 600;
     transition: color 0.2s ease;
 }
 
-.switch-auth a:hover, 
-.text-primary-custom:hover {
-    color: #e67e00 !important; 
-    text-decoration: underline; 
+.login-card .text-primary-custom:hover,
+.login-card .switch-auth a:hover {
+    color: #e67e00;
+    text-decoration: underline;
 }
