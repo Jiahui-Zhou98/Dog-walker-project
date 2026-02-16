@@ -8,7 +8,34 @@ function WalkersModule() {
   let allWalkers = [];
   let isLoading = false;
 
-  // 1. Fetch data from API
+  /**
+   * Check authentication status to enable/disable "My Posts" checkbox
+   */
+  const checkAuthForMyPosts = async () => {
+    const myPostsCheckbox = document.getElementById("filterMyPosts");
+    const myPostsLabel = document.querySelector('label[for="filterMyPosts"]');
+    if (!myPostsCheckbox) return;
+
+    try {
+      const res = await fetch("/api/auth/me");
+      if (res.ok) {
+        // User is logged in: enable the checkbox
+        myPostsCheckbox.disabled = false;
+        if (myPostsLabel) myPostsLabel.classList.remove("text-muted");
+      } else {
+        // Not logged in: keep it disabled and unchecked
+        myPostsCheckbox.disabled = true;
+        myPostsCheckbox.checked = false;
+        if (myPostsLabel) myPostsLabel.classList.add("text-muted");
+      }
+    } catch (err) {
+      console.error("Auth check failed:", err);
+    }
+  };
+
+  /**
+   * Fetch walkers data from API with filters and pagination
+   */
   const fetchWalkers = async () => {
     isLoading = true;
     renderLoading();
@@ -19,17 +46,24 @@ function WalkersModule() {
         pageSize: pageSize,
       });
 
+      // Get values from standard filters
       const size = document.getElementById("filterSize")?.value;
       const location = document.getElementById("filterLocation")?.value;
       const experience = document.getElementById("filterExperience")?.value;
       const time = document.getElementById("filterTime")?.value;
       const availability = document.getElementById("filterAvailability")?.value;
+      
+      // Get value from My Posts filter
+      const myPosts = document.getElementById("filterMyPosts")?.checked;
 
       if (size) params.append("size", size);
       if (location) params.append("location", location);
       if (experience) params.append("experience", experience);
       if (time) params.append("time", time);
       if (availability) params.append("availability", availability);
+      
+      // Add myPosts parameter if checked
+      if (myPosts) params.append("myPosts", "true");
 
       const res = await fetch(`/api/walkers?${params.toString()}`);
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
@@ -47,7 +81,9 @@ function WalkersModule() {
     }
   };
 
-  // 2. Render Loading
+  /**
+   * Render loading spinner
+   */
   const renderLoading = () => {
     const list = document.getElementById("walkers-list");
     if (list) {
@@ -59,7 +95,9 @@ function WalkersModule() {
     }
   };
 
-  // 3. Render Error
+  /**
+   * Render error message
+   */
   const renderError = (msg) => {
     const list = document.getElementById("walkers-list");
     if (list) {
@@ -67,14 +105,14 @@ function WalkersModule() {
     }
   };
 
-
-  // 4. Render Individual Walker Card
+  /**
+   * Render individual Walker Card
+   */
   const renderWalkerCard = (w) => {
     const schedule = [];
     if (w.availability?.weekdays) schedule.push("Weekdays");
     if (w.availability?.weekends) schedule.push("Weekends");
     const timeSlots = (w.availability?.times || []).join(", ");
-
    
     const displayAreas = Array.isArray(w.serviceAreas) 
       ? w.serviceAreas.join(", ") 
@@ -83,7 +121,6 @@ function WalkersModule() {
     const displaySizes = Array.isArray(w.preferredDogSizes)
       ? w.preferredDogSizes.join(", ")
       : (w.preferredDogSizes || "N/A");
-    // ---------------
 
     return `
       <div class="col-md-4 mb-4">
@@ -130,7 +167,9 @@ function WalkersModule() {
     `;
   };
 
-  // 5. Render List & Pagination
+  /**
+   * Render the list of walkers and trigger pagination rendering
+   */
   const renderWalkers = () => {
     const list = document.getElementById("walkers-list");
     if (!list) return;
@@ -148,7 +187,9 @@ function WalkersModule() {
     renderPagination();
   };
 
-  // [Pagination logic remains the same...]
+  /**
+   * Render pagination controls and handle click events
+   */
   const renderPagination = () => {
     const nav = document.getElementById("pagination-container");
     if (!nav) return;
@@ -181,20 +222,21 @@ function WalkersModule() {
     });
   };
 
-  // 6. Delete Walker Logic (New Method)
+  /**
+   * Delete Walker Profile with Confirmation Modal
+   */
   me.deleteWalker = (walkerId, walkerName) => {
-    console.log("🗑️ Delete button clicked for walker:", walkerId, walkerName);
+    console.log("🗑️ Delete initiated for walker:", walkerId, walkerName);
 
-    // Update modal content (Re-using the same modal structure as requests)
-    const modalNameEl = document.getElementById("deleteRequestName"); // You might want to change this ID in walkers.html to 'deleteWalkerName'
+    const modalNameEl = document.getElementById("deleteRequestName"); 
     if (modalNameEl) modalNameEl.textContent = walkerName;
 
     const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
     deleteModal.show();
 
     const confirmBtn = document.getElementById("confirmDeleteBtn");
-
-    // Clear previous listeners
+    
+    // Replace the button to remove old event listeners (prevents multiple deletes)
     const newConfirmBtn = confirmBtn.cloneNode(true);
     confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
 
@@ -207,11 +249,11 @@ function WalkersModule() {
 
         if (!response.ok) throw new Error(`Delete failed: ${response.status}`);
 
-        // Show Success Toast
+        // Success Feedback
         const successToast = new bootstrap.Toast(document.getElementById("deleteSuccessToast"));
         successToast.show();
 
-        // Refresh List
+        // Refresh list after a short delay
         setTimeout(() => fetchWalkers(), 500);
       } catch (error) {
         console.error("❌ Error deleting walker:", error);
@@ -221,22 +263,38 @@ function WalkersModule() {
     });
   };
 
+  /**
+   * Apply selected filters and reset to page 1
+   */
   me.applyFilters = () => {
     currentPage = 1;
     fetchWalkers();
   };
 
+  /**
+   * Reset all filters and fetch default list
+   */
   me.resetFilters = () => {
     ["filterSize", "filterLocation", "filterExperience", "filterTime", "filterAvailability"].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.value = "";
     });
+    
+    // Reset My Posts Checkbox
+    const myPosts = document.getElementById("filterMyPosts");
+    if (myPosts) myPosts.checked = false;
+
     currentPage = 1;
     fetchWalkers();
   };
 
+  /**
+   * Initialize Module: Attach listeners and initial fetch
+   */
   me.init = () => {
     fetchWalkers();
+    checkAuthForMyPosts(); // Check if user is logged in to enable "My Posts"
+
     document.getElementById("applyFilters")?.addEventListener("click", me.applyFilters);
     document.getElementById("resetFilters")?.addEventListener("click", me.resetFilters);
 
@@ -251,5 +309,6 @@ function WalkersModule() {
 document.addEventListener("DOMContentLoaded", () => {
   const module = WalkersModule();
   module.init();
+  // Attach to window for global access (e.g., from onclick in cards)
   window.walkersModule = module; 
 });
