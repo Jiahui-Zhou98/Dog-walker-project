@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Collect form data
     const formData = new FormData(form);
 
+    const serviceAreasRaw = formData.get("serviceAreas"); 
+    const serviceAreasArray = serviceAreasRaw 
+        ? serviceAreasRaw.split(',').map(s => s.trim()).filter(s => s !== "") 
+        : [];
+
     // Collect multi-select checkbox values for Dog Sizes
     const preferredDogSizes = [];
     document.querySelectorAll('input[name="preferredDogSizes"]:checked').forEach((cb) => {
@@ -33,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
       name: formData.get("name"),
       email: formData.get("email"),
       phone: formData.get("phone"),
-      serviceAreas: formData.get("serviceAreas"), // String from input
+      serviceAreas: serviceAreasArray,
 
       // Experience & Preferences
       experienceYears: parseInt(formData.get("experienceYears")),

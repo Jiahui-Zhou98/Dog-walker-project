@@ -78,7 +78,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("name").value = walker.name || "";
     document.getElementById("email").value = walker.email || "";
     document.getElementById("phone").value = walker.phone || "";
-    document.getElementById("serviceAreas").value = walker.serviceAreas || "";
+    if (walker.serviceAreas && Array.isArray(walker.serviceAreas)) {
+      document.getElementById("serviceAreas").value = walker.serviceAreas.join(", ");
+    } else {
+        document.getElementById("serviceAreas").value = "";
+    }
     document.getElementById("experienceYears").value = walker.experienceYears || 0;
     document.getElementById("hourlyRate").value = walker.hourlyRate || 15;
     document.getElementById("maxDogsPerWalk").value = walker.maxDogsPerWalk || 1;
@@ -132,7 +136,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       name: formData.get("name"),
       email: formData.get("email"),
       phone: formData.get("phone"),
-      serviceAreas: formData.get("serviceAreas"),
+      serviceAreas: formData.get("serviceAreas") 
+      ? formData.get("serviceAreas").split(',').map(s => s.trim()).filter(s => s !== "")
+      : [],
       experienceYears: parseInt(formData.get("experienceYears")),
       hourlyRate: parseInt(formData.get("hourlyRate")),
       maxDogsPerWalk: parseInt(formData.get("maxDogsPerWalk")),
