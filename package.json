@@ -9,6 +9,7 @@
     "dev": "nodemon backend.js",
     "seed:requests": "node data/seed-requests.js",
     "seed:walkers": "node data/seed-walkers.js",
+    "seed:all": "npm run seed:requests && npm run seed:walkers",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

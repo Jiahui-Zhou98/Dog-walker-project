@@ -215,6 +215,24 @@ npm run seed:walkers
 
 This generates 1000 dog walkers profile records in the `pawsitiveWalks` database.
 
+```bash
+npm run seed:all
+```
+
+This runs both seed scripts (requests + walkers).
+
+Seed safety rules:
+
+- Seed scripts print the target MongoDB host/database before changing data.
+- In `production`, seeding is blocked by default.
+- To intentionally seed in `production`, both variables are required:
+
+```bash
+ALLOW_PROD_SEED=true \
+SEED_CONFIRM=I_UNDERSTAND_DATA_RESET \
+npm run seed:all
+```
+
 ### Run the App
 
 ```bash
