@@ -1,10 +1,45 @@
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
+import { URL } from "node:url";
 
 dotenv.config();
 
 const URI = process.env.MONGODB_URI || "mongodb://localhost:27017";
 const dbName = "pawsitiveWalks";
+const PRODUCTION_SEED_CONFIRM_TEXT = "I_UNDERSTAND_DATA_RESET";
+
+function getSanitizedMongoTarget(uri) {
+  try {
+    const parsed = new URL(uri);
+    const uriDbName = parsed.pathname.replace(/^\/+/, "") || dbName;
+    return `${parsed.protocol}//${parsed.hostname}/${uriDbName}`;
+  } catch {
+    return "(unable to parse MONGODB_URI)";
+  }
+}
+
+function enforceSeedSafety() {
+  const isProduction = process.env.NODE_ENV === "production";
+  console.log(`[seed] Target MongoDB: ${getSanitizedMongoTarget(URI)}`);
+
+  if (!isProduction) {
+    return;
+  }
+
+  if (process.env.ALLOW_PROD_SEED !== "true") {
+    console.error(
+      "Refusing to seed in production. Set ALLOW_PROD_SEED=true to continue.",
+    );
+    process.exit(1);
+  }
+
+  if (process.env.SEED_CONFIRM !== PRODUCTION_SEED_CONFIRM_TEXT) {
+    console.error(
+      `Missing production confirmation. Set SEED_CONFIRM=${PRODUCTION_SEED_CONFIRM_TEXT} to continue.`,
+    );
+    process.exit(1);
+  }
+}
 
 // ========== Expanded Data Pools ==========
 
@@ -325,6 +360,7 @@ function generateRequest(index) {
 // ========== Main Function ==========
 
 async function seedRequests() {
+  enforceSeedSafety();
   console.log("\n🌱 Starting to generate 1000 dog walking requests...");
   console.log("📊 Data pools expanded:");
   console.log(`   - ${dogNames.length} dog names`);
