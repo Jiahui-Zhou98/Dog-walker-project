@@ -181,43 +181,77 @@ function WalkersModule() {
 
     if (allWalkers.length === 0) {
       list.innerHTML = `<div class="col-12 text-center py-5"><h3 class="text-muted">No walkers found</h3></div>`;
-      const nav = document.getElementById("pagination-container");
-      if (nav) nav.innerHTML = "";
+      const paginationEl = document.getElementById("pagination"); // Match Requests style ID
+      if (paginationEl) paginationEl.innerHTML = "";
       return;
     }
 
     list.innerHTML = allWalkers.map((w) => renderWalkerCard(w)).join("");
+    
+    
     renderPagination();
   };
 
-  const renderPagination = () => {
-    const nav = document.getElementById("pagination-container");
-    if (!nav) return;
-    const totalPages = Math.ceil(totalWalkers / pageSize);
-    if (totalPages <= 1) {
-      nav.innerHTML = "";
-      return;
-    }
-    let html = `<li class="page-item ${currentPage === 1 ? "disabled" : ""}"><a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a></li>`;
-    for (let i = 1; i <= totalPages; i++) {
-      if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
-        html += `<li class="page-item ${i === currentPage ? "active" : ""}"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
+  /* NOTE: This logic calculates a sliding window of page numbers 
+   (e.g., showing 1 2 [3] 4 5) instead of showing every single page.
+  */
+    const renderPagination = () => {
+      const paginationEl = document.getElementById("pagination");
+      if (!paginationEl) return;
+
+      const totalPages = Math.ceil(totalWalkers / pageSize);
+
+      // NOTE: If only one page exists, don't show the bar
+      if (totalPages <= 1) {
+        paginationEl.innerHTML = "";
+        return;
       }
-    }
-    html += `<li class="page-item ${currentPage === totalPages ? "disabled" : ""}"><a class="page-link" href="#" data-page="${currentPage + 1}">Next</a></li>`;
-    nav.innerHTML = html;
-    nav.querySelectorAll(".page-link").forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const p = parseInt(link.getAttribute("data-page"));
-        if (p && p >= 1 && p <= totalPages && p !== currentPage) {
-          currentPage = p;
-          fetchWalkers();
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+
+      let html = `
+        <li class="page-item ${currentPage === 1 ? "disabled" : ""}">
+          <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
+        </li>
+      `;
+
+      // NOTE: Sliding window calculation (matches RequestsModule)
+      const maxVisible = 5;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+      if (endPage - startPage < maxVisible - 1) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        html += `
+          <li class="page-item ${i === currentPage ? "active" : ""}">
+            <a class="page-link" href="#" data-page="${i}">${i}</a>
+          </li>
+        `;
+      }
+
+      html += `
+        <li class="page-item ${currentPage === totalPages ? "disabled" : ""}">
+          <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a>
+        </li>
+      `;
+
+      paginationEl.innerHTML = html;
+
+      // NOTE: Use Event Delegation style to handle clicks via data-page attribute
+      paginationEl.querySelectorAll(".page-link").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          // NOTE: Retrieve value from 'data-page' attribute
+          const page = parseInt(e.target.dataset.page);
+          if (page && page >= 1 && page <= totalPages && page !== currentPage) {
+            currentPage = page;
+            fetchWalkers(); // Trigger API call
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        });
       });
-    });
-  };
+    };
 
   me.deleteWalker = (walkerId, walkerName) => {
     const modalNameEl = document.getElementById("deleteRequestName");
