@@ -43,8 +43,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           // Show Success Toast
           const successToastEl = document.getElementById("successToast");
           if (successToastEl) {
-            const successToast = new bootstrap.Toast(successToastEl);
-            successToast.show();
+              successToastEl.querySelector(".toast-header").className = "toast-header bg-danger text-white";
+              successToastEl.querySelector("strong").textContent = "Deleted";
+              successToastEl.querySelector(".toast-body").textContent = "Profile deleted successfully!";
+              
+              const successToast = new bootstrap.Toast(successToastEl);
+              successToast.show();
           }
 
           // Redirect after short delay
@@ -165,11 +169,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
+     
       const successToastEl = document.getElementById("successToast");
       if (successToastEl) {
-        const successToast = new bootstrap.Toast(successToastEl);
-        successToast.show();
+          
+          successToastEl.querySelector(".toast-header").className = "toast-header bg-success text-white";
+          successToastEl.querySelector("strong").textContent = "Success";
+          successToastEl.querySelector(".toast-body").textContent = "Profile updated successfully!";
+          
+          const successToast = new bootstrap.Toast(successToastEl);
+          successToast.show();
       }
 
       setTimeout(() => {
