@@ -12,7 +12,7 @@
 
 ## Website Link
 
-- todo: add link here after deployment
+- https://dog-walker-project.onrender.com
 
 ## Project Link
 
@@ -24,7 +24,20 @@ A zero-fee community platform connecting dog owners with trusted dog walkers. Un
 
 ## Project Objective
 
-- todo: add objective here
+- Build a zero-fee community platform where dog owners and walkers can connect directly without platform commissions.
+- Support two full workflows: posting dog walking requests and publishing dog walker profiles.
+- Provide account-based access control so users can manage only their own posts.
+- Make discovery practical with filtering, pagination, and location/time preference matching.
+- Keep deployment production-ready using MongoDB Atlas + Render with environment-based secrets and guarded seed scripts.
+
+## Core Features
+
+- Authentication: register, login, logout, and current-user session check (`/api/auth/me`).
+- Requests workflow: create, read, update, delete, filter, paginate, and ownership-protected editing.
+- Walkers workflow: create, read, update, delete, filter, paginate, and ownership-protected editing.
+- Dashboard: logged-in user summary and logout actions.
+- Seed tooling: generate 1000 requests + 1000 walkers with production safety checks.
+- Health endpoint for deployment verification: `/api/health`.
 
 ## User Personas
 
@@ -64,93 +77,103 @@ A zero-fee community platform connecting dog owners with trusted dog walkers. Un
 
 ```
 dog-walker/
-├── backend.js                  # Express server entry point (Shared)
+├── backend.js                  # Express server entry point
 ├── package.json
-├── .env                        # Environment variables (not in repo)
-├── .gitignore
+├── README.md
+├── .env.example                # Environment template (safe for repo)
+├── .gitignore                  # Ignores local secrets such as .env
 │
 ├── db/
 │   ├── connection.js           # Shared MongoDB connection helper
-│   ├── RequestsDB.js           # Jiahui  - Requests database methods
-│   └── WalkersDB.js            # Yi-Peng - Walkers database methods
+│   ├── RequestsDB.js           # Requests collection data methods
+│   ├── WalkersDB.js            # Walkers collection data methods
+│   └── UsersDB.js              # Users collection data methods
+│
+├── middleware/
+│   └── auth.js                 # Session auth guard (requireAuth)
 │
 ├── routes/
-│   ├── requests.js             # Jiahui  - Requests API routes
-│   └── walkers.js              # Yi-Peng - Walkers API routes
+│   ├── auth.js                 # Register/login/logout/me APIs
+│   ├── requests.js             # Requests APIs
+│   └── walkers.js              # Walkers APIs
 │
 ├── data/
-│   ├── seed-requests.js        # Jiahui  - Seed 1000 request records
-│   └── seed-walkers.js         # Yi-Peng - Seed walker records (TBD)
+│   ├── seed-requests.js        # Seed 1000 request records
+│   └── seed-walkers.js         # Seed 1000 walker records
 │
 └── frontend/
-    ├── index.html              # Jiahui  - Home page
-    ├── requests.html           # Jiahui  - Browse walking requests
-    ├── post-request.html       # Jiahui  - Post a new request form
-    ├── edit-request.html       # Jiahui  - Edit an existing request
-    ├── walkers.html            # Yi-Peng - Browse walker profiles
-    ├── about.html              # Yi-Peng - About page
+    ├── index.html              # Home page
+    ├── requests.html           # Request listing page
+    ├── post-request.html       # Create request form
+    ├── edit-request.html       # Edit request form
+    ├── walkers.html            # Walker listing page
+    ├── post-profile.html       # Create walker profile form
+    ├── edit-profile.html       # Edit walker profile form
+    ├── login.html              # Login page
+    ├── register.html           # Registration page
+    ├── dashboard.html          # Logged-in user dashboard
+    ├── about.html              # About page
     │
-    |__ image/
-    |   |__ og-image.png        # Jiahui  - Open graph
-    |   |__ favicon.png         # Yi-Peng - Favicon
-    |
-    |__ videos/
-    |   |__ hero.mp4            # Jiahui  - Developed for Home page
-    |
+    ├── images/
+    │   ├── og-image.png
+    │   ├── favicon.png
+    │   └── hero-poster.png
+    │
+    ├── videos/
+    │   └── hero.mp4
+    │
     ├── css/
-    │   ├── main.css            # Shared  - Variables, navbar, footer, buttons
-    │   ├── index.css           # Jiahui  - Home page styles
-    │   ├── requests.css        # Jiahui  - Request pages styles
-    │   ├── walkers.css         # Yi-Peng - Walker pages styles
-    │   └── about.css           # Yi-Peng - About page styles
+    │   ├── main.css            # Shared global styles
+    │   ├── index.css
+    │   ├── requests.css
+    │   ├── walkers.css
+    │   ├── about.css
+    │   ├── login.css
+    │   ├── register.css
+    │   └── dashboard.css
     │
     └── js/
-        ├── requestsModule.js   # Jiahui  - Requests list logic & pagination
-        ├── postRequestModule.js# Jiahui  - Post request form logic
-        └── editRequestModule.js# Jiahui  - Edit request form logic
+        ├── authNavModule.js
+        ├── loginModule.js
+        ├── registerModule.js
+        ├── dashboardModule.js
+        ├── requestsModule.js
+        ├── postRequestModule.js
+        ├── editRequestModule.js
+        ├── walkersModule.js
+        ├── postProfileModule.js
+        └── editProfileModule.js
 ```
 
 ## Division of Work
 
-Each team member independently implemented a **complete full-stack feature**, covering all layers: **Database (MongoDB) → Backend API (Express) → Frontend (HTML/CSS/JS)**.
+Each member implemented full-stack features (MongoDB + Express API + frontend pages/modules), with shared integration for authentication, middleware, and deployment.
 
----
+### Jiahui Zhou
 
-### Jiahui Zhou — Dog Walking Requests (`requests` collection)
+- Requests feature end-to-end: `db/RequestsDB.js`, `routes/requests.js`, `data/seed-requests.js`.
+- Request-facing UI: `frontend/requests.html`, `frontend/post-request.html`, `frontend/edit-request.html`, `frontend/js/requestsModule.js`, `frontend/js/postRequestModule.js`, `frontend/js/editRequestModule.js`, `frontend/css/requests.css`.
+- Home and account pages: `frontend/index.html`, `frontend/login.html`, `frontend/dashboard.html`, `frontend/js/loginModule.js`, `frontend/js/dashboardModule.js`, `frontend/css/index.css`, `frontend/css/login.css`, `frontend/css/dashboard.css`.
+- Branding/media assets: `frontend/images/og-image.png`, `frontend/videos/hero.mp4`.
 
-Jiahui Zhou built the full-stack Dog Walking Requests feature around the `requests` MongoDB collection. On the database layer, she designed the requests schema and implemented CRUD methods in `RequestsDB.js`, plus a seed script that generates 1,000 realistic test records with randomized dog names, breeds, and Boston-area locations. On the backend, she created API endpoints in `routes/requests.js`. On the frontend, she built four HTML pages — a home page with hero section and call-to-action, a requests listing page with five-field filtering and pagination, a post-request form, and an edit-request form — along with three JavaScript modules handling dynamic rendering, form submission, and pre-populated editing, and two CSS files (index.css, requests.css) for page-specific styling.
+### Yi-Peng Chiang
 
----
-
-### Yi-Peng Chiang — Walker Profiles (`walkers` collection)
-
-Yi-Peng Chiang built the full-stack Walker Profiles feature around the `walkers` MongoDB collection. On the database layer, she designed the walkers schema and implemented CRUD methods in `WalkersDB.js`, plus a seed script for generating test walker records. On the backend, she created API endpoints in `routes/walkers.js` for listing, viewing, creating, updating, and deleting walker profiles. On the frontend, she built the Walkers page (walkers.html) for browsing and managing walker profiles with filtering and pagination, and the About page (about.html) introducing the platform, each with dedicated CSS files (walkers.css, about.css).
-
----
+- Walkers feature end-to-end: `db/WalkersDB.js`, `routes/walkers.js`, `data/seed-walkers.js`.
+- Walker-facing UI: `frontend/walkers.html`, `frontend/post-profile.html`, `frontend/edit-profile.html`, `frontend/js/walkersModule.js`, `frontend/js/postProfileModule.js`, `frontend/js/editProfileModule.js`, `frontend/css/walkers.css`.
+- Registration and informational pages: `frontend/register.html`, `frontend/about.html`, `frontend/js/registerModule.js`, `frontend/css/about.css`, `frontend/css/register.css`.
+- Branding asset: `frontend/images/favicon.png`.
 
 ### Shared Work
 
-| Component               | Description                                                           |
-| ----------------------- | --------------------------------------------------------------------- |
-| `backend.js`            | Express server setup, middleware, route mounting                      |
-| `db/connection.js`      | Shared MongoDB connection helper used by both DB modules              |
-| `frontend/css/main.css` | Global CSS variables, navbar, footer, shared buttons, responsive base |
-
----
-
-### Components
-
-- Jiahui Zhou:
-  1. Open graph design
-  - Tools used: Canva(https://www.canva.com/), Uchinoko Maker(https://uchinoko-maker.jp/?lang=en)
-  - Image path: `frontend/images/og-image.png`
-  2. Home page video design
-  - Tools used: Deepseek(https://chat.deepseek.com/), Jimeng AI(https://jimeng.jianying.com/ai-tool/home)
-  - Video path: `frontend/videos/hero.mp4`
-
-- Yi-Peng Chiang: Favicon design
-  - Tools used: Canva(https://www.canva.com/), favicon.io(https://favicon.io/favicon-converter/)
-  - Image path: `frontend/images/favicon.png`
+| Component | Description |
+| --------- | ----------- |
+| `backend.js` | Express app bootstrap, session store, env-based production guards, route mounting |
+| `routes/auth.js` | Register/login/logout/current-user APIs |
+| `db/UsersDB.js` | User persistence used by auth routes |
+| `middleware/auth.js` | Session-based route protection (`requireAuth`) |
+| `db/connection.js` | Shared MongoDB connection helper |
+| `frontend/js/authNavModule.js` | Shared nav state behavior based on login status |
+| `frontend/css/main.css` | Shared global styling variables and layout components |
 
 ---
 
