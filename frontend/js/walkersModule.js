@@ -7,7 +7,7 @@ function WalkersModule() {
   let totalWalkers = 0;
   let allWalkers = [];
   let isLoading = false;
-  let loggedInUserId = null; // Added to track current user identity
+  let loggedInUserId = null;
 
   /**
    * Check authentication status to enable "My Posts" and identify the user
@@ -15,17 +15,24 @@ function WalkersModule() {
   const checkAuthStatus = async () => {
     const myPostsCheckbox = document.getElementById("filterMyPosts");
     const myPostsLabel = document.querySelector('label[for="filterMyPosts"]');
+    const postProfileBtn = document.getElementById("postProfileBtn");
     
     try {
       const res = await fetch("/api/auth/me");
       if (res.ok) {
         const result = await res.json();
-        // Support different API response structures
         loggedInUserId = result.user ? result.user._id : result._id;
 
         if (myPostsCheckbox) {
           myPostsCheckbox.disabled = false;
           if (myPostsLabel) myPostsLabel.classList.remove("text-muted");
+        }
+
+        // Optional: Update button style if logged in
+        if (postProfileBtn) {
+          postProfileBtn.classList.remove("btn-outline-secondary");
+          postProfileBtn.classList.add("btn-primary-custom");
+          postProfileBtn.innerHTML = "+ Post Profile";
         }
       } else {
         loggedInUserId = null;
@@ -33,6 +40,13 @@ function WalkersModule() {
           myPostsCheckbox.disabled = true;
           myPostsCheckbox.checked = false;
           if (myPostsLabel) myPostsLabel.classList.add("text-muted");
+        }
+
+        // Optional: Hint to sign in on the button
+        if (postProfileBtn) {
+          postProfileBtn.classList.add("btn-outline-secondary");
+          postProfileBtn.classList.remove("btn-primary-custom");
+          postProfileBtn.innerHTML = "Sign in to Post";
         }
       }
     } catch (err) {
@@ -54,7 +68,6 @@ function WalkersModule() {
         pageSize: pageSize,
       });
 
-      // --- Maintain all original filters ---
       const size = document.getElementById("filterSize")?.value;
       const location = document.getElementById("filterLocation")?.value;
       const experience = document.getElementById("filterExperience")?.value;
@@ -104,7 +117,7 @@ function WalkersModule() {
   };
 
   /**
-   * Render individual Walker Card with Ownership Logic
+   * Render individual Walker Card
    */
   const renderWalkerCard = (w) => {
     const schedule = [];
@@ -115,7 +128,6 @@ function WalkersModule() {
     const displayAreas = Array.isArray(w.serviceAreas) ? w.serviceAreas.join(", ") : w.serviceAreas || "N/A";
     const displaySizes = Array.isArray(w.preferredDogSizes) ? w.preferredDogSizes.join(", ") : w.preferredDogSizes || "N/A";
 
-    // Ownership check using String conversion (Matching RequestsModule style)
     const isOwner = loggedInUserId && String(w.userId) === String(loggedInUserId);
 
     return `
@@ -207,9 +219,6 @@ function WalkersModule() {
     });
   };
 
-  /**
-   * Delete Walker Profile (Unified logic with RequestsModule)
-   */
   me.deleteWalker = (walkerId, walkerName) => {
     const modalNameEl = document.getElementById("deleteRequestName");
     if (modalNameEl) modalNameEl.textContent = walkerName;
@@ -255,8 +264,20 @@ function WalkersModule() {
   };
 
   me.init = async () => {
-    await checkAuthStatus(); // Combined auth check and ID storage
+    await checkAuthStatus(); 
     fetchWalkers();
+
+    // --- ADDED: Unified Post Profile Redirect Logic ---
+    const postProfileBtn = document.getElementById("postProfileBtn"); 
+    if (postProfileBtn) {
+      postProfileBtn.addEventListener("click", (e) => {
+        if (!loggedInUserId) {
+          e.preventDefault(); // Stop normal navigation
+          // Redirect to login with message and return path
+          window.location.href = "/login.html?message=signin_to_post&returnTo=post-profile.html";
+        }
+      });
+    }
 
     document.getElementById("applyFilters")?.addEventListener("click", me.applyFilters);
     document.getElementById("resetFilters")?.addEventListener("click", me.resetFilters);
