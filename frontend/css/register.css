@@ -13,9 +13,6 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Targeting links specifically within the login/register card 
-   to increase specificity without using !important.
-*/
 .login-card .text-primary-custom,
 .login-card .switch-auth a {
     color: #ff8c00;

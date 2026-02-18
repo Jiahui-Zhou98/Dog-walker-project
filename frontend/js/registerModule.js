@@ -1,7 +1,8 @@
-/**
- * PawsitiveWalks Registration Module - Enhanced with Password Toggle & Match Check
- */
-
+// =============================================
+// registerModule.js - Register page logic
+// Author: Yi-Peng Chiang
+// Page: register.html
+// =============================================
 document.addEventListener("DOMContentLoaded", () => {
   const registerForm = document.getElementById("register-form");
   const passwordInput = document.getElementById("reg-password");

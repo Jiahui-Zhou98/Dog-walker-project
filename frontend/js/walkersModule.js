@@ -28,7 +28,7 @@ function WalkersModule() {
           if (myPostsLabel) myPostsLabel.classList.remove("text-muted");
         }
 
-        // Optional: Update button style if logged in
+        // Update button style if logged in
         if (postProfileBtn) {
           postProfileBtn.classList.remove("btn-outline-secondary");
           postProfileBtn.classList.add("btn-primary-custom");
@@ -42,7 +42,7 @@ function WalkersModule() {
           if (myPostsLabel) myPostsLabel.classList.add("text-muted");
         }
 
-        // Optional: Hint to sign in on the button
+        // Hint to sign in on the button
         if (postProfileBtn) {
           postProfileBtn.classList.add("btn-outline-secondary");
           postProfileBtn.classList.remove("btn-primary-custom");
@@ -192,16 +192,12 @@ function WalkersModule() {
     renderPagination();
   };
 
-  /* NOTE: This logic calculates a sliding window of page numbers 
-   (e.g., showing 1 2 [3] 4 5) instead of showing every single page.
-  */
     const renderPagination = () => {
       const paginationEl = document.getElementById("pagination");
       if (!paginationEl) return;
 
       const totalPages = Math.ceil(totalWalkers / pageSize);
 
-      // NOTE: If only one page exists, don't show the bar
       if (totalPages <= 1) {
         paginationEl.innerHTML = "";
         return;
@@ -213,7 +209,6 @@ function WalkersModule() {
         </li>
       `;
 
-      // NOTE: Sliding window calculation (matches RequestsModule)
       const maxVisible = 5;
       let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
       let endPage = Math.min(totalPages, startPage + maxVisible - 1);
@@ -238,15 +233,14 @@ function WalkersModule() {
 
       paginationEl.innerHTML = html;
 
-      // NOTE: Use Event Delegation style to handle clicks via data-page attribute
       paginationEl.querySelectorAll(".page-link").forEach((link) => {
         link.addEventListener("click", (e) => {
           e.preventDefault();
-          // NOTE: Retrieve value from 'data-page' attribute
+          
           const page = parseInt(e.target.dataset.page);
           if (page && page >= 1 && page <= totalPages && page !== currentPage) {
             currentPage = page;
-            fetchWalkers(); // Trigger API call
+            fetchWalkers(); 
             window.scrollTo({ top: 0, behavior: "smooth" });
           }
         });
@@ -301,13 +295,12 @@ function WalkersModule() {
     await checkAuthStatus(); 
     fetchWalkers();
 
-    // --- ADDED: Unified Post Profile Redirect Logic ---
+    
     const postProfileBtn = document.getElementById("postProfileBtn"); 
     if (postProfileBtn) {
       postProfileBtn.addEventListener("click", (e) => {
         if (!loggedInUserId) {
-          e.preventDefault(); // Stop normal navigation
-          // Redirect to login with message and return path
+          e.preventDefault(); 
           window.location.href = "/login.html?message=signin_to_post&returnTo=post-profile.html";
         }
       });

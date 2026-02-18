@@ -14,7 +14,7 @@
   padding: 1.5rem;
 }
 
-/* 2. Apply Button Styling (Increased specificity using ID + Class) */
+/* 2. Apply Button Styling */
 button#applyFilters.btn.btn-primary-custom {
   border-radius: 999px;
   padding: 0.6rem 1.5rem;
@@ -47,12 +47,11 @@ button#resetFilters.btn.btn-secondary-custom:hover {
   transform: translateY(-2px);
 }
 
-/* 4. Orange Size Badge (The blue one you wanted to change) */
-/* We target the specific structure: .item-card -> .badge */
+/* 4. Orange Size Badge */
 .item-card .card-body .badge.bg-light.text-primary {
-  background-color: #ffe0cc; /* Pale orange background */
-  color: #ff8c00;            /* Bright orange text */
-  border-radius: 999px;      /* Pill shape */
+  background-color: #ffe0cc; 
+  color: #ff8c00;            
+  border-radius: 999px;      
   border: 1px solid rgba(255, 136, 0, 0.2);
   font-weight: 700;
   text-transform: uppercase;
@@ -76,7 +75,6 @@ button#resetFilters.btn.btn-secondary-custom:hover {
 
 /* 6. Base Pagination Link Color */
 .pagination .page-link {
-  /* Using your brand orange for the text */
   color: #ff8c00;
   border-color: #dee2e6;
   transition: all 0.3s ease;
