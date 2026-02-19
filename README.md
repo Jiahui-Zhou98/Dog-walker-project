@@ -7,16 +7,16 @@
 
 ## Class Link
 
-- CS5610-2026-Spring: https://johnguerra.co/classes/webDevelopment_online_spring_2026/
+- [CS5610-2026-Spring](https://johnguerra.co/classes/webDevelopment_online_spring_2026/)
 - Class Project2
 
 ## Website Link
 
-- https://dog-walker-project.onrender.com
+- [PawsitiveWalks](https://dog-walker-project.onrender.com)
 
 ## Project Link
 
-- GitHub Repo: https://github.com/Jiahui-Zhou98/Dog-walker-project.git
+- [GitHub Repo](https://github.com/Jiahui-Zhou98/Dog-walker-project.git)
 
 ## Project Description
 
@@ -155,13 +155,28 @@ Each member implemented full-stack features (MongoDB + Express API + frontend pa
 
 ---
 
-## Design Document Link
-
-- todo: add link here
-
 ## Screenshots
 
-- todo: add screenshots after deployment
+- Register
+  ![register](./design_doc/register.png)
+- Sign in
+  ![alt text](./design_doc/signin.png)
+- Dashboard&Log out
+  ![alt text](./design_doc/dashboard.png)
+- Home page
+  ![alt text](./design_doc/home.png)
+- About page
+  ![alt text](./design_doc/about.png)
+- Find Requests
+  ![alt text](./design_doc/requests.png)
+- Post/Edit Request
+  ![alt text](./design_doc/post-request.png)
+- Become a Walker
+  ![alt text](./design_doc/walkers.png)
+- Post/Edit Walker Profile
+  ![alt text](./design_doc/post-profile.png)
+
+---
 
 ## Instructions (How to get started)
 
@@ -252,6 +267,6 @@ MIT
 
 ## Slides and Video Demonstration
 
-- Slides link: add here
+- [Slides](https://docs.google.com/presentation/d/1mIjMORH_RMx7k6k3-FUu2FFrL9iDWtp2n2X1vxRCq-M/edit?usp=sharing)
 
 - Video link: add here
