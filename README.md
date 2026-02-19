@@ -8,7 +8,7 @@
 ## Class Link
 
 - [CS5610-2026-Spring](https://johnguerra.co/classes/webDevelopment_online_spring_2026/)
-- Class Project2
+- This is Project2 for this class
 
 ## Website Link
 
@@ -41,7 +41,7 @@ A zero-fee community platform connecting dog owners with trusted dog walkers. Un
 
 ## Design Document
 
-- [Find design document here](./design_doc/design-document.md)
+- [Find user stories and design mockup here](./design_doc/design-document.md)
 
 ## Tech Stack
 
