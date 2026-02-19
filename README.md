@@ -41,7 +41,7 @@ A zero-fee community platform connecting dog owners with trusted dog walkers. Un
 
 ## Design Document
 
-- [Find design document here](./design-document.md)
+- [Find design document here](./design_doc/design-document.md)
 
 ## Tech Stack
 
