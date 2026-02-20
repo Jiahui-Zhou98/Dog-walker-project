@@ -6,12 +6,10 @@ function RequestsModule() {
   const pageSize = 20;
   let allRequests = [];
   let totalRequests = 0;
-  let isLoading = false;
   let loggedInUserId = null;
 
   // Fetch requests from API
   const fetchRequests = async () => {
-    isLoading = true;
     renderLoading();
 
     try {
@@ -55,8 +53,6 @@ function RequestsModule() {
     } catch (error) {
       console.error("Error fetching requests:", error);
       renderError(error.message);
-    } finally {
-      isLoading = false;
     }
   };
 

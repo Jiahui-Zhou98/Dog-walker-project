@@ -7,16 +7,13 @@ const router = express.Router();
 
 // ========== Validation Helpers ==========
 
-const VALID_SIZES = ["small", "medium", "large"];
-const VALID_TIMES = ["morning", "afternoon", "evening"];
-
 /**
  * Check if a string is a valid MongoDB ObjectId
  */
 function isValidObjectId(id) {
   try {
     return ObjectId.isValid(id) && String(new ObjectId(id)) === id;
-  } catch (e) {
+  } catch {
     return false;
   }
 }
@@ -33,12 +30,14 @@ function validateWalkerData(body) {
 
   if (body.experienceYears !== undefined) {
     const exp = Number(body.experienceYears);
-    if (isNaN(exp) || exp < 0) errors.push("Experience must be a non-negative number.");
+    if (isNaN(exp) || exp < 0)
+      errors.push("Experience must be a non-negative number.");
   }
 
   if (body.hourlyRate !== undefined) {
     const rate = Number(body.hourlyRate);
-    if (isNaN(rate) || rate < 0) errors.push("Hourly rate must be a non-negative number.");
+    if (isNaN(rate) || rate < 0)
+      errors.push("Hourly rate must be a non-negative number.");
   }
 
   if (errors.length > 0) return { valid: false, errors };
@@ -51,13 +50,21 @@ function validateWalkerData(body) {
     experienceYears: Number(body.experienceYears) || 0,
     hourlyRate: Number(body.hourlyRate) || 0,
     serviceAreas: Array.isArray(body.serviceAreas) ? body.serviceAreas : [],
-    preferredDogSizes: Array.isArray(body.preferredDogSizes) ? body.preferredDogSizes : [],
+    preferredDogSizes: Array.isArray(body.preferredDogSizes)
+      ? body.preferredDogSizes
+      : [],
     availability: {
-      weekdays: body.availability?.weekdays === true || body.availability?.weekdays === "true",
-      weekends: body.availability?.weekends === true || body.availability?.weekends === "true",
-      times: Array.isArray(body.availability?.times) ? body.availability?.times : []
+      weekdays:
+        body.availability?.weekdays === true ||
+        body.availability?.weekdays === "true",
+      weekends:
+        body.availability?.weekends === true ||
+        body.availability?.weekends === "true",
+      times: Array.isArray(body.availability?.times)
+        ? body.availability?.times
+        : [],
     },
-    bio: body.bio ? body.bio.trim() : ""
+    bio: body.bio ? body.bio.trim() : "",
   };
 
   return { valid: true, data: sanitized };
@@ -138,7 +145,7 @@ router.get("/:id", async (req, res) => {
     const walker = await walkersDB.getWalkerById(req.params.id);
     if (!walker) return res.status(404).json({ error: "Walker not found" });
     res.json({ walker });
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -148,16 +155,19 @@ router.get("/:id", async (req, res) => {
  */
 router.post("/", requireAuth, async (req, res) => {
   const { valid, errors, data } = validateWalkerData(req.body);
-  if (!valid) return res.status(400).json({ error: "Validation failed", details: errors });
+  if (!valid)
+    return res
+      .status(400)
+      .json({ error: "Validation failed", details: errors });
 
   try {
-    const walkerData = { 
-      ...data, 
-      userId: req.session.userId, 
+    const walkerData = {
+      ...data,
+      userId: req.session.userId,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
-    
+
     const newWalker = await walkersDB.createWalker(walkerData);
     res.status(201).json({ walker: newWalker });
   } catch (error) {
@@ -170,17 +180,24 @@ router.post("/", requireAuth, async (req, res) => {
  * PUT /api/walkers/:id - Update profile (Owner only)
  */
 router.put("/:id", requireAuth, async (req, res) => {
-  if (!isValidObjectId(req.params.id)) return res.status(400).json({ error: "Invalid ID" });
+  if (!isValidObjectId(req.params.id))
+    return res.status(400).json({ error: "Invalid ID" });
 
   const { valid, errors, data } = validateWalkerData(req.body);
-  if (!valid) return res.status(400).json({ error: "Validation failed", details: errors });
+  if (!valid)
+    return res
+      .status(400)
+      .json({ error: "Validation failed", details: errors });
 
   try {
     const existing = await walkersDB.getWalkerById(req.params.id);
     if (!existing) return res.status(404).json({ error: "Walker not found" });
 
     // CRITICAL: Ownership Check (String conversion is essential)
-    if (!existing.userId || String(existing.userId) !== String(req.session.userId)) {
+    if (
+      !existing.userId ||
+      String(existing.userId) !== String(req.session.userId)
+    ) {
       return res.status(403).json({ error: "Forbidden: Not your post" });
     }
 
@@ -198,14 +215,18 @@ router.put("/:id", requireAuth, async (req, res) => {
  * DELETE /api/walkers/:id - Delete profile (Owner only)
  */
 router.delete("/:id", requireAuth, async (req, res) => {
-  if (!isValidObjectId(req.params.id)) return res.status(400).json({ error: "Invalid ID" });
+  if (!isValidObjectId(req.params.id))
+    return res.status(400).json({ error: "Invalid ID" });
 
   try {
     const existing = await walkersDB.getWalkerById(req.params.id);
     if (!existing) return res.status(404).json({ error: "Walker not found" });
 
     // CRITICAL: Ownership Check
-    if (!existing.userId || String(existing.userId) !== String(req.session.userId)) {
+    if (
+      !existing.userId ||
+      String(existing.userId) !== String(req.session.userId)
+    ) {
       return res.status(403).json({ error: "Forbidden: Not your post" });
     }
 
