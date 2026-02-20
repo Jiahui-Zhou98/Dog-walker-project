@@ -302,4 +302,4 @@ MIT
 
 - [Slides](https://docs.google.com/presentation/d/1mIjMORH_RMx7k6k3-FUu2FFrL9iDWtp2n2X1vxRCq-M/edit?usp=sharing)
 
-- Video link: add here
+- [Video](https://drive.google.com/file/d/1VWA103Yuhl9yIyCl_CdZgOGWbwdRMKZx/view?usp=sharing)
