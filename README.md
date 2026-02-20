@@ -13,6 +13,7 @@
 ## Website Link
 
 - [PawsitiveWalks](https://dog-walker-project.onrender.com)
+- Deployment: Render, MongoDB Atlas
 
 ## How to Use the Website
 
