@@ -8,12 +8,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- SEO Meta Tags -->
     <title>Find Requests - PawsitiveWalks</title>
     <meta
       name="description"
       content="Browse dog walking requests filtered by location, dog size, time, and more. Post your own request for free."
+    />
     <meta name="keywords" content="dog, walking, pets, community, platform" />
     <meta name="author" content="Jiahui Zhou" />
 
@@ -26,8 +27,10 @@
       property="og:description"
       content="PawsitiveWalks is a platform connecting dog owners with trusted dog walkers. It is a zero-fee community platform connecting dog owners with trusted walkers. A simple bridge for direct connection and negotiation."
     />
-    <!-- TODO: Add the url after deployment -->
-    <meta property="og:url" content="https://pawsitivewalks.com" />
+    <meta
+      property="og:url"
+      content="https://dog-walker-project.onrender.com/"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="PawsitiveWalks" />
@@ -36,12 +39,11 @@
     <meta property="og:image:height" content="630" />
 
     <!-- Canonical URL -->
-    <!-- TODO: Add the canonical url after deployment -->
-    <link rel="canonical" href="https://pawsitivewalks.com" />
+    <link rel="canonical" href="https://dog-walker-project.onrender.com/" />
 
     <!-- Favicon Meta Tags -->
     <link rel="icon" type="image/png" href="./images/favicon.png" />
-  
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -92,7 +94,12 @@
               <a class="nav-link" href="/walkers.html">Become a Walker</a>
             </li>
             <li class="nav-item ms-lg-3">
-              <a id="authActionBtn" class="nav-link btn-signin" href="/login.html">Sign In</a>
+              <a
+                id="authActionBtn"
+                class="nav-link btn-signin"
+                href="/login.html"
+                >Sign In</a
+              >
             </li>
           </ul>
         </div>
@@ -164,8 +171,15 @@
           </div>
           <div class="col-md-2 d-flex align-items-end" id="myPostsFilter">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="filterMyPosts" disabled />
-              <label class="form-check-label text-muted" for="filterMyPosts">My Posts</label>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="filterMyPosts"
+                disabled
+              />
+              <label class="form-check-label text-muted" for="filterMyPosts"
+                >My Posts</label
+              >
             </div>
           </div>
           <div class="col-md-2 d-flex align-items-end">

@@ -15,7 +15,10 @@
       name="description"
       content="Manage your personal profile, update service areas, and adjust your dog walking preferences."
     />
-    <meta name="keywords" content="profile, account settings, walker details, edit preferences" />
+    <meta
+      name="keywords"
+      content="profile, account settings, walker details, edit preferences"
+    />
     <meta name="author" content="Yi-Peng Chiang" />
 
     <!-- Open Graph Meta Tags -->
@@ -28,6 +31,23 @@
       content="PawsitiveWalks is a platform connecting dog owners with trusted dog walkers. It is a zero-fee community platform connecting dog owners with trusted walkers. A simple bridge for direct connection and negotiation."
     />
 
+    <meta
+      property="og:url"
+      content="https://dog-walker-project.onrender.com/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="PawsitiveWalks" />
+    <meta property="og:image" content="./images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://dog-walker-project.onrender.com/" />
+
+    <!-- Favicon Meta Tags -->
+    <link rel="icon" type="image/png" href="./images/favicon.png" />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&family=Nunito:wght@400;700&display=swap"
       rel="stylesheet"
@@ -39,7 +59,7 @@
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/walkers.css" />
   </head>
-  
+
   <body>
     <nav class="navbar navbar-expand-lg sticky-top">
       <div class="container">
@@ -197,22 +217,50 @@
 
             <hr class="my-4" />
 
-            <h5 class="mb-3 fw-bold text-primary-custom">Preferences & Availability</h5>
+            <h5 class="mb-3 fw-bold text-primary-custom">
+              Preferences & Availability
+            </h5>
             <div class="row g-3 mb-4">
               <div class="col-12">
-                <label class="form-label d-block">Preferred Dog Sizes <span class="text-danger">*</span></label>
+                <label class="form-label d-block"
+                  >Preferred Dog Sizes <span class="text-danger">*</span></label
+                >
                 <div class="d-flex gap-4">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="preferredDogSizes" value="small" id="sizeSmall">
-                    <label class="form-check-label" for="sizeSmall">Small (< 20 lbs)</label>
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="preferredDogSizes"
+                      value="small"
+                      id="sizeSmall"
+                    />
+                    <label class="form-check-label" for="sizeSmall"
+                      >Small (< 20 lbs)</label
+                    >
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="preferredDogSizes" value="medium" id="sizeMedium">
-                    <label class="form-check-label" for="sizeMedium">Medium (20-50 lbs)</label>
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="preferredDogSizes"
+                      value="medium"
+                      id="sizeMedium"
+                    />
+                    <label class="form-check-label" for="sizeMedium"
+                      >Medium (20-50 lbs)</label
+                    >
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="preferredDogSizes" value="large" id="sizeLarge">
-                    <label class="form-check-label" for="sizeLarge">Large (> 50 lbs)</label>
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="preferredDogSizes"
+                      value="large"
+                      id="sizeLarge"
+                    />
+                    <label class="form-check-label" for="sizeLarge"
+                      >Large (> 50 lbs)</label
+                    >
                   </div>
                 </div>
               </div>
@@ -220,12 +268,26 @@
               <div class="col-md-6 mt-3">
                 <label class="form-label d-block">General Days</label>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="weekdays" name="weekdays">
-                  <label class="form-check-label" for="weekdays">Available Weekdays</label>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="weekdays"
+                    name="weekdays"
+                  />
+                  <label class="form-check-label" for="weekdays"
+                    >Available Weekdays</label
+                  >
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="weekends" name="weekends">
-                  <label class="form-check-label" for="weekends">Available Weekends</label>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="weekends"
+                    name="weekends"
+                  />
+                  <label class="form-check-label" for="weekends"
+                    >Available Weekends</label
+                  >
                 </div>
               </div>
 
@@ -233,16 +295,40 @@
                 <label class="form-label d-block">Times of Day</label>
                 <div class="d-flex gap-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="morning" name="times" id="timeMorning">
-                    <label class="form-check-label" for="timeMorning">Morning</label>
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value="morning"
+                      name="times"
+                      id="timeMorning"
+                    />
+                    <label class="form-check-label" for="timeMorning"
+                      >Morning</label
+                    >
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="afternoon" name="times" id="timeAfternoon">
-                    <label class="form-check-label" for="timeAfternoon">Afternoon</label>
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value="afternoon"
+                      name="times"
+                      id="timeAfternoon"
+                    />
+                    <label class="form-check-label" for="timeAfternoon"
+                      >Afternoon</label
+                    >
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="evening" name="times" id="timeEvening">
-                    <label class="form-check-label" for="timeEvening">Evening</label>
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value="evening"
+                      name="times"
+                      id="timeEvening"
+                    />
+                    <label class="form-check-label" for="timeEvening"
+                      >Evening</label
+                    >
                   </div>
                 </div>
               </div>
@@ -308,32 +394,58 @@
     </div>
 
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title">Confirm Delete Profile</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete Profile</button>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title">Confirm Delete Profile</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Are you sure you want to delete your profile? This action cannot
+              be undone.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+              Delete Profile
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="toast-container position-fixed top-0 end-0 p-3">
-    <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header bg-success text-white">
-        <strong class="me-auto">Success</strong>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div
+        id="successToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header bg-success text-white">
+          <strong class="me-auto">Success</strong>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+          ></button>
+        </div>
+        <div class="toast-body">Profile deleted successfully!</div>
       </div>
-      <div class="toast-body">Profile deleted successfully!</div>
     </div>
-  </div>
 
     <footer class="py-4 mt-auto border-top text-center text-muted">
       <p>&copy; 2026 PawsitiveWalks</p>

@@ -30,8 +30,10 @@
       property="og:description"
       content="PawsitiveWalks is a platform connecting dog owners with trusted dog walkers. It is a zero-fee community platform connecting dog owners with trusted walkers. A simple bridge for direct connection and negotiation."
     />
-    <!-- TODO: Add the url after deployment -->
-    <meta property="og:url" content="https://pawsitivewalks.com" />
+    <meta
+      property="og:url"
+      content="https://dog-walker-project.onrender.com/"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="PawsitiveWalks" />
@@ -40,8 +42,7 @@
     <meta property="og:image:height" content="630" />
 
     <!-- Canonical URL -->
-    <!-- TODO: Add the canonical url after deployment -->
-    <link rel="canonical" href="https://pawsitivewalks.com" />
+    <link rel="canonical" href="https://dog-walker-project.onrender.com/" />
 
     <!-- Favicon Meta Tags -->
     <link rel="icon" type="image/png" href="./images/favicon.png" />
@@ -65,7 +66,7 @@
     <!-- Walkers CSS -->
     <link rel="stylesheet" href="./css/walkers.css" />
   </head>
-  
+
   <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg sticky-top">
@@ -119,7 +120,7 @@
       </div>
       <div class="d-flex justify-content-center align-items-center mb-4">
         <a
-          id="postProfileBtn" 
+          id="postProfileBtn"
           href="/post-profile.html"
           class="btn btn-primary-custom d-none d-md-block"
         >
@@ -181,11 +182,18 @@
             </div>
 
             <div class="col-md-2 d-flex align-items-end" id="myPostsFilter">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="filterMyPosts" disabled />
-            <label class="form-check-label text-muted" for="filterMyPosts">My Posts</label>
-          </div>
-        </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="filterMyPosts"
+                  disabled
+                />
+                <label class="form-check-label text-muted" for="filterMyPosts"
+                  >My Posts</label
+                >
+              </div>
+            </div>
 
             <div class="col-md-2 d-flex align-items-end">
               <div class="d-flex gap-2 w-100">
@@ -210,52 +218,97 @@
       <!-- Walkers list -->
       <div id="walkers-list" class="row g-3"></div>
       <nav aria-label="Walkers pagination" class="mt-4">
-      <ul class="pagination justify-content-center" id="pagination">
-        </ul>
-    </nav>
+        <ul class="pagination justify-content-center" id="pagination"></ul>
+      </nav>
     </div>
 
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header bg-danger text-white">
-            <h5 class="modal-title" id="deleteModalLabel">Confirm Delete Profile</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="deleteModalLabel">
+              Confirm Delete Profile
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
-            <p>Are you sure you want to delete the walker profile for <strong id="deleteRequestName"></strong>?</p>
-            <p class="text-danger mb-0">This action will permanently remove your profile from the list.</p>
+            <p>
+              Are you sure you want to delete the walker profile for
+              <strong id="deleteRequestName"></strong>?
+            </p>
+            <p class="text-danger mb-0">
+              This action will permanently remove your profile from the list.
+            </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete Profile</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+              Delete Profile
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <div class="toast-container position-fixed top-0 end-0 p-3">
-      <div id="deleteSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div
+        id="deleteSuccessToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
         <div class="toast-header bg-success text-white">
           <strong class="me-auto">Success</strong>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
         </div>
-        <div class="toast-body">
-          Walker profile deleted successfully!
-        </div>
+        <div class="toast-body">Walker profile deleted successfully!</div>
       </div>
 
-      <div id="deleteErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div
+        id="deleteErrorToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
         <div class="toast-header bg-danger text-white">
           <strong class="me-auto">Error</strong>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
         </div>
         <div class="toast-body">
           Failed to delete profile. Please try again later.
         </div>
       </div>
     </div>
-    
+
     <!-- Footer -->
     <footer>
       <div class="container">

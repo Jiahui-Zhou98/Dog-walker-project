@@ -8,16 +8,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- SEO Meta Tags -->
     <title>Join PawsitiveWalks - Register as a Dog Walker or Owner</title>
     <meta
-    name="description"
-    content="Create your PawsitiveWalks account today. Sign up to find reliable dog walkers or start your career as a professional pet sitter."
+      name="description"
+      content="Create your PawsitiveWalks account today. Sign up to find reliable dog walkers or start your career as a professional pet sitter."
     />
-    <meta name="keywords" content="sign up, create account, register, dog walking job, find pet sitter" />
+    <meta
+      name="keywords"
+      content="sign up, create account, register, dog walking job, find pet sitter"
+    />
     <meta name="author" content="Yi-Peng Chiang" />
-    
+
     <!-- Open Graph Meta Tags -->
     <meta
       property="og:title"
@@ -27,10 +30,23 @@
       property="og:description"
       content="PawsitiveWalks is a platform connecting dog owners with trusted dog walkers. It is a zero-fee community platform connecting dog owners with trusted walkers. A simple bridge for direct connection and negotiation."
     />
+    <meta
+      property="og:url"
+      content="https://dog-walker-project.onrender.com/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="PawsitiveWalks" />
+    <meta property="og:image" content="./images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://dog-walker-project.onrender.com/" />
 
     <!-- Favicon Meta Tags -->
     <link rel="icon" type="image/png" href="./images/favicon.png" />
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,71 +55,137 @@
       rel="stylesheet"
     />
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Main CSS -->
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/register.css" />
   </head>
-  
-    <body class="login-page">
-    <div class="login-page-wrap d-flex align-items-center justify-content-center min-vh-100 py-5">
+
+  <body class="login-page">
+    <div
+      class="login-page-wrap d-flex align-items-center justify-content-center min-vh-100 py-5"
+    >
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-12 col-sm-10 col-md-6 col-lg-5 col-xl-4">
-            
-            <div class="login-card shadow-lg border-0 rounded-4 p-4 p-md-5 bg-white">
-              
+            <div
+              class="login-card shadow-lg border-0 rounded-4 p-4 p-md-5 bg-white"
+            >
               <div class="login-header text-center mb-4">
-                <div class="mb-2" style="font-size: 2.5rem;">🐾</div>
+                <div class="mb-2" style="font-size: 2.5rem">🐾</div>
                 <h1 class="fw-bold h2">Create Account</h1>
                 <p class="text-muted">Join the PawsitiveWalks family</p>
               </div>
 
-              <div id="error-message" class="alert alert-danger d-none mb-3" role="alert" style="font-size: 0.85rem;"></div>
+              <div
+                id="error-message"
+                class="alert alert-danger d-none mb-3"
+                role="alert"
+                style="font-size: 0.85rem"
+              ></div>
 
               <form id="register-form" novalidate>
                 <div class="mb-3">
-                  <label class="form-label fw-semibold" for="reg-name">Full Name</label>
-                  <input type="text" id="reg-name" class="form-control form-control-lg" placeholder="Alex Chen" required>
+                  <label class="form-label fw-semibold" for="reg-name"
+                    >Full Name</label
+                  >
+                  <input
+                    type="text"
+                    id="reg-name"
+                    class="form-control form-control-lg"
+                    placeholder="Alex Chen"
+                    required
+                  />
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label fw-semibold" for="reg-email">Email Address</label>
-                  <input type="email" id="reg-email" class="form-control form-control-lg" placeholder="name@example.com" required>
+                  <label class="form-label fw-semibold" for="reg-email"
+                    >Email Address</label
+                  >
+                  <input
+                    type="email"
+                    id="reg-email"
+                    class="form-control form-control-lg"
+                    placeholder="name@example.com"
+                    required
+                  />
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label fw-semibold" for="reg-password">Password</label>
+                  <label class="form-label fw-semibold" for="reg-password"
+                    >Password</label
+                  >
                   <div class="input-group">
-                    <input type="password" id="reg-password" class="form-control form-control-lg" placeholder="Min. 8 characters" required>
-                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">👁️</button>
+                    <input
+                      type="password"
+                      id="reg-password"
+                      class="form-control form-control-lg"
+                      placeholder="Min. 8 characters"
+                      required
+                    />
+                    <button
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      id="togglePassword"
+                    >
+                      👁️
+                    </button>
                   </div>
                 </div>
 
                 <div class="mb-4">
-                  <label class="form-label fw-semibold" for="reg-confirm-password">Confirm Password</label>
+                  <label
+                    class="form-label fw-semibold"
+                    for="reg-confirm-password"
+                    >Confirm Password</label
+                  >
                   <div class="input-group">
-                    <input type="password" id="reg-confirm-password" class="form-control form-control-lg" placeholder="Repeat your password" required>
-                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">👁️</button>
+                    <input
+                      type="password"
+                      id="reg-confirm-password"
+                      class="form-control form-control-lg"
+                      placeholder="Repeat your password"
+                      required
+                    />
+                    <button
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      id="toggleConfirmPassword"
+                    >
+                      👁️
+                    </button>
                   </div>
                   <div id="password-status" class="mt-1 small d-none">
-                    <span id="status-icon"></span> <span id="status-text"></span>
+                    <span id="status-icon"></span>
+                    <span id="status-text"></span>
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary-custom btn-lg w-100 shadow-sm">
+                <button
+                  type="submit"
+                  class="btn btn-primary-custom btn-lg w-100 shadow-sm"
+                >
                   Sign Up
                 </button>
               </form>
 
               <div class="text-center mt-4">
                 <p class="mb-0 text-muted">
-                  Already have an account? <a href="/login.html" class="fw-bold text-decoration-none text-primary-custom">Login</a>
+                  Already have an account?
+                  <a
+                    href="/login.html"
+                    class="fw-bold text-decoration-none text-primary-custom"
+                    >Login</a
+                  >
                 </p>
               </div>
-
-            </div> <p class="text-center mt-4 text-muted small">&copy; 2026 PawsitiveWalks</p>
-            
+            </div>
+            <p class="text-center mt-4 text-muted small">
+              &copy; 2026 PawsitiveWalks
+            </p>
           </div>
         </div>
       </div>
