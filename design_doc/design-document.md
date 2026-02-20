@@ -62,6 +62,8 @@ A zero-fee community platform connecting dog owners with trusted dog walkers. Un
 
 ### about
 
+![about-mockup](./mockup/about-mockup.png)
+
 ---
 
 ### find requests
@@ -78,9 +80,13 @@ A zero-fee community platform connecting dog owners with trusted dog walkers. Un
 
 ### become a walker
 
+![walkers-mockup](./mockup/walkers-mockup.png)
+
 ---
 
 ### register
+
+![register-mockup](./mockup/register-mockup.png)
 
 ---
 
