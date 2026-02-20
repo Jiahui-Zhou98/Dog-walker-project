@@ -14,6 +14,12 @@
 
 - [PawsitiveWalks](https://dog-walker-project.onrender.com)
 
+## How to Use the Website
+
+- [Slides](https://docs.google.com/presentation/d/1mIjMORH_RMx7k6k3-FUu2FFrL9iDWtp2n2X1vxRCq-M/edit?usp=sharing)
+
+- [Video](https://drive.google.com/file/d/1VWA103Yuhl9yIyCl_CdZgOGWbwdRMKZx/view?usp=sharing)
+
 ## Project Link
 
 - [GitHub Repo](https://github.com/Jiahui-Zhou98/Dog-walker-project.git)
@@ -297,9 +303,3 @@ Then visit [http://localhost:3000](http://localhost:3000).
 ## License
 
 MIT
-
-## Slides and Video Demonstration
-
-- [Slides](https://docs.google.com/presentation/d/1mIjMORH_RMx7k6k3-FUu2FFrL9iDWtp2n2X1vxRCq-M/edit?usp=sharing)
-
-- [Video](https://drive.google.com/file/d/1VWA103Yuhl9yIyCl_CdZgOGWbwdRMKZx/view?usp=sharing)
