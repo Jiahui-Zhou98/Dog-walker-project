@@ -1,30 +1,30 @@
 /* Custom Primary Button - Orange */
 .btn-primary-custom {
-    background-color: #ff8800;
-    color: white;
-    border: none;
-    transition: all 0.3s ease;
+  background-color: #ff8800;
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
 }
 
 .btn-primary-custom:hover,
 .btn-primary-custom:focus {
-    background-color: #e67a00;
-    color: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: #e67a00;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .login-card .text-primary-custom,
 .login-card .switch-auth a {
-    color: #ff8c00;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s ease;
+  color: #ff8c00;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
 }
 
 .login-card .text-primary-custom:hover,
 .login-card .switch-auth a:hover {
-    color: #e67e00;
-    text-decoration: underline;
+  color: #e67e00;
+  text-decoration: underline;
 }
 
 .input-group .btn-outline-secondary {

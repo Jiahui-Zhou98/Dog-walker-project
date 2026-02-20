@@ -96,7 +96,7 @@ function generateWalker(index) {
   const createdAt = randomDate();
 
   const fullName = randomItem(walkerNames);
-  const emailName = fullName.toLowerCase().replace(/\s+/g, '.');
+  const emailName = fullName.toLowerCase().replace(/\s+/g, ".");
 
   // Ensure these arrays are not empty (optional but prevents weird empty data)
   const preferredDogSizes = sizes.filter(() => Math.random() > 0.4);
@@ -181,11 +181,21 @@ async function seedWalkers() {
     // Statistics (similar vibe to seedRequests)
     const stats = {
       total: await collection.countDocuments(),
-      openToGroupWalks: await collection.countDocuments({ openToGroupWalks: true }),
-      morningAvailable: await collection.countDocuments({ "availability.times": "morning" }),
-      smallPref: await collection.countDocuments({ preferredDogSizes: "small" }),
-      mediumPref: await collection.countDocuments({ preferredDogSizes: "medium" }),
-      largePref: await collection.countDocuments({ preferredDogSizes: "large" }),
+      openToGroupWalks: await collection.countDocuments({
+        openToGroupWalks: true,
+      }),
+      morningAvailable: await collection.countDocuments({
+        "availability.times": "morning",
+      }),
+      smallPref: await collection.countDocuments({
+        preferredDogSizes: "small",
+      }),
+      mediumPref: await collection.countDocuments({
+        preferredDogSizes: "medium",
+      }),
+      largePref: await collection.countDocuments({
+        preferredDogSizes: "large",
+      }),
     };
 
     console.log("\n📊 Database Statistics:");
@@ -206,7 +216,9 @@ async function seedWalkers() {
   } catch (error) {
     console.error("\n❌ Error seeding data:", error.message);
     console.error("   Make sure MongoDB is running!");
-    console.error("   If on Mac with Homebrew, try: brew services start mongodb-community");
+    console.error(
+      "   If on Mac with Homebrew, try: brew services start mongodb-community",
+    );
   } finally {
     await client.close();
     console.log("\n👋 Disconnected from MongoDB. All done!\n");

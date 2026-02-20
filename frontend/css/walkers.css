@@ -7,8 +7,8 @@
 
 /* 1. Filter Section Container Styling */
 .container .filters-section.filters-box {
-  background-color: rgba(255, 140, 66, 0.1); 
-  border: 1px solid rgba(255, 140, 66, 0.3); 
+  background-color: rgba(255, 140, 66, 0.1);
+  border: 1px solid rgba(255, 140, 66, 0.3);
   box-shadow: 0 4px 15px rgba(255, 140, 66, 0.05);
   border-radius: 15px;
   padding: 1.5rem;
@@ -49,9 +49,9 @@ button#resetFilters.btn.btn-secondary-custom:hover {
 
 /* 4. Orange Size Badge */
 .item-card .card-body .badge.bg-light.text-primary {
-  background-color: #ffe0cc; 
-  color: #ff8c00;            
-  border-radius: 999px;      
+  background-color: #ffe0cc;
+  color: #ff8c00;
+  border-radius: 999px;
   border: 1px solid rgba(255, 136, 0, 0.2);
   font-weight: 700;
   text-transform: uppercase;
