@@ -69,6 +69,17 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok", message: "PawsitiveWalks API is running" });
 });
 
+// 404 handler for unknown API routes
+app.use("/api", (req, res) => {
+  res.status(404).json({ error: "API endpoint not found" });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err);
+  res.status(500).json({ error: "Internal server error" });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   console.log(`Frontend: http://localhost:${PORT}`);
