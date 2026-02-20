@@ -1,5 +1,3 @@
-console.log("PostWalkerModule loaded");
-
 // Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", () => {
   // Get form elements
@@ -10,21 +8,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // Prevent default form submission
     event.preventDefault();
 
-    console.log("📝 Post Walker Profile Form submitted!");
-
     // Collect form data
     const formData = new FormData(form);
 
-    const serviceAreasRaw = formData.get("serviceAreas"); 
-    const serviceAreasArray = serviceAreasRaw 
-        ? serviceAreasRaw.split(',').map(s => s.trim()).filter(s => s !== "") 
-        : [];
+    const serviceAreasRaw = formData.get("serviceAreas");
+    const serviceAreasArray = serviceAreasRaw
+      ? serviceAreasRaw
+          .split(",")
+          .map((s) => s.trim())
+          .filter((s) => s !== "")
+      : [];
 
     // Collect multi-select checkbox values for Dog Sizes
     const preferredDogSizes = [];
-    document.querySelectorAll('input[name="preferredDogSizes"]:checked').forEach((cb) => {
-      preferredDogSizes.push(cb.value);
-    });
+    document
+      .querySelectorAll('input[name="preferredDogSizes"]:checked')
+      .forEach((cb) => {
+        preferredDogSizes.push(cb.value);
+      });
 
     // Collect multi-select checkbox values for Times
     const times = [];
@@ -50,20 +51,18 @@ document.addEventListener("DOMContentLoaded", () => {
       availability: {
         weekdays: document.getElementById("weekdays").checked,
         weekends: document.getElementById("weekends").checked,
-        times: times
+        times: times,
       },
 
       // Additional Details
       bio: formData.get("bio"),
       openToGroupWalks: document.getElementById("openToGroupWalks").checked,
-      
+
       // Default/Placeholder values for a new profile
       rating: 5.0,
       completedWalks: 0,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     };
-
-    console.log("📦 Data to send:", data);
 
     // Disable submit button to prevent duplicate submissions
     const submitButton = form.querySelector('button[type="submit"]');
@@ -86,10 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // Parse response data
-      const result = await response.json();
-      console.log("✅ Walker profile created successfully:", result);
-
       // Show success toast notification
       const successToastEl = document.getElementById("successToast");
       if (successToastEl) {
@@ -101,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         window.location.href = "/walkers.html";
       }, 3000);
-
     } catch (error) {
       // Handle errors
       console.error("❌ Error submitting walker profile:", error);

@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmInput = document.getElementById("reg-confirm-password");
 
   if (registerForm) {
-    console.log("Registration Module: Ready.");
-
     setupPasswordToggle("togglePassword", "reg-password");
     setupPasswordToggle("toggleConfirmPassword", "reg-confirm-password");
 
@@ -98,7 +96,6 @@ async function handleRegistration(e) {
     const data = await res.json();
 
     if (res.ok) {
-      console.log("User created successfully.");
       messageBox.textContent =
         "Registration successful! Redirecting to login...";
       messageBox.classList.remove("d-none", "alert-danger");

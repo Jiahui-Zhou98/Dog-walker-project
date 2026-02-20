@@ -1,5 +1,3 @@
-console.log("EditWalkerModule loaded");
-
 document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("editWalkerForm");
   const deleteBtn = document.getElementById("deleteProfileBtn");
@@ -7,8 +5,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   // ========== Get walker ID from URL ==========
   const urlParams = new URLSearchParams(window.location.search);
   const walkerId = urlParams.get("id");
-
-  console.log("Editing walker profile with ID:", walkerId);
 
   if (!walkerId) {
     alert("Error: No walker ID provided");
@@ -20,7 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (deleteBtn) {
     deleteBtn.addEventListener("click", () => {
       // Show the Bootstrap Modal
-      const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+      const deleteModal = new bootstrap.Modal(
+        document.getElementById("deleteModal"),
+      );
       deleteModal.show();
 
       const confirmBtn = document.getElementById("confirmDeleteBtn");
@@ -31,31 +29,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       newConfirmBtn.addEventListener("click", async () => {
         deleteModal.hide();
-        console.log("Attempting to delete walker profile:", walkerId);
 
         try {
           const response = await fetch(`/api/walkers/${walkerId}`, {
             method: "DELETE",
           });
 
-          if (!response.ok) throw new Error(`Delete failed: ${response.status}`);
+          if (!response.ok)
+            throw new Error(`Delete failed: ${response.status}`);
 
           // Show Success Toast
           const successToastEl = document.getElementById("successToast");
           if (successToastEl) {
-              successToastEl.querySelector(".toast-header").className = "toast-header bg-danger text-white";
-              successToastEl.querySelector("strong").textContent = "Deleted";
-              successToastEl.querySelector(".toast-body").textContent = "Profile deleted successfully!";
-              
-              const successToast = new bootstrap.Toast(successToastEl);
-              successToast.show();
+            successToastEl.querySelector(".toast-header").className =
+              "toast-header bg-danger text-white";
+            successToastEl.querySelector("strong").textContent = "Deleted";
+            successToastEl.querySelector(".toast-body").textContent =
+              "Profile deleted successfully!";
+
+            const successToast = new bootstrap.Toast(successToastEl);
+            successToast.show();
           }
 
           // Redirect after short delay
           setTimeout(() => {
             window.location.href = "/walkers.html";
           }, 1500);
-
         } catch (error) {
           console.error("Error deleting walker:", error);
           alert("Failed to delete profile. Please try again.");
@@ -66,7 +65,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // ========== Fetch existing walker data ==========
   try {
-    console.log("Fetching walker data...");
     const response = await fetch(`/api/walkers/${walkerId}`);
 
     if (!response.ok) {
@@ -76,44 +74,53 @@ document.addEventListener("DOMContentLoaded", async () => {
     const result = await response.json();
     const walker = result.walker;
 
-    console.log("Walker data loaded:", walker);
-
     // Pre-fill form fields
     document.getElementById("name").value = walker.name || "";
     document.getElementById("email").value = walker.email || "";
     document.getElementById("phone").value = walker.phone || "";
     if (walker.serviceAreas && Array.isArray(walker.serviceAreas)) {
-      document.getElementById("serviceAreas").value = walker.serviceAreas.join(", ");
+      document.getElementById("serviceAreas").value =
+        walker.serviceAreas.join(", ");
     } else {
-        document.getElementById("serviceAreas").value = "";
+      document.getElementById("serviceAreas").value = "";
     }
-    document.getElementById("experienceYears").value = walker.experienceYears || 0;
+    document.getElementById("experienceYears").value =
+      walker.experienceYears || 0;
     document.getElementById("hourlyRate").value = walker.hourlyRate || 15;
-    document.getElementById("maxDogsPerWalk").value = walker.maxDogsPerWalk || 1;
+    document.getElementById("maxDogsPerWalk").value =
+      walker.maxDogsPerWalk || 1;
 
     if (walker.preferredDogSizes && Array.isArray(walker.preferredDogSizes)) {
-      walker.preferredDogSizes.forEach(size => {
-        const checkbox = document.querySelector(`input[name="preferredDogSizes"][value="${size}"]`);
+      walker.preferredDogSizes.forEach((size) => {
+        const checkbox = document.querySelector(
+          `input[name="preferredDogSizes"][value="${size}"]`,
+        );
         if (checkbox) checkbox.checked = true;
       });
     }
 
     if (walker.availability) {
-      document.getElementById("weekdays").checked = walker.availability.weekdays || false;
-      document.getElementById("weekends").checked = walker.availability.weekends || false;
+      document.getElementById("weekdays").checked =
+        walker.availability.weekdays || false;
+      document.getElementById("weekends").checked =
+        walker.availability.weekends || false;
 
-      if (walker.availability.times && Array.isArray(walker.availability.times)) {
-        walker.availability.times.forEach(time => {
-          const checkbox = document.querySelector(`input[name="times"][value="${time}"]`);
+      if (
+        walker.availability.times &&
+        Array.isArray(walker.availability.times)
+      ) {
+        walker.availability.times.forEach((time) => {
+          const checkbox = document.querySelector(
+            `input[name="times"][value="${time}"]`,
+          );
           if (checkbox) checkbox.checked = true;
         });
       }
     }
 
     document.getElementById("bio").value = walker.bio || "";
-    document.getElementById("openToGroupWalks").checked = walker.openToGroupWalks || false;
-
-    console.log("Form pre-filled successfully");
+    document.getElementById("openToGroupWalks").checked =
+      walker.openToGroupWalks || false;
   } catch (error) {
     console.error("Error loading walker profile:", error);
     alert(`Error loading profile: ${error.message}`);
@@ -127,9 +134,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const formData = new FormData(form);
     const preferredDogSizes = [];
-    document.querySelectorAll('input[name="preferredDogSizes"]:checked').forEach((cb) => {
-      preferredDogSizes.push(cb.value);
-    });
+    document
+      .querySelectorAll('input[name="preferredDogSizes"]:checked')
+      .forEach((cb) => {
+        preferredDogSizes.push(cb.value);
+      });
 
     const times = [];
     document.querySelectorAll('input[name="times"]:checked').forEach((cb) => {
@@ -140,9 +149,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       name: formData.get("name"),
       email: formData.get("email"),
       phone: formData.get("phone"),
-      serviceAreas: formData.get("serviceAreas") 
-      ? formData.get("serviceAreas").split(',').map(s => s.trim()).filter(s => s !== "")
-      : [],
+      serviceAreas: formData.get("serviceAreas")
+        ? formData
+            .get("serviceAreas")
+            .split(",")
+            .map((s) => s.trim())
+            .filter((s) => s !== "")
+        : [],
       experienceYears: parseInt(formData.get("experienceYears")),
       hourlyRate: parseInt(formData.get("hourlyRate")),
       maxDogsPerWalk: parseInt(formData.get("maxDogsPerWalk")),
@@ -150,10 +163,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       availability: {
         weekdays: document.getElementById("weekdays").checked,
         weekends: document.getElementById("weekends").checked,
-        times: times
+        times: times,
       },
       bio: formData.get("bio"),
-      openToGroupWalks: document.getElementById("openToGroupWalks").checked
+      openToGroupWalks: document.getElementById("openToGroupWalks").checked,
     };
 
     const submitButton = form.querySelector('button[type="submit"]');
@@ -168,17 +181,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-     
+      if (!response.ok)
+        throw new Error(`HTTP error! status: ${response.status}`);
+
       const successToastEl = document.getElementById("successToast");
       if (successToastEl) {
-          
-          successToastEl.querySelector(".toast-header").className = "toast-header bg-success text-white";
-          successToastEl.querySelector("strong").textContent = "Success";
-          successToastEl.querySelector(".toast-body").textContent = "Profile updated successfully!";
-          
-          const successToast = new bootstrap.Toast(successToastEl);
-          successToast.show();
+        successToastEl.querySelector(".toast-header").className =
+          "toast-header bg-success text-white";
+        successToastEl.querySelector("strong").textContent = "Success";
+        successToastEl.querySelector(".toast-body").textContent =
+          "Profile updated successfully!";
+
+        const successToast = new bootstrap.Toast(successToastEl);
+        successToast.show();
       }
 
       setTimeout(() => {

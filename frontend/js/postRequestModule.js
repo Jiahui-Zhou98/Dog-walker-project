@@ -1,5 +1,3 @@
-console.log("PostRequestModule loaded");
-
 // Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", () => {
   // Get form elements
@@ -23,8 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (event) => {
     // Prevent default form submission (prevent page refresh)
     event.preventDefault();
-
-    console.log("📝 Post Request Form submitted!");
 
     // Collect form data
     const formData = new FormData(form);
@@ -62,8 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
         : "",
     };
 
-    console.log("📦 Data to send:", data);
-
     // Disable submit button to prevent duplicate submissions
     const submitButton = form.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.textContent;
@@ -84,10 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      // Parse response data
-      const result = await response.json();
-      console.log("✅ Request created successfully:", result);
 
       // Show success toast notification
       const successToast = new bootstrap.Toast(

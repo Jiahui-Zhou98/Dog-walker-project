@@ -1,5 +1,3 @@
-console.log("RequestsModule loaded");
-
 function RequestsModule() {
   const me = {};
   let currentPage = 1;
@@ -359,8 +357,6 @@ function RequestsModule() {
 
   // Delete request
   me.deleteRequest = (requestId, dogName) => {
-    console.log("🗑️ Delete button clicked for:", requestId, dogName);
-
     // Update modal content with dog name
     document.getElementById("deleteRequestName").textContent = dogName;
 
@@ -379,8 +375,6 @@ function RequestsModule() {
 
     // Add new event listener for this specific delete
     newConfirmBtn.addEventListener("click", async () => {
-      console.log("🗑️ Delete confirmed, sending request...");
-
       // Hide the modal
       deleteModal.hide();
 
@@ -393,8 +387,6 @@ function RequestsModule() {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-
-        console.log("✅ Request deleted successfully");
 
         // Show success toast
         const successToast = new bootstrap.Toast(

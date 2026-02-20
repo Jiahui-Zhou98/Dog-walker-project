@@ -1,5 +1,3 @@
-console.log("EditRequestModule loaded");
-
 // Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", async () => {
   // Get form elements
@@ -12,8 +10,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const requestId = urlParams.get("id");
 
-  console.log("📝 Editing request with ID:", requestId);
-
   // If no ID in URL, redirect back to requests list
   if (!requestId) {
     alert("Error: No request ID provided");
@@ -23,8 +19,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // ========== Fetch existing request data ==========
   try {
-    console.log("🔍 Fetching request data...");
-
     // Send GET request to fetch this specific request
     const response = await fetch(`/api/requests/${requestId}`);
 
@@ -34,8 +28,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const result = await response.json();
     const request = result.request;
-
-    console.log("✅ Request data loaded:", request);
 
     // ========== Pre-fill form with existing data ==========
     // Dog information
@@ -75,8 +67,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       socialNoteContainer.style.display = "block";
       document.getElementById("socialNote").value = request.socialNote || "";
     }
-
-    console.log("✅ Form pre-filled with existing data");
   } catch (error) {
     console.error("❌ Error loading request:", error);
     alert(`Error loading request: ${error.message}`);
@@ -98,8 +88,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   form.addEventListener("submit", async (event) => {
     // Prevent default form submission
     event.preventDefault();
-
-    console.log("📝 Update form submitted!");
 
     // Collect form data
     const formData = new FormData(form);
@@ -140,8 +128,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         : "",
     };
 
-    console.log("📦 Updated data to send:", data);
-
     // Disable submit button
     const submitButton = form.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.textContent;
@@ -162,10 +148,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      // Parse response data
-      const result = await response.json();
-      console.log("✅ Request updated successfully:", result);
 
       // Show success toast
       const successToast = new bootstrap.Toast(

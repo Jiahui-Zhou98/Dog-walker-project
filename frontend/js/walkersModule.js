@@ -1,5 +1,3 @@
-console.log("WalkersModule loaded");
-
 function WalkersModule() {
   const me = {};
   let currentPage = 1;

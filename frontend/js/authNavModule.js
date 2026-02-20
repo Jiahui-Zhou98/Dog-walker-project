@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // LOGIC BLOCK: If the user just registered, stay in "Sign In" state
   if (isNewlyRegistered) {
-    console.log("New registration detected. Skipping auto-login check.");
     btn.textContent = "Sign In";
     btn.href = "/login.html";
     updatePostRequestButton(false);
