@@ -5,6 +5,29 @@ function RequestsModule() {
   let allRequests = [];
   let totalRequests = 0;
   let loggedInUserId = null;
+  const HTML_ESCAPE_MAP = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  };
+
+  const escapeHtml = (value) =>
+    String(value ?? "").replace(/[&<>"']/g, (ch) => HTML_ESCAPE_MAP[ch]);
+
+  const safeText = (value, fallback = "N/A") => {
+    const normalized = String(value ?? "").trim();
+    return normalized || fallback;
+  };
+
+  const formatLabel = (value, fallback = "N/A") => {
+    const normalized = safeText(value, "").toLowerCase();
+    if (!normalized) return fallback;
+    return normalized.charAt(0).toUpperCase() + normalized.slice(1);
+  };
+
+  const safeId = (value) => encodeURIComponent(String(value ?? ""));
 
   // Fetch requests from API
   const fetchRequests = async () => {
@@ -77,12 +100,22 @@ function RequestsModule() {
     container.innerHTML = `
       <div class="text-center py-5">
         <h3 class="text-danger">⚠️ Error Loading Requests</h3>
-        <p class="text-muted">${message}</p>
-        <button class="btn btn-primary-custom mt-3" onclick="location.reload()">
+        <p class="text-muted" id="requestsErrorMessage"></p>
+        <button class="btn btn-primary-custom mt-3" id="requestsRetryBtn">
           Try Again
         </button>
       </div>
     `;
+
+    const messageEl = container.querySelector("#requestsErrorMessage");
+    if (messageEl) {
+      messageEl.textContent = safeText(message, "Unknown error");
+    }
+    container
+      .querySelector("#requestsRetryBtn")
+      ?.addEventListener("click", () => {
+        window.location.reload();
+      });
   };
 
   // Render a single request card
@@ -95,6 +128,26 @@ function RequestsModule() {
     const statusInfo = statusMap[request.status] || statusMap.open;
     const statusClass = statusInfo.class;
     const statusText = statusInfo.text;
+    const dogName = escapeHtml(safeText(request.dogName));
+    const breed = escapeHtml(safeText(request.breed));
+    const age = Number.isFinite(Number(request.age))
+      ? String(Number(request.age))
+      : "N/A";
+    const size = escapeHtml(formatLabel(request.size));
+    const temperament = escapeHtml(formatLabel(request.temperament));
+    const frequency = escapeHtml(formatLabel(request.frequency));
+    const preferredTime = escapeHtml(formatLabel(request.preferredTime));
+    const duration = Number.isFinite(Number(request.duration))
+      ? String(Number(request.duration))
+      : "N/A";
+    const budget = Number.isFinite(Number(request.budget))
+      ? String(Number(request.budget))
+      : "N/A";
+    const location = escapeHtml(safeText(request.location));
+    const ownerName = escapeHtml(safeText(request.ownerName));
+    const ownerEmail = escapeHtml(safeText(request.ownerEmail));
+    const requestId = safeId(request._id);
+    const dogNameAttr = escapeHtml(safeText(request.dogName, ""));
 
     // Social badge (new feature)
     const socialBadge = request.openToSocial
@@ -103,9 +156,9 @@ function RequestsModule() {
 
     // Social note (new feature)
     const socialNote =
-      request.openToSocial && request.socialNote
+      request.openToSocial && safeText(request.socialNote, "")
         ? `<div class="social-note">
-           <strong>Social Note:</strong> ${request.socialNote}
+           <strong>Social Note:</strong> ${escapeHtml(safeText(request.socialNote, ""))}
          </div>`
         : "";
 
@@ -122,8 +175,8 @@ function RequestsModule() {
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                   <div>
-                    <h3 class="card-title mb-1">${request.dogName}${socialBadge}</h3>
-                    <p class="card-subtitle">${request.breed} • ${request.age} years old</p>
+                    <h3 class="card-title mb-1">${dogName}${socialBadge}</h3>
+                    <p class="card-subtitle">${breed} • ${age} years old</p>
                   </div>
                   <span class="badge-status ${statusClass}">${statusText}</span>
                 </div>
@@ -132,46 +185,46 @@ function RequestsModule() {
                   <div class="col-md-6">
                     <div class="info-row">
                       <strong>Size:</strong>
-                      <span>${request.size.charAt(0).toUpperCase() + request.size.slice(1)}</span>
+                      <span>${size}</span>
                     </div>
                     <div class="info-row">
                       <strong>Temperament:</strong>
-                      <span>${request.temperament.charAt(0).toUpperCase() + request.temperament.slice(1)}</span>
+                      <span>${temperament}</span>
                     </div>
                     <div class="info-row">
                       <strong>Frequency:</strong>
-                      <span>${request.frequency.charAt(0).toUpperCase() + request.frequency.slice(1)}</span>
+                      <span>${frequency}</span>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="info-row">
                       <strong>Preferred Time:</strong>
-                      <span>${request.preferredTime.charAt(0).toUpperCase() + request.preferredTime.slice(1)}</span>
+                      <span>${preferredTime}</span>
                     </div>
                     <div class="info-row">
                       <strong>Duration:</strong>
-                      <span>${request.duration} minutes</span>
+                      <span>${duration} minutes</span>
                     </div>
                     <div class="info-row">
                       <strong>Budget:</strong>
-                      <span style="color: var(--primary-color); font-weight: 700;">$${request.budget}</span>
+                      <span style="color: var(--primary-color); font-weight: 700;">$${budget}</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="info-row mt-3">
                   <strong>Location:</strong>
-                  <span>${request.location}</span>
+                  <span>${location}</span>
                 </div>
 
                 <div class="info-row">
                   <strong>Owner:</strong>
-                  <span>${request.ownerName}</span>
+                  <span>${ownerName}</span>
                 </div>
 
                 <div class="info-row">
                   <strong>Email:</strong>
-                  <span>${request.ownerEmail || "N/A"}</span>
+                  <span>${ownerEmail}</span>
                 </div>
 
                 ${socialNote}
@@ -180,12 +233,14 @@ function RequestsModule() {
                   loggedInUserId && loggedInUserId === request.createdBy
                     ? `
                 <div class="mt-3 d-flex gap-2 justify-content-end">
-                  <a href="/edit-request.html?id=${request._id}" class="btn btn-outline-primary btn-sm">
+                  <a href="/edit-request.html?id=${requestId}" class="btn btn-outline-primary btn-sm">
                     Edit
                   </a>
                   <button 
                     class="btn btn-outline-danger btn-sm" 
-                    onclick="window.requestsModule.deleteRequest('${request._id}', '${request.dogName}')">
+                    data-action="delete-request"
+                    data-request-id="${requestId}"
+                    data-dog-name="${dogNameAttr}">
                     Delete
                   </button>
                 </div>
@@ -198,6 +253,16 @@ function RequestsModule() {
         </div>
       </div>
     `;
+  };
+
+  const bindRequestCardActions = (container) => {
+    container
+      .querySelectorAll('button[data-action="delete-request"]')
+      .forEach((btn) => {
+        btn.addEventListener("click", () => {
+          me.deleteRequest(btn.dataset.requestId, btn.dataset.dogName || "N/A");
+        });
+      });
   };
 
   // Render all requests
@@ -221,6 +286,7 @@ function RequestsModule() {
         ${allRequests.map((request) => renderRequestCard(request)).join("")}
       </div>
     `;
+    bindRequestCardActions(container);
 
     renderPagination();
   };

@@ -161,33 +161,49 @@ Each member implemented full-stack features (MongoDB + Express API + frontend pa
 
 ![register](./design_doc/screenshots/register.png)
 
+---
+
 ### Sign in
 
 ![alt text](./design_doc/screenshots/signin.png)
+
+---
 
 ### Dashboard&Log out
 
 ![alt text](./design_doc/screenshots/dashboard.png)
 
+---
+
 ### Home
 
 ![alt text](./design_doc/screenshots/home.png)
+
+---
 
 ### About
 
 ![alt text](./design_doc/screenshots/about.png)
 
+---
+
 ### Find Requests
 
 ![alt text](./design_doc/screenshots/requests.png)
+
+---
 
 ### Post/Edit Request
 
 ![alt text](./design_doc/screenshots/post-request.png)
 
+---
+
 ### Become a Walker
 
 ![alt text](./design_doc/screenshots/walkers.png)
+
+---
 
 ### Post/Edit Walker Profile
 

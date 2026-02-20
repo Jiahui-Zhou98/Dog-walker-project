@@ -5,6 +5,36 @@ function WalkersModule() {
   let totalWalkers = 0;
   let allWalkers = [];
   let loggedInUserId = null;
+  const HTML_ESCAPE_MAP = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  };
+
+  const escapeHtml = (value) =>
+    String(value ?? "").replace(/[&<>"']/g, (ch) => HTML_ESCAPE_MAP[ch]);
+
+  const safeText = (value, fallback = "N/A") => {
+    const normalized = String(value ?? "").trim();
+    return normalized || fallback;
+  };
+
+  const safeId = (value) => encodeURIComponent(String(value ?? ""));
+
+  const isSafeEmail = (value) =>
+    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value);
+
+  const formatList = (value) => {
+    if (Array.isArray(value)) {
+      const normalized = value
+        .map((item) => String(item ?? "").trim())
+        .filter((item) => item);
+      return normalized.length ? normalized.join(", ") : "N/A";
+    }
+    return safeText(value);
+  };
 
   /**
    * Check authentication status to enable "My Posts" and identify the user
@@ -29,7 +59,7 @@ function WalkersModule() {
         if (postProfileBtn) {
           postProfileBtn.classList.remove("btn-outline-secondary");
           postProfileBtn.classList.add("btn-primary-custom");
-          postProfileBtn.innerHTML = "+ Post Profile";
+          postProfileBtn.textContent = "+ Post Profile";
         }
       } else {
         loggedInUserId = null;
@@ -43,7 +73,7 @@ function WalkersModule() {
         if (postProfileBtn) {
           postProfileBtn.classList.add("btn-outline-secondary");
           postProfileBtn.classList.remove("btn-primary-custom");
-          postProfileBtn.innerHTML = "Sign in to Post";
+          postProfileBtn.textContent = "Sign in to Post";
         }
       }
     } catch (err) {
@@ -106,7 +136,15 @@ function WalkersModule() {
   const renderError = (msg) => {
     const list = document.getElementById("walkers-list");
     if (list) {
-      list.innerHTML = `<div class="col-12 text-center py-5 text-danger">⚠️ Error: ${msg}</div>`;
+      list.innerHTML = `
+        <div class="col-12 text-center py-5 text-danger">
+          ⚠️ Error: <span id="walkersErrorMessage"></span>
+        </div>
+      `;
+      const messageEl = list.querySelector("#walkersErrorMessage");
+      if (messageEl) {
+        messageEl.textContent = safeText(msg, "Unknown error");
+      }
     }
   };
 
@@ -117,14 +155,24 @@ function WalkersModule() {
     const schedule = [];
     if (w.availability?.weekdays) schedule.push("Weekdays");
     if (w.availability?.weekends) schedule.push("Weekends");
-    const timeSlots = (w.availability?.times || []).join(", ");
+    const timeSlots = formatList(w.availability?.times || []);
 
-    const displayAreas = Array.isArray(w.serviceAreas)
-      ? w.serviceAreas.join(", ")
-      : w.serviceAreas || "N/A";
-    const displaySizes = Array.isArray(w.preferredDogSizes)
-      ? w.preferredDogSizes.join(", ")
-      : w.preferredDogSizes || "N/A";
+    const displayAreas = formatList(w.serviceAreas);
+    const displaySizes = formatList(w.preferredDogSizes);
+    const walkerName = escapeHtml(safeText(w.name));
+    const walkerNameAttr = escapeHtml(safeText(w.name, ""));
+    const walkerId = safeId(w._id);
+    const scheduleText = escapeHtml(schedule.join(" & ") || "N/A");
+    const experienceYears = Number.isFinite(Number(w.experienceYears))
+      ? String(Number(w.experienceYears))
+      : "N/A";
+    const hourlyRate = Number.isFinite(Number(w.hourlyRate))
+      ? String(Number(w.hourlyRate))
+      : "N/A";
+    const rawEmail = safeText(w.email, "");
+    const emailMarkup = isSafeEmail(rawEmail)
+      ? `<a href="mailto:${rawEmail}" class="text-decoration-none text-dark">${escapeHtml(rawEmail)}</a>`
+      : "N/A";
 
     const isOwner =
       loggedInUserId && String(w.userId) === String(loggedInUserId);
@@ -133,37 +181,39 @@ function WalkersModule() {
       <div class="col-md-4 mb-4">
         <div class="item-card h-100 shadow-sm border-0">
           <div class="card-body p-4">
-            <h5 class="card-title fw-bold mb-3">${w.name}</h5>
+            <h5 class="card-title fw-bold mb-3">${walkerName}</h5>
             <div class="walker-info">
               <p class="mb-2">
                 <i class="bi bi-envelope-fill me-2 text-primary"></i> 
-                <a href="mailto:${w.email}" class="text-decoration-none text-dark">${w.email || "N/A"}</a>
+                ${emailMarkup}
               </p>
               <p class="mb-2">
                 <i class="bi bi-star-fill me-2 text-warning"></i> 
-                <strong>Exp:</strong> ${w.experienceYears}y | <strong>Rate:</strong> $${w.hourlyRate}/hr
+                <strong>Exp:</strong> ${experienceYears}y | <strong>Rate:</strong> $${hourlyRate}/hr
               </p>
               <p class="mb-2">
                 <i class="bi bi-geo-alt-fill me-2 text-danger"></i> 
-                <strong>Areas:</strong> ${displayAreas}
+                <strong>Areas:</strong> ${escapeHtml(displayAreas)}
               </p>
               <hr class="my-3">
-              <p class="mb-1 small text-muted"><strong>Schedule:</strong> ${schedule.join(" & ") || "N/A"}</p>
-              <p class="mb-1 small text-muted"><strong>Times:</strong> ${timeSlots || "N/A"}</p>
+              <p class="mb-1 small text-muted"><strong>Schedule:</strong> ${scheduleText}</p>
+              <p class="mb-1 small text-muted"><strong>Times:</strong> ${escapeHtml(timeSlots)}</p>
               
               <div class="mt-3 d-flex justify-content-between align-items-center">
                 <span class="badge bg-light text-primary border text-uppercase" style="font-size: 0.65rem;">
-                  Sizes: ${displaySizes}
+                  Sizes: ${escapeHtml(displaySizes)}
                 </span>
                 
                 <div class="d-flex gap-2">
                   ${
                     isOwner
                       ? `
-                    <a href="/edit-profile.html?id=${w._id}" class="btn btn-outline-primary btn-sm">Edit</a>
+                    <a href="/edit-profile.html?id=${walkerId}" class="btn btn-outline-primary btn-sm">Edit</a>
                     <button 
                       class="btn btn-outline-danger btn-sm" 
-                      onclick="window.walkersModule.deleteWalker('${w._id}', '${w.name}')">
+                      data-action="delete-walker"
+                      data-walker-id="${walkerId}"
+                      data-walker-name="${walkerNameAttr}">
                       Delete
                     </button>
                   `
@@ -178,6 +228,19 @@ function WalkersModule() {
     `;
   };
 
+  const bindWalkerCardActions = (list) => {
+    list
+      .querySelectorAll('button[data-action="delete-walker"]')
+      .forEach((btn) => {
+        btn.addEventListener("click", () => {
+          me.deleteWalker(
+            btn.dataset.walkerId,
+            btn.dataset.walkerName || "N/A",
+          );
+        });
+      });
+  };
+
   const renderWalkers = () => {
     const list = document.getElementById("walkers-list");
     if (!list) return;
@@ -190,6 +253,7 @@ function WalkersModule() {
     }
 
     list.innerHTML = allWalkers.map((w) => renderWalkerCard(w)).join("");
+    bindWalkerCardActions(list);
 
     renderPagination();
   };

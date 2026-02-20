@@ -40,6 +40,25 @@ if (!SESSION_SECRET) {
 
 // Middleware
 app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader(
+    "Content-Security-Policy",
+    [
+      "default-src 'self'",
+      "script-src 'self' https://cdn.jsdelivr.net",
+      "style-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'",
+      "img-src 'self' data:",
+      "font-src 'self' https://cdn.jsdelivr.net",
+      "connect-src 'self'",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "frame-ancestors 'none'",
+    ].join("; "),
+  );
+  next();
+});
+
 app.use(express.static("frontend"));
 app.use(
   session({
@@ -76,6 +95,7 @@ app.use("/api", (req, res) => {
 
 // Global error handler
 app.use((err, req, res, next) => {
+  void next;
   console.error("Unhandled error:", err);
   res.status(500).json({ error: "Internal server error" });
 });
