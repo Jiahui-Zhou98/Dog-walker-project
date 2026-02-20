@@ -1,8 +1,3 @@
-// =============================================
-// registerModule.js - Register page logic
-// Author: Yi-Peng Chiang
-// Page: register.html
-// =============================================
 document.addEventListener("DOMContentLoaded", () => {
   const registerForm = document.getElementById("register-form");
   const passwordInput = document.getElementById("reg-password");
@@ -10,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (registerForm) {
     console.log("Registration Module: Ready.");
-  
+
     setupPasswordToggle("togglePassword", "reg-password");
     setupPasswordToggle("toggleConfirmPassword", "reg-confirm-password");
 
@@ -88,7 +83,6 @@ async function handleRegistration(e) {
   const email = emailInput.value.trim().toLowerCase();
   const password = passwordInput.value;
 
-  
   submitBtn.disabled = true;
   submitBtn.textContent = "Creating Account...";
   messageBox.classList.add("d-none");
@@ -105,7 +99,8 @@ async function handleRegistration(e) {
 
     if (res.ok) {
       console.log("User created successfully.");
-      messageBox.textContent = "Registration successful! Redirecting to login...";
+      messageBox.textContent =
+        "Registration successful! Redirecting to login...";
       messageBox.classList.remove("d-none", "alert-danger");
       messageBox.classList.add("alert-success");
       submitBtn.style.visibility = "hidden";

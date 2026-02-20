@@ -1,9 +1,3 @@
-// =============================================
-// loginModule.js - Login page logic
-// Author: Jiahui Zhou
-// Page: login.html
-// =============================================
-
 document.addEventListener("DOMContentLoaded", () => {
   // redirect to dashboard if user is already logged in
   redirectIfLoggedIn();
