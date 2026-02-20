@@ -58,19 +58,31 @@ A zero-fee community platform connecting dog owners with trusted dog walkers. Un
 
 ![home-mockup](./mockup/home-mockup.png)
 
+---
+
 ### about
+
+---
 
 ### find requests
 
 ![requests-mockup](./mockup/requests-mockup.png)
 
+---
+
 ### post/edit request
 
 ![post-requests-mockup](./mockup/post-request-mockup.png)
 
+---
+
 ### become a walker
 
+---
+
 ### register
+
+---
 
 ### signin & dashboard
 
