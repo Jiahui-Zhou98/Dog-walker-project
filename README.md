@@ -159,39 +159,39 @@ Each member implemented full-stack features (MongoDB + Express API + frontend pa
 
 ### Register
 
-![register](./design_doc/register.png)
+![register](./design_doc/screenshots/register.png)
 
 ### Sign in
 
-![alt text](./design_doc/signin.png)
+![alt text](./design_doc/screenshots/signin.png)
 
 ### Dashboard&Log out
 
-![alt text](./design_doc/dashboard.png)
+![alt text](./design_doc/screenshots/dashboard.png)
 
 ### Home
 
-![alt text](./design_doc/home.png)
+![alt text](./design_doc/screenshots/home.png)
 
 ### About
 
-![alt text](./design_doc/about.png)
+![alt text](./design_doc/screenshots/about.png)
 
 ### Find Requests
 
-![alt text](./design_doc/requests.png)
+![alt text](./design_doc/screenshots/requests.png)
 
 ### Post/Edit Request
 
-![alt text](./design_doc/post-request.png)
+![alt text](./design_doc/screenshots/post-request.png)
 
 ### Become a Walker
 
-![alt text](./design_doc/walkers.png)
+![alt text](./design_doc/screenshots/walkers.png)
 
 ### Post/Edit Walker Profile
 
-![alt text](./design_doc/post-profile.png)
+![alt text](./design_doc/screenshots/post-profile.png)
 
 ---
 

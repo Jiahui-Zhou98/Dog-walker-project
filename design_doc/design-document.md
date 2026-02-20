@@ -54,16 +54,24 @@ A zero-fee community platform connecting dog owners with trusted dog walkers. Un
 
 ## Design Mockup
 
-- home
+### home
 
-- about
+![home-mockup](./mockup/home-mockup.png)
 
-- find requests
+### about
 
-- become a walker
+### find requests
 
-- register
+![requests-mockup](./mockup/requests-mockup.png)
 
-- signin
+### post/edit request
 
-- dashboard
+![post-requests-mockup](./mockup/post-request-mockup.png)
+
+### become a walker
+
+### register
+
+### signin & dashboard
+
+![signin-dashboard-mockup](./mockup/signin-dashboard-mockup.png)
