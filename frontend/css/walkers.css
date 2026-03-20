@@ -5,49 +5,7 @@
           edit-profile.html
    ============================================= */
 
-/* 1. Filter Section Container Styling */
-.container .filters-section.filters-box {
-  background-color: rgba(255, 140, 66, 0.1);
-  border: 1px solid rgba(255, 140, 66, 0.3);
-  box-shadow: 0 4px 15px rgba(255, 140, 66, 0.05);
-  border-radius: 15px;
-  padding: 1.5rem;
-}
-
-/* 2. Apply Button Styling */
-button#applyFilters.btn.btn-primary-custom {
-  border-radius: 999px;
-  padding: 0.6rem 1.5rem;
-  background-color: #ff8c00;
-  border: none;
-  color: #ffffff;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-button#applyFilters.btn.btn-primary-custom:hover {
-  background-color: #e67e00;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
-}
-
-/* 3. Reset Button Styling */
-button#resetFilters.btn.btn-secondary-custom {
-  border-radius: 999px;
-  padding: 0.6rem 1.5rem;
-  background-color: #ffe0cc;
-  border: none;
-  color: #5a3e2b;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-button#resetFilters.btn.btn-secondary-custom:hover {
-  background-color: #ffc099;
-  transform: translateY(-2px);
-}
-
-/* 4. Orange Size Badge */
+/* 1. Orange Size Badge */
 .item-card .card-body .badge.bg-light.text-primary {
   background-color: #ffe0cc;
   color: #ff8c00;
@@ -57,54 +15,4 @@ button#resetFilters.btn.btn-secondary-custom:hover {
   text-transform: uppercase;
   padding: 0.4rem 0.8rem;
   font-size: 0.75rem;
-}
-
-/* 5. Dropdown & Input Focus States */
-.filters-box .form-select,
-.filters-box .form-control {
-  border: 1px solid rgba(255, 140, 66, 0.4);
-  border-radius: 8px;
-}
-
-.filters-box .form-select:focus,
-.filters-box .form-control:focus {
-  border-color: #ff8c00;
-  box-shadow: 0 0 0 0.25rem rgba(255, 140, 66, 0.25);
-  outline: 0;
-}
-
-/* 6. Base Pagination Link Color */
-.pagination .page-link {
-  color: #ff8c00;
-  border-color: #dee2e6;
-  transition: all 0.3s ease;
-}
-
-/* 7. Hover State */
-.pagination .page-link:hover {
-  /* Slightly darker orange on hover */
-  color: #e67e00;
-  background-color: #fff5eb;
-  border-color: #dee2e6;
-}
-
-/* 8. Active Page State (The selected number) */
-.pagination .page-item.active .page-link {
-  /* Solid brand orange background for the active page */
-  background-color: #ff8c00;
-  border-color: #ff8c00;
-  color: white;
-}
-
-/* 9. Disabled State (e.g., Previous when on page 1) */
-.pagination .page-item.disabled .page-link {
-  color: #6c757d;
-  background-color: #fff;
-  border-color: #dee2e6;
-}
-
-/* 10. Focus State (Accessibility highlight) */
-.pagination .page-link:focus {
-  box-shadow: 0 0 0 0.25rem rgba(255, 140, 66, 0.25);
-  background-color: #fff5eb;
 }
